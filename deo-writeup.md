@@ -6,6 +6,18 @@ Optimization problems have many applications and complexities of problems in opt
 
 # Introduction / Metaheuristic optimization algorithms
 Meta-heuristic algorithms are algorithms that would initially sample a set of solutions from the set, uses the solutions to test if they are acceptable enough or else alter the solutions a little to find better ones. Although meta-heuristic algorithms does not need that much information as other optimization algorithms, meta-heuristic does not guarantee the very best solution in the set of solutions but only in a subset of the set of solutions.
+For centuries we have relied on nature to show us the most appropriate solutions to problems. That's why in the last decades computer scientists has turned to nature to develop novel algorithms.
+
+# Genetic algorithms
+
+# Artificial Immune Systems
+Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.
+
+# Ant Colony Optimization
+Ant colonies can find food faster by utilizing shorter paths found by the ants in its colony. An ant would leave more pheromones when it has reached the food faster so other ants would be more inclined to use the path. This also applies to optimization by using memory and prioritizing directions with more incentives.
+
+# Marriage in Honey Bee Optimization
+The model simulates the evolution of honey-bees starting with a solitary colony (single queen without a family) to the emergence of an eusocial colony (one or more queens with a family).
 
 # Applications
 Researchers have made good use of optimization problems such as scheduling problems, data clustering, image and video processing, tuning of neural networks, and pattern recognition
