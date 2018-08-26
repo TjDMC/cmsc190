@@ -1,5 +1,8 @@
 //Not yet formatted properly
 
+Optimization:
+Laguna, M. 2004. Global optimization and meta-heuristics.
+
 Heuristics and Meta-heuristics:
 Desale, S., Rasool, A., Andale, S., Rane, P. 2015. Heuristics and meta-heuristic algorithms and their relevance to the real world: A survey. International journal of computer engineering in research trends, 2, 296-304.
 
