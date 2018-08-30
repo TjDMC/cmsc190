@@ -5,7 +5,7 @@ Basically, optimization is searching for the best solutions out of all possible 
 Optimization problems have many applications and complexities of problems in optimization varies from an application to another. An optimization problem gets harder when it considers bigger and bigger sets of possible solutions thus increasing the searching time for any algorithm that would try to solve these kinds of problems.
 
 # Introduction / Metaheuristic optimization algorithms
-Meta-heuristic algorithms are algorithms that would initially sample a set of solutions from the set, uses the solutions to test if they are acceptable enough or else alter the solutions a little to find better ones. Although meta-heuristic algorithms does not need that much information as other optimization algorithms, meta-heuristic does not guarantee the very best solution in the set of solutions but only in a subset of the set of solutions.
+Metaheuristic algorithms are algorithms that would initially sample a set of solutions from the set, uses the solutions to test if they are acceptable enough or else alter the solutions a little to find better ones. Although meta-heuristic algorithms does not need that much information as other optimization algorithms, meta-heuristic does not guarantee the very best solution in the set of solutions but only in a subset of the set of solutions.
 For centuries we have relied on nature to show us the most appropriate solutions to problems. That's why in the last decades computer scientists has turned to nature to develop novel algorithms.
 
 # Genetic algorithms
@@ -38,7 +38,20 @@ Neural networks can be tuned by its parameters. These parameters talked about ar
 Patterns can be also found in data. These patterns can help add to the metadata of that data. Pattern recognition finds those patterns that can be found off the data. Optimization helps identify patterns that best identify a given data.
 
 # Inspiration for the algorithm
-Lions have displayed cooperation and antagonism especially in hunting. They're socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
+Lions have displayed cooperation and antagonism especially in hunting.
+
+# Lion Pride Optimizer
+Previous works such as the Lion Pride Optimizer was inspired by this brutal competition of males whom also plays an important role for the persistence of the pride. In the work, the optimization chooses two of the best points in a "pride" and each "female" with a mating coefficient will create 4 offsprings only to choose one at last based on a male in the pride. The mating coefficient is treated as a randomized coefficient to further enhance the randomicity of the algorithm. The coefficient is calculated as `mc0 (rand(1,1) - 0.5)` where `mc0` is the base mating coefficient. The optimization bases its offspring generation with the equations
+```
+x^(k+1)_(4i-3) = X^k_(b1)+mc^k_i(X^k_(b1)-X^k_i)
+x^(k+1)_(4i-2) = X^k_(b1)-mc^k_i(X^k_(b1)-X^k_i)
+x^(k+1)_(4i-1) = X^k_(b2)+mc^k_i(X^k_(b2)-X^k_i)
+x^(k+1)_(4i) = X^k_(b2)-mc^k_i(X^k_(b2)-X^k_i)
+```
+where `i` is the pride number `k` is the generation and `X^k_i` is the female. The optimization also uses safeguards to prevent stagnation in the pride by either replacing all members in the pride or resetting the search space when it meets a certain threshold
+
+
+They're socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
 Male lions have radically different social behavior and appearance than the female lions and v.v.
 The lions can also be classified if they're residents or nomads. Resident lions create groups called prides, establish their territories and flourish there while nomads take what they need in an area then finds another area to pillage not establishing territories.
 A pride typically would include five females have cubs of both sexes and one or more adult male lions.
