@@ -1,11 +1,11 @@
-#Paper Overview
+# Paper Overview
 Solving complex optimization problems has been a hot topic the past decade and has garnered large followings most of which are practitioners and researchers. This attention has brought upon the development of new metaheuristic algorithms, many of which are inspired by various phenomena demonstrated by nature.
 The paper proposes a new population based algorithm, the Lion Optimization Algorithm (LOA). The distinct lifestyle of lions and their characteristics of utilizing cooperation was made as the motivational basis for the development of this optimization algorithm. The algorithm is also tested against benchmark problems sourced from literature and whose primary solutions was compared with the results of the test. The results also confirm the performance of this algorithm alongside other algorithms used in the paper.
 
-#Introduction / Optimization
+# Introduction / Optimization
 Basically, optimization is searching for the best solutions out of all possible solutions. A best solution can be defined regarding either the most of some measure of success (e.g. revenue) or the least of another measure (e.g. cost) (Laguna, 2004). We can be looking at a group of answers or one answer from a set. In solving optimization problems, one's goal is to minimize or maximize a result variable of a function by trying out different parameters for input.
 
-#Introduction / Optimization Algorithms
+# Introduction / Optimization Algorithms
 Optimization algorithms can be divided into two major categories, as exact and approximate (Desale, et al. 2015). Exact algorithms guarantee that the optimal solution to the problem will be found in a finite amount of time. There are, however, harder optimization problems that requires the searching of very large solution sets and thus making it impractical to use exact algorithms. As such, the usage of approximate algorithms are necessitated. These algorithms do not guarantee that the optimal solution will be found, but it can find an approximate (sometimes exact) solution to the problem in a relatively short amount of time, sometimes using a less computationally intensive method. Approximate algorithms can be further divided into two major categories as heuristic and metaheuristic algorithms (Desale, et al. 2015).
 
 Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution. Heuristic algorithms are often greedy which generally gets them trapped in a local optimum. As a result, they usually fail to obtain the global optimum solution.
@@ -14,7 +14,7 @@ Metaheuristic algorithms, on the other hand, requires minimal or no assumptions 
 
 For centuries humans have relied on nature to find the most appropriate solutions to problems. That's why in the past decades, computer scientists has turned to nature to develop novel algorithms.
 
-#Examples of Meta-heuristic algorithms: Genetic algorithm
+# Examples of Meta-heuristic algorithms: Genetic algorithm
 The genetic algorithm (Holland, 1975) is modeled after Darwin’s theory of evolution. An initial population is initialized in which each individual represents a solution to the problem. Through a series of selection, crossover, and mutation, successive populations are generated until an individual with a desired fitness is obtained. Fitness is defined as how well an individual can solve the given problem.
 Selection pertains to the process in which individuals with the best fitness are selected and allowed to pass their genes (or properties. E.g. bits) to the next generation. The individuals with the highest fitness have a higher chance of being selected.
 Crossover is when genes of the selected individuals are interchanged with each other. The results are called offspring and are added to the next generation.
@@ -78,9 +78,9 @@ Lions usually hunt together in prides. Female lions would work together to surro
 Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
 Additionally, to mark their territory the pride would urinate all over the place to drive away others who would intrude.
 
-#Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
-#Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
-#Meta-heuristic algorithms used for comparison: Gravitational Search Algorithm
-#Meta-heuristic algorithms used for comparison: Hunting Search
-#Meta-heuristic algorithms used for comparison: Bat Algorithm
-#Meta-heuristic algorithms used for comparison: Water Wave Optimization
+# Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
+# Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
+# Meta-heuristic algorithms used for comparison: Gravitational Search Algorithm
+# Meta-heuristic algorithms used for comparison: Hunting Search
+# Meta-heuristic algorithms used for comparison: Bat Algorithm
+# Meta-heuristic algorithms used for comparison: Water Wave Optimization
