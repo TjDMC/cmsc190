@@ -1,14 +1,31 @@
-# Introduction / What is Optimization?
-Basically, optimization is searching for the best solutions out of all possible solutions. We can be looking at a group of answers or one answer from a set. In solving optimization problems, one's goal is to minimize or maximize a result variable of a function by trying out different parameters for input.
+#Paper Overview
+Solving complex optimization problems has been a hot topic the past decade and has garnered large followings most of which are practitioners and researchers. This attention has brought upon the development of new metaheuristic algorithms, many of which are inspired by various phenomena demonstrated by nature.
+The paper proposes a new population based algorithm, the Lion Optimization Algorithm (LOA). The distinct lifestyle of lions and their characteristics of utilizing cooperation was made as the motivational basis for the development of this optimization algorithm. The algorithm is also tested against benchmark problems sourced from literature and whose primary solutions was compared with the results of the test. The results also confirm the performance of this algorithm alongside other algorithms used in the paper.
 
-# Introduction
-Optimization problems have many applications and complexities of problems in optimization varies from an application to another. An optimization problem gets harder when it considers bigger and bigger sets of possible solutions thus increasing the searching time for any algorithm that would try to solve these kinds of problems.
+#Introduction / Optimization
+Basically, optimization is searching for the best solutions out of all possible solutions. A best solution can be defined regarding either the most of some measure of success (e.g. revenue) or the least of another measure (e.g. cost) (Laguna, 2004). We can be looking at a group of answers or one answer from a set. In solving optimization problems, one's goal is to minimize or maximize a result variable of a function by trying out different parameters for input.
 
-# Introduction / Metaheuristic optimization algorithms
-Metaheuristic algorithms are algorithms that would initially sample a set of solutions from the set, uses the solutions to test if they are acceptable enough or else alter the solutions a little to find better ones. Although meta-heuristic algorithms does not need that much information as other optimization algorithms, meta-heuristic does not guarantee the very best solution in the set of solutions but only in a subset of the set of solutions.
-For centuries we have relied on nature to show us the most appropriate solutions to problems. That's why in the last decades computer scientists has turned to nature to develop novel algorithms.
+#Introduction / Optimization Algorithms
+Optimization algorithms can be divided into two major categories, as exact and approximate (Desale, et al. 2015). Exact algorithms guarantee that the optimal solution to the problem will be found in a finite amount of time. There are, however, harder optimization problems that requires the searching of very large solution sets and thus making it impractical to use exact algorithms. As such, the usage of approximate algorithms are necessitated. These algorithms do not guarantee that the optimal solution will be found, but it can find an approximate (sometimes exact) solution to the problem in a relatively short amount of time, sometimes using a less computationally intensive method. Approximate algorithms can be further divided into two major categories as heuristic and metaheuristic algorithms (Desale, et al. 2015).
 
-# Genetic algorithms
+Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution. Heuristic algorithms are often greedy which generally gets them trapped in a local optimum. As a result, they usually fail to obtain the global optimum solution.
+
+Metaheuristic algorithms, on the other hand, requires minimal or no assumptions about the problem being solved. This makes them applicable to a wide variety of problems. A metaheuristic algorithm optimizes a problem by iteratively improving a candidate solution until a desired quality is achieved. In contrast to heuristic algorithms, metaheuristic algorithms often employ mechanisms to escape from being stuck in a local optimum and thus making them more likely to obtain the global optimum solution. An example of such mechanisms is the deliberate deterioration of a solution in order to more thoroughly explore the solution space in hopes of finding a better solution.
+
+For centuries humans have relied on nature to find the most appropriate solutions to problems. That's why in the past decades, computer scientists has turned to nature to develop novel algorithms.
+
+#Examples of Meta-heuristic algorithms: Genetic algorithm
+The genetic algorithm (Holland, 1975) is modeled after Darwin’s theory of evolution. An initial population is initialized in which each individual represents a solution to the problem. Through a series of selection, crossover, and mutation, successive populations are generated until an individual with a desired fitness is obtained. Fitness is defined as how well an individual can solve the given problem.
+Selection pertains to the process in which individuals with the best fitness are selected and allowed to pass their genes (or properties. E.g. bits) to the next generation. The individuals with the highest fitness have a higher chance of being selected.
+Crossover is when genes of the selected individuals are interchanged with each other. The results are called offspring and are added to the next generation.
+Mutation refers to when genes of the offspring are subject to mutate or change (e.g. Binary value from 1 to 0). This further diversifies the sample space and consequently prevents the algorithm from converging early.
+
+#Examples of Meta-heuristic algorithms: Particle Swarm Optimization
+The Particle Swarm Optimization (Eberhart,1995) algorithm is modeled after the movement of a swarm as a whole (e.g. A flock
+of birds collectively foraging for food). In this algorithm, an initial set of particles is first initialized with each
+particle having a random initial velocity. These particles are then flung through hyperspace where each of their position
+represents a solution to the problem at hand. Each of these solutions are evaluated regarding their fitness and a particle's
+current most fit solution is stored as its 'pbest'. The current best solution attained by the entire set particles is also stored; this is called 'gbest'. For each time step of the algorithm, each particle is accelerated towards its 'pbest' and the 'gbest'. Eventually, these particles will converge around an optimal solution.
 
 # Artificial Immune Systems
 Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.
@@ -60,3 +77,10 @@ Nomads, who doesn't establish territories, would move about sporadically (whenev
 Lions usually hunt together in prides. Female lions would work together to surround and swiftly catch the prey. There could also be a hunter female lion who would go out of territory to hunt on their own while the other members of the pride would wait for the lioness to return. But still, coordinated group hunting would bring greater success in prey hunts.
 Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
 Additionally, to mark their territory the pride would urinate all over the place to drive away others who would intrude.
+
+#Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
+#Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
+#Meta-heuristic algorithms used for comparison: Gravitational Search Algorithm
+#Meta-heuristic algorithms used for comparison: Hunting Search
+#Meta-heuristic algorithms used for comparison: Bat Algorithm
+#Meta-heuristic algorithms used for comparison: Water Wave Optimization
