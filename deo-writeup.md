@@ -78,6 +78,9 @@ Lions usually hunt together in prides. Female lions would work together to surro
 Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
 Additionally, to mark their territory the pride would urinate all over the place to drive away others who would intrude.
 
+# Lion's Algorithm
+The Lion's algorithm by Rajakumar (2012) is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years. During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed. 
+
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
 # Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
 # Meta-heuristic algorithms used for comparison: Gravitational Search Algorithm
