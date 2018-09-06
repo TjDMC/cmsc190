@@ -31,7 +31,7 @@ current most fit solution is stored as its 'pbest'. The current best solution at
 Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.
 
 # Ant Colony Optimization
-Ant colonies can find food faster by utilizing shorter paths found by the ants in its colony. An ant would leave more pheromones when it has reached the food faster so other ants would be more inclined to use the path. This also applies to optimization by using memory and prioritizing directions with more incentives.
+Ants can find food faster by utilizing shorter paths found by the other ants in its colony. An ant would leave more pheromones when it has reached the food faster so other ants would be more inclined to use the path. This also applies to optimization by using memory and prioritizing directions with more incentives.
 
 # Marriage in Honey Bee Optimization
 The model simulates the evolution of honey-bees starting with a solitary colony (single queen without a family) to the emergence of an eusocial colony (one or more queens with a family).
@@ -67,6 +67,7 @@ x^(k+1)_(4i) = X^k_(b2)-mc^k_i(X^k_(b2)-X^k_i)
 ```
 where `i` is the pride number `k` is the generation and `X^k_i` is the female. The optimization also uses safeguards to prevent stagnation in the pride by either replacing all members in the pride or resetting the search space when it meets a certain threshold
 
+# Inspiration
 
 They're socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
 Male lions have radically different social behavior and appearance than the female lions and v.v.
@@ -76,7 +77,23 @@ As young males would grow they would separate from their birth pride and establi
 Nomads, who doesn't establish territories, would move about sporadically (whenever they want) and either in pairs or singularly.
 Lions usually hunt together in prides. Female lions would work together to surround and swiftly catch the prey. There could also be a hunter female lion who would go out of territory to hunt on their own while the other members of the pride would wait for the lioness to return. But still, coordinated group hunting would bring greater success in prey hunts.
 Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
-Additionally, to mark their territory the pride would urinate all over the place to drive away others who would intrude.
+Additionally, to mark their territory the pride would place urine all over the place to drive away others who would intrude.
+
+# Idea
+The initially proposed algorithm started an initial population formed by a set of solutions randomly generated labelled as Lions. A percentage `%N` of the initial population of solutions are selected as 'Nomad Lions' while the rest are the 'Resident Lions.' While the nomad lions are individually grouped, the resident lions are then further divided into partitions called 'Prides' where a percentage `%S` is percentage of the females in the group but in nomad lions, this percentage is reversed, where `%S` will be used to identify the males in the nomad lions.
+Each lion will have a variable pertaining to the best obtained solution for every passing iteration that will be called best visited position and will be updated regularly for every iteration. In each pride, a few random females will be selected to go hunting. These females will encircle the prey and catch it. The males in the pride will roam the territory. The females may mate with one or more resident males then a young male is created. These males may establish their own prides and territory later or may become a nomad.
+The nomad lions roams around the search space to find better (places) solutions. A nomad lion may invade and replace a resident male in a pride, driving out that resident male. Also, a female lion may also migrate to another pride or become a nomad herself. Weak lions, who have not found better prey (solutions) where there is no competition, will die or be killed. The process will go on until the stopping condition is satisfied.
+
+# Proposed Algorithm
+The first step of the algorithm is to randomly generate solutions called Lions with a population of N. In a Nvar dimensional search space optimization problem a Lion is represented as
+```
+Lion = [x_1, x_2,..., x_Nvar]
+```
+As most optimization algorithms, there will be a given cost function, where the fitness value of a solution can be gauged.
+```
+fitness = f(Lion) = f(x_1, x_2,..., x_Nvar)
+```
+Along with generating the solutions, a percentage of N will be selected as nomad lions and the rest would be divided into a number P of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage S of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where 1-S will be the percentage of females in the nomads. The percentage S is typically chosen between 75 to 90 percent.
 
 # Lion's Algorithm
 The Lion's algorithm by Rajakumar (2012) is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years. During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed. 
