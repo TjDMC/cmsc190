@@ -95,6 +95,8 @@ fitness = f(Lion) = f(x_1, x_2,..., x_Nvar)
 ```
 Along with generating the solutions, a percentage of N will be selected as nomad lions and the rest would be divided into a number P of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage S of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where 1-S will be the percentage of females in the nomads. The percentage S is typically chosen between 75 to 90 percent.
 
+
+
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
 # Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
 # Meta-heuristic algorithms used for comparison: Gravitational Search Algorithm
