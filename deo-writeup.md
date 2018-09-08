@@ -95,7 +95,8 @@ fitness = f(Lion) = f(x_1, x_2,..., x_Nvar)
 ```
 Along with generating the solutions, a percentage of N will be selected as nomad lions and the rest would be divided into a number P of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage S of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where 1-S will be the percentage of females in the nomads. The percentage S is typically chosen between 75 to 90 percent.
 
-
+# Lion's Algorithm
+The Lion's algorithm by Rajakumar (2012) is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years. During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed.
 
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
 # Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
