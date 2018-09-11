@@ -24,7 +24,7 @@ Selection pertains to the process in which individuals with the best fitness are
 Crossover is when genes of the selected individuals are interchanged with each other. The results are called offspring and are added to the next generation.
 Mutation refers to when genes of the offspring are subject to mutate or change (e.g. Binary value from 1 to 0). This further diversifies the sample space and consequently prevents the algorithm from converging early.
 
-#Examples of Meta-heuristic algorithms: Particle Swarm Optimization
+# Examples of Meta-heuristic algorithms: Particle Swarm Optimization
 The Particle Swarm Optimization (Eberhart,1995) algorithm is modeled after the movement of a swarm as a whole (e.g. A flock
 of birds collectively foraging for food). In this algorithm, an initial set of particles is first initialized with each
 particle having a random initial velocity. These particles are then flung through hyperspace where each of their position
@@ -55,16 +55,13 @@ Scheduling problems are problems where different difficulty on jobs would take d
 Data clustering or cluster analysis is the way to group a set of objects such that objects with the most similarity a group together in clusters. The objects may have one or more properties to identify and the groups may have smaller subgroups that one can also classify. Optimization helps identify the best clustering of an object based on its parameters.
 
 # Image and video processing
-
+Image and video processing is the process of adding metadata to an image or video based to what its visual content actually is. An image or video in a computer is represented as pixels or boxes of colors that is displayed on the screen of the viewer. These pixels individually cannot determine the actual content, which is significant to the viewer, of the image and video. Optimization algorithms help computers identify what pixels in an image or video actually represents to the viewer. Such algorithms help with edge detection, segmentation, representation and description of the parts of an image or video.
 
 # Tuning of neural networks
 Neural networks can be tuned by its parameters. These parameters talked about are parameters that are constant throughout the run of the network. This parameters may be tuned to get the best performance out of neural network which may also drive the network to learn faster, slower or not at all. Optimization helps to find the best parameters that will drive the system's performance.
 
 # Pattern recognition
 Patterns can be also found in data. These patterns can help add to the metadata of that data. Pattern recognition finds those patterns that can be found off the data. Optimization helps identify patterns that best identify a given data.
-
-# Inspiration for the algorithm
-Lions have displayed cooperation and antagonism especially in hunting.
 
 # Lion Pride Optimizer
 Previous works such as the Lion Pride Optimizer was inspired by this brutal competition of males whom also plays an important role for the persistence of the pride. In the work, the optimization chooses two of the best points in a "pride" and each "female" with a mating coefficient will create 4 offsprings only to choose one at last based on a male in the pride. The mating coefficient is treated as a randomized coefficient to further enhance the randomicity of the algorithm. The coefficient is calculated as `mc0 (rand(1,1) - 0.5)` where `mc0` is the base mating coefficient. The optimization bases its offspring generation with the equations
@@ -76,9 +73,8 @@ x^(k+1)_(4i) = X^k_(b2)-mc^k_i(X^k_(b2)-X^k_i)
 ```
 where `i` is the pride number `k` is the generation and `X^k_i` is the female. The optimization also uses safeguards to prevent stagnation in the pride by either replacing all members in the pride or resetting the search space when it meets a certain threshold
 
-# Inspiration
-
-They're socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
+# Inspiration for the algorithm
+Lions have displayed cooperation and antagonism especially in hunting. Lions are also socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
 Male lions have radically different social behavior and appearance than the female lions and v.v.
 The lions can also be classified if they're residents or nomads. Resident lions create groups called prides, establish their territories and flourish there while nomads take what they need in an area then finds another area to pillage not establishing territories.
 A pride typically would include five females have cubs of both sexes and one or more adult male lions.
@@ -104,8 +100,13 @@ fitness = f(Lion) = f(x_1, x_2,..., x_Nvar)
 ```
 Along with generating the solutions, a percentage of N will be selected as nomad lions and the rest would be divided into a number P of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage S of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where 1-S will be the percentage of females in the nomads. The percentage S is typically chosen between 75 to 90 percent.
 
+# Opposition Based Learning
+Opposition based learning is a novel idea of comparing input solutions after computing for their costs or revenues to arrive to better solutions or to arrive at the best solution faster. OBL is used to arrive to the best solution faster than the naive method. In Genetic Algorithm, OBL is also used to get better solutions by allowing multiple best solutions selected by the cost or revenue function to produce better solutions influenced by the selected solutions' genes. A basic example of OBL is finding a solution X in a one dimensional solution set. For the solution X, we have an estimate X^ that approaches X from the left. As we optimize to the solution X, the difference between the solution X and the estimate X^ will get less and less as X^ gets near to the solution X. Suppose we get to X at a certain time, which is the time from the start of the optimization to whenever the estimate X^ will be equal to the solution X. If we use OBL to add another estimate ^X_2 that would approach X from the right then the time it takes for the optimization to arrive at solution X would be the maximum between the time it takes for X^ or ^X_2 to reach solution X.
+
 # Lion's Algorithm
 The Lion's algorithm by Rajakumar (2012) is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years. During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed.
+
+
 
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
 # Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
