@@ -98,8 +98,11 @@ fitness = f(Lion) = f(x_1, x_2,..., x_Nvar)
 Along with generating the solutions, a percentage of N will be selected as nomad lions and the rest would be divided into a number P of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage S of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where 1-S will be the percentage of females in the nomads. The percentage S is typically chosen between 75 to 90 percent.
 
 # Proposed Algorithm: Hunting
-In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander[60] divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centres and Right Wings.
+In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander[60] divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
 Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems.
+The group with members of the highest finesses (highest revenue, lowest cost) is considered as the Centers while the other two groups are considered as Left and Right Wings.
+
+
 
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
 # Meta-heuristic algorithms used for comparison: Biogeography-Based Optimization
