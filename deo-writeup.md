@@ -101,7 +101,44 @@ Along with generating the solutions, a percentage of N will be selected as nomad
 In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander[60] divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
 Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems.
 The group with members of the highest finesses (highest revenue, lowest cost) is considered as the Centers while the other two groups are considered as Left and Right Wings.
+In the algorithm, the hunters are divided into three groups: Left, Right and Center. The group with highest cumulative finesses is considered to be the Center and the other groups would be Left and Right Wings.
+A dummy prey would move to a new position and escape as follows:
+```
+PREY' = PREY + rand(0,1) * PI * (PREY - Hunter)
+```
+where PREY is the current position of the prey, PREY' is the new position and PI is the percentage of improvement of the finesse of the hunter.
+For the left and right wings, they approach the prey as follows:
+```
+Hunter' = { rand((2 * PREY - Hunter), PREY), (2 * PREY - Hunter) < PREY
+            rand(PREY, (2 * PREY - Hunter)), (2 * PREY - Hunter) > PREY
+```
+where Hunter is the current position of the hunter and Hunter' is the new position of the hunter.
+As for the Center hunters, their new position is as follows:
+```
+Hunter' = { rand(Hunter, PREY), Hunter < PREY
+            rand(PREY, Hunter), Hunter > PREY
+```
+In all of these equations, `rand(a,b)` generates a random number between a and b, where a and b are upper and lower bounds, respectively.
+This mechanism allows the hunters to create a circle shaped neighborhood around the prey, approach it from different directions and catch it. This also allows better solutions to be found (escape local optima) because some hunters use opposite positions.
+Therefore hunting in each pride can be stated in the following Pseudo-code:
+\*\*Pseudo Code 1
 
+# Proposed Algorithm: Moving Towards Safe Place
+As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
+Therefore the new position for a female lion is given as:
+```
+Female Lion' = Female Lion + 2D * rand(0,1){R1} + U(-1,1) * tan(\theta) * D * {R2}
+where {R1}.{R2} = 0, ||{R2}|| = 1
+```
+where Female Lion and Female Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
+
+
+
+# Proposed Algorithm: Roaming
+# Proposed Algorithm: Mating
+# Proposed Algorithm: Defense
+# Proposed Algorithm: Population Equilibrium
+# Proposed Algorithm: Convergence
 
 
 # Meta-heuristic algorithms used for comparison: Invasive Weed Optimization
