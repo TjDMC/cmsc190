@@ -131,8 +131,7 @@ Female Lion' = Female Lion + 2D * rand(0,1){R1} + U(-1,1) * tan(\theta) * D * {R
 where {R1}.{R2} = 0, ||{R2}|| = 1
 ```
 where Female Lion and Female Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
-
-
+{R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}.
 
 # Proposed Algorithm: Roaming
 # Proposed Algorithm: Mating
