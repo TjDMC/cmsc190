@@ -162,3 +162,8 @@ where Female Lion and Female Lion' is the previous and next position of the fema
 Male lions in a pride would typically roam the pride's territory. To emulate this specific behavior of resident males, $\%R$
 \end{comment}
 --This section still requires further understanding--
+
+\section{Proposed Algorithm: Mating}
+Mating of the lions in the population refers to the crossing-over of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations: $$\text{Offspring}_j\text{1}=\beta \times \text{Female Lion}_j +\sum\frac{1-\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i,$$ $$\text{Offspring}_j\text{2}=(1-\beta) \times \text{Female Lion}_j +\sum\frac{\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i$$, where $j$ is dimension; $S_i$ is 1 if male $i$ is selected for mating, 0 otherwise; $NR$ is the number of resident males in a pride; $\beta$ is a randomly generated number with a normal distribution with mean value 0.5 and standard deviation 0.1.
+
+One of these offsprings is set as male, and the other as female. A mutation is applied on each gene of one of the produced offspring with probability $Mu$. Through mutation, a random number replaces the value of the gene.

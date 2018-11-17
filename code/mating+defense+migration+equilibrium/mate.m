@@ -24,28 +24,30 @@ function offsprings = mate(female, males, muprob, maxvalue, minvalue)
         end
         o1.vector = [o1.vector; (malegene(1)+femgene(1))]; % offspring 1
         o2.vector = [o2.vector; (malegene(2)+femgene(2))]; % offspring 2
-        
-        %gender group
-        if rand(1) <= 0.5
-            o1.sex = 'm';
-            o2.sex = 'f';
-        else
-            o1.sex = 'f';
-            o2.sex = 'm';
-        end
-        
-        %determine candidate for mutation (only 1 of the offspring can undergo mutation)
-        if rand(1) <=0.5
-            tomutate=o1;
-        else
-            tomutate=o2;
-        end
-        
-        %mutation
+    end
+    
+    %gender group
+    if rand(1) <= 0.5
+        o1.sex = 'm';
+        o2.sex = 'f';
+    else
+        o1.sex = 'f';
+        o2.sex = 'm';
+    end
+
+    %determine candidate for mutation (only 1 of the offspring can undergo mutation)
+    if rand(1) <=0.5
+        tomutate=o1;
+    else
+        tomutate=o2;
+    end
+
+    %mutation
+    for i=1:length(tomutate.vector)
         if rand(1) <= muprob
             tomutate.vector(i) = (maxvalue-minvalue)*rand()+minvalue;
         end
-
     end
+    
     offsprings = [o1 o2];
 end

@@ -352,7 +352,9 @@ function plotLions(dim,grps,xbounds,ybounds)
                    end
                end
            end
+           fprintf(' %i ',length(grps(i2).content));
         end
         hold off;
+        fprintf('\n%i %i %i\n',ctrm,ctrf,ctrm+ctrf);
     end
 end
