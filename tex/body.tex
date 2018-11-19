@@ -8,11 +8,11 @@ Basically, optimization is searching for the best solutions out of all possible 
 \section{Optimization Algorithms}
 Optimization algorithms can be divided into two major categories, as exact and approximate \cite{desale_2015}. Exact algorithms guarantee that the optimal solution to the problem will be found in a finite amount of time. There are, however, harder optimization problems that requires the searching of very large solution sets and thus making it impractical to use exact algorithms. An example of this is the travelling salesman problem, whereby a salesman is tasked to plan a path that visits a series of cities exactly once and return to his starting point with minimum distance travelled. In this problem, the number of possible paths that the salesman can take grows factorially as the number of cities increases. It is possible to solve this problem using brute-force method but it would take a lot of time. As such, the usage of approximate algorithms are necessitated. These algorithms do not guarantee that the optimal solution will be found, but it can find an approximate (sometimes exact) solution to the problem in a relatively short amount of time, sometimes using a less computationally intensive method. Approximate algorithms can be further divided into two major categories as heuristic and metaheuristic algorithms \cite{desale_2015}.
 
-Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution. 
+Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution.
 
-Metaheuristic algorithms, on the other hand, requires minimal or no assumptions about the problem being solved. They can be tailored to optimize a specific problem which makes them applicable to a wide variety of problems. A metaheuristic algorithm optimizes a problem by iteratively improving a candidate solution until a desired quality is achieved. Metaheuristic algorithms often employ mechanisms to escape from being stuck in a local optimum and thus making them more likely to obtain the global optimum solution. 
+Metaheuristic algorithms, on the other hand, requires minimal or no assumptions about the problem being solved. They can be tailored to optimize a specific problem which makes them applicable to a wide variety of problems. A metaheuristic algorithm optimizes a problem by iteratively improving a candidate solution until a desired quality is achieved. Metaheuristic algorithms often employ mechanisms to escape from being stuck in a local optimum and thus making them more likely to obtain the global optimum solution.
 
-An example of an algorithm that can often get stuck in a local optimum is the hill climbing algorithm. The hill-climbing algorithm starts with an arbitrary solution and makes iterative changes to it. If, after an iteration, the current solution state is found to be worse than its previous state, then it is reverted back. Otherwise, the solution is retained and is changed again. This process is repeated until no further improvements can be done to the solution. The problem with this method is that it is greedy, meaning that the solution achieved can be the best solution out of all its neighbouring solution, but not out of the entire solution space. This can be visualized by considering all possible states of the solution laid out on the surface of a landscape, wherein the height of any point on the landscape represents the optimality of the solution state at that point. Say we have two hills on that landscape, one of them higher than the other. The higher hill represents the global optimum of the solution space, while the lower hill represents the local optimum. If the initial solution state is near the smaller hill, it is more likely that the algorithm will "climb" the smaller hill. And since, it only accepts a state that is better than the previous one, it will not be able to go down the hill and climb the higher hill. Thus, it can get stuck in that local optimum. 
+An example of an algorithm that can often get stuck in a local optimum is the hill climbing algorithm. The hill-climbing algorithm starts with an arbitrary solution and makes iterative changes to it. If, after an iteration, the current solution state is found to be worse than its previous state, then it is reverted back. Otherwise, the solution is retained and is changed again. This process is repeated until no further improvements can be done to the solution. The problem with this method is that it is greedy, meaning that the solution achieved can be the best solution out of all its neighbouring solution, but not out of the entire solution space. This can be visualized by considering all possible states of the solution laid out on the surface of a landscape, wherein the height of any point on the landscape represents the optimality of the solution state at that point. Say we have two hills on that landscape, one of them higher than the other. The higher hill represents the global optimum of the solution space, while the lower hill represents the local optimum. If the initial solution state is near the smaller hill, it is more likely that the algorithm will "climb" the smaller hill. And since, it only accepts a state that is better than the previous one, it will not be able to go down the hill and climb the higher hill. Thus, it can get stuck in that local optimum.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/intro/hill_climbing}
@@ -102,6 +102,10 @@ As most optimization algorithms, there will be a given cost function, where the 
 $$\text{fitness} = f(\text{Lion}) = f(x_1, x_2,..., x_{Nvar})$$
 Along with generating the solutions, a percentage of $N$ will be selected as nomad lions and the rest would be divided into a number $P$ of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage $S$ of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where $1-S$ will be the percentage of females in the nomads. The percentage $\%S$ is typically chosen between 75 to 90 percent.
 
+The positions of every lion (solution) is random of which is uniformally distributed across the entire search space. Until the percentage of nomad reaches the percentage threshold, lions would be labeled as nomads. The remaining lions would then be labeled as pride lions and would be divided using a specific group size. Each pride lion would be added to the group until the desired group sized would be reached, proceeding to the next group if filled. Until the gender percentage threshold is reached the lions in the pride will be labeled as female otherwise as a male. The same shall be done in labeling the gender of the nomads.
+
+<DEMO>
+
 \section{Proposed Algorithm: Hunting}
 In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
 Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems.
@@ -117,14 +121,14 @@ A dummy prey would move to a new position and escape as follows:
 $$\text{PREY}' = \text{PREY} + \text{rand}(0,1) \times \text{PI} \times (\text{PREY} - \text{Hunter})$$
 where PREY is the current position of the prey, PREY$'$ is the new position and PI is the percentage of improvement of the finesse of the hunter.
 For the left and right wings, they approach the prey as follows:
-\[ \text{Hunter}' =  \begin{cases} 
+\[ \text{Hunter}' =  \begin{cases}
       \text{rand}((2 \times \text{PREY} - \text{Hunter}), \text{PREY}) & (2 \times \text{PREY} - \text{Hunter}) < \text{PREY} \\
       \text{rand}(\text{PREY}, (2 \times \text{PREY} - \text{Hunter})) & (2 \times \text{PREY} - \text{Hunter}) > \text{PREY}
    \end{cases}
 \]
 where Hunter is the current position of the hunter and Hunter' is the new position of the hunter.
 As for the Center hunters, their new position is as follows:
-\[ \text{Hunter}' =  \begin{cases} 
+\[ \text{Hunter}' =  \begin{cases}
       \text{rand}(\text{Hunter}, \text{PREY}) & \text{Hunter} < \text{PREY} \\
       \text{rand}(\text{PREY}, \text{Hunter}) & \text{Hunter} > \text{PREY}
    \end{cases}
@@ -145,6 +149,8 @@ Therefore hunting in each pride can be stated in the following Pseudo-code:
 \end{center}
 \end{figure}
 
+At the beginning of the hunting phase, a group of female lions would be chosen from the pride. These lions would be ranked by their fitness and a number of these lions would be marked as centers while others would be marked as left and right wings.
+
 \section{Proposed Algorithm: Moving towards safe place}
 
 As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
@@ -157,8 +163,15 @@ where Female Lion and Female Lion' is the previous and next position of the fema
 {R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
 
 
+
+
 \section{Proposed Algorithm: Roaming}
 \begin{comment}
 Male lions in a pride would typically roam the pride's territory. To emulate this specific behavior of resident males, $\%R$
 \end{comment}
---This section still requires further understanding--
+
+\section{Proposed Algorithm: Mating}
+
+\section{Proposed Algorithm: Defense}
+\section{Proposed Algorithm: Migration}
+\section{Proposed Algorithm: Lions' Population Equilibrium}
