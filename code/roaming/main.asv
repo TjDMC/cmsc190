@@ -35,7 +35,6 @@ nmdgrp = Group;
 g.type = 'n';
 nmdgrp.content = [];
 
-bestpos = [];
 bestgfit = Inf;
 
 for i=1:nmds 
@@ -43,40 +42,24 @@ for i=1:nmds
     pop(1) = [];
     
     nmdgrp.content = [nmdgrp.content lion];
-    myfit = fiteval(lion.position);
+    myfit = fiteval(lion.position)
     if myfit < bestgfit
-        bestgfit = myfit;
-        bestpos = lion.position;
+        bestgfit = myfit
     end
 end
 
-nmdgrp
-
-nmdgrp.gbest = bestpos;
-grps = [grps nmdgrp];
+grps = [grps nmdgrp]
 
 pridenumber = ceil(length(pop)/plen);
-for i=1:pridenumber
+
+for i=2:pridenumber+1
     g = Group ;
     g.type = 'p';
     g.content = [];
-    
-    bestpos = [];
-    bestgfit = Inf;
-    
     for j=1:plen
-        lion = pop(1);
-        g.content = [g.content lion];
+        g.content = [g.content pop(1)];
         pop(1) = [];
-        
-        myfit = fiteval(lion.position);
-        if myfit < bestgfit
-            bestgfit = myfit;
-            bestpos = lion.position;
-        end
     end
-    
-    g.gbest = bestpos;
     grps = [grps g];
 end
 
@@ -104,11 +87,11 @@ for i=1:iter
                 lstfit = fiteval(lstpos);
                 
                 % reset probability
-                impro = (lstfit - gfit)/gfit; %improvement
-                probrate = 0.1 + min(0.5, impro);
+                impro = (lstfit - gfit)/gfit %improvement
+                probrate = 0.1 + min(0.5, impro)
                 
-                rndm = rand(1)
-                if rndm < probrate
+                if rand() > probrate
+                    fprintf('Nomad %d resets\n', k)
                     lstpos = rand(2,1).*(maxsp-minsp)+minsp;
                     lstfit = fiteval(lstpos);
                 end
@@ -118,10 +101,10 @@ for i=1:iter
 
                 if newfit < lstfit
                     lionsupdated = lionsupdated + 1;
-                    grps(j).content(k).best = newpos;
+                    grps(j).content.best = newpos;
                     
                     if newfit < gfit
-                        gfit = newfit;
+                        gfit = newfit
                         grps(j).gbest = newpos;
                     end
                 end
@@ -145,7 +128,7 @@ for i=1:iter
                     distance = (target.best - lstpos); % direction vector times D distance between best and source
                     p1 = 2 * rand() * distance; % represents second term in formula
 
-                    angle = rand() * pi / 3 - pi / 6; % represents tan(theta) * U(-1, 1)
+                    angle = rand() * impro / 3 - impro / 6; % represents tan(theta) * U(-1, 1)
                     p2 = [-distance(2); distance(1)] * angle; % represents third term in formula
                     % [] represents new perpendicular direction vector times D distance
 
@@ -159,7 +142,7 @@ for i=1:iter
                         source.best = newpos;
                         
                         if newfit < gfit
-                            gfit = newfit;
+                            gfit = newfit
                             grps(j).gbest = newpos;
                         end
                     end
@@ -168,35 +151,40 @@ for i=1:iter
 
                     selectable(select) = []; % Remove from possible selections
                 end
-                
-                grps(j).content(k) = source;
+            end
 
-                if updated == 1
-                    lionsupdated = lionsupdated + 1;
-                end
+            grps(j).content(k) = source;
+
+            if updated == 1
+                lionsupdated = lionsupdated + 1;
             end
         end
 
     end
     
     for j=1:length(grps)
-        for k=1:length(grps(j).content)
-            source = grps(j).content(k);
-
+        if grps(j).type == 'n' % Nomad
             % -- Print
-            print1 = source.best;
-            print2 = source.position;
-            if grps(j).type == 'n' % Nomad
-                plot(print1(1), print1(2), '*r');
+            printn1 = grps(j).content.best;
+            printn2 = grps(j).content.position;
+            
+            plot(printn1(1), printn1(2), '*r');
+            hold on;
+            plot(printn2(1), printn2(2), '+r');
+            hold on;
+        else
+             for k=1:length(grps(j).content)
+                source = grps(j).content(k);
+                
+                % -- Print
+                printp1 = source.best;
+                printp2 = source.position;
+
+                plot(printp1(1), printp1(2), '*b');
                 hold on;
-                plot(print2(1), print2(2), '+r');
+                plot(printp2(1), printp2(2), '+b');
                 hold on;
-            else
-                plot(print1(1), print1(2), '*b');
-                hold on;
-                plot(print2(1), print2(2), '+b');
-                hold on;
-            end
+             end
         end
     end
     
