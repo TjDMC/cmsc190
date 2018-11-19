@@ -91,6 +91,7 @@ hold on;
 
 for i=1:iter
     lionsupdated = 0;
+    rsnmupdated = 0;
     
     % Looping
     parfor j=1:length(grps)
@@ -100,24 +101,25 @@ for i=1:iter
 
         for k=1:length(grps(j).content)
             if type == 'n' % Nomad
-                lstpos = grps(j).content(k).best;
-                lstfit = fiteval(lstpos);
+                lstpos = grps(j).content(k).position;
+                bstfit = fiteval(grps(j).content(k).best);
                 
                 % reset probability
-                impro = (lstfit - gfit)/gfit; %improvement
+                impro = (bstfit - gfit)/gfit; %improvement
                 probrate = 0.1 + min(0.5, impro);
                 
                 rndm = rand(1)
                 if rndm < probrate
                     lstpos = rand(2,1).*(maxsp-minsp)+minsp;
-                    lstfit = fiteval(lstpos);
+                    rsnmupdated = rsnmupdated + 1;
                 end
                 
                 newpos = lstpos + (rand(2,1).*2-1)*rnddis;
                 newfit = fiteval(newpos);
 
-                if newfit < lstfit
+                if newfit < bstfit
                     lionsupdated = lionsupdated + 1;
+                    
                     grps(j).content(k).best = newpos;
                     
                     if newfit < gfit
@@ -151,10 +153,10 @@ for i=1:iter
 
                     newpos = lstpos + p1 + p2;
 
-                    lstfit = fiteval(lstpos);
+                    bstfit = fiteval(lstpos);
                     newfit = fiteval(newpos);
 
-                    if newfit < lstfit
+                    if newfit < bstfit
                         updated = 1; % check
                         source.best = newpos;
                         
@@ -208,7 +210,7 @@ for i=1:iter
     
     print(['roam-iter-' num2str(i)],'-dpng')
     
-    fprintf('Iteration %d: %d of %d lions moved.\n', i, lionsupdated, len)
+    fprintf('Iteration %d: %d of %d lions moved. %d resets.\n', i, lionsupdated, len, rsnmupdated)
     
 end
 
