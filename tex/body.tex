@@ -151,6 +151,18 @@ Therefore hunting in each pride can be stated in the following Pseudo-code:
 
 At the beginning of the hunting phase, a group of female lions would be chosen from the pride. These lions would be ranked by their fitness and a number of these lions would be marked as centers while others would be marked as left and right wings.
 
+The number of centers chosen for each pride is configurable by a percentage. The remaining pride members would be defaulted to be the left and right wings.
+
+For ever hunting phase executed, a prey would be set by the average positions of the female lions chosen for hunting. All hunters would advance to the prey once and then hunting phase is done.
+
+The following example shows convergence of the lions to the solution when advancements of the lions is repeated. The fitness function used in this example is $f(x,y) = (x-1)^2 + (y-1)^2$ where the solutions are minimized for their cost, where in this function is toward the center (1,1) at cost zero. The prey is not reconfigured each iteration so that it can simulate real catch and escape situation.
+
+<DEMO>
+
+As shown in the previous figures, the prey acts as a marker to indicate the position where the all the hunting lions would move next. As the prey approaches the minimal solution in the correct direction, the hunting lions would also approach the ideal solution. In this example, the iterations stops when all the lions have shown no improvement in their advancement to the prey. In the figures, the lions have visibly reached each other at about 10 iterations but hasn't stopped its pursuit because of very small adjustments that isn't visible in the figures.
+
+This part of the algorithm helps in searching local spaces for one solution as proven in the example.
+
 \section{Proposed Algorithm: Moving towards safe place}
 
 As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
@@ -161,8 +173,7 @@ Therefore the new position for a female lion is given as:
 \end{align*}
 where Female Lion and Female Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
 {R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
-
-
+In the following example (which uses the same fitness function and method as the previous section), multiple lions are created in the space; one of which lions is selected to move (source), tournament selection is done without replacement and each selected lion would be evaluated which of them have the best fitness (in this case: least cost).
 
 
 \section{Proposed Algorithm: Roaming}
