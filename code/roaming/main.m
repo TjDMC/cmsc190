@@ -104,33 +104,29 @@ for i=1:iter
                 lstpos = grps(j).content(k).position;
                 bstfit = fiteval(grps(j).content(k).best);
                 
-                % reset probability
+                % random probability
                 impro = (bstfit - gfit)/gfit; %improvement
                 probrate = 0.1 + min(0.5, impro);
                 
                 rndm = rand(1)
                 if rndm < probrate
-                    lstpos = rand(2,1).*(maxsp-minsp)+minsp;
+                    newpos = rand(2,1).*(maxsp-minsp)+minsp;
+                    newfit = fiteval(newpos);
                     rsnmupdated = rsnmupdated + 1;
-                end
-                
-                newpos = lstpos + (rand(2,1).*2-1)*rnddis;
-                newfit = fiteval(newpos);
+                    
+                    if newfit < bstfit
+                        lionsupdated = lionsupdated + 1;
 
-                if newfit < bstfit
-                    lionsupdated = lionsupdated + 1;
-                    
-                    grps(j).content(k).best = newpos;
-                    
-                    if newfit < gfit
-                        gfit = newfit;
-                        grps(j).gbest = newpos;
+                        grps(j).content(k).best = newpos;
+
+                        if newfit < gfit
+                            gfit = newfit;
+                            grps(j).gbest = newpos;
+                        end
                     end
-                end
 
-                grps(j).content(k).position = newpos;
-                
-                
+                    grps(j).content(k).position = newpos;
+                end
             else
                 selectable = grps(j).content;
                 visitablenumber = fix(vper*gsize);
@@ -208,9 +204,10 @@ for i=1:iter
     legend(hndl, 'Nomad Best', 'Nomad Pos', 'Pride Lion Best', 'Pride Lion Pos', 'Location', 'southoutside')
     hold off;
     
-    print(['roam-iter-' num2str(i)],'-dpng')
+%     print(['roam-iter-' num2str(i)],'-dpng')
     
-    fprintf('Iteration %d: %d of %d lions moved. %d resets.\n', i, lionsupdated, len, rsnmupdated)
+    fprintf('Iteration %d: %d of %d lions improved. %d resets.\n', i, lionsupdated, len, rsnmupdated)
+    pause(0.066)
     
 end
 

@@ -181,7 +181,9 @@ Roaming in territory is something lions in a pride usually do. This also helps i
 
 Along with roaming, if a resident male visits a new position better than its current position, update its current best position and best visited solution.
 
+For pride lions, roaming would mean to use each others' position to find better positions (solutions). Similar to the previous section, in this part of the algorithm, the lions would go towards each other using the same formula.
 
+For nomad lions, however, roaming would be utilizing random movement to find better positions (solutions). These lions can only go as far as a set range of movement per iteration that is randomly chosen with uniform distrbution. Nomad lions, being independent from others, may get stuck in local optima. Getting stuck in local optima, the nomad lion won't do any useful searching when it happens. Thus, a reset should be done whenever this happens.
 
 
 \section{Proposed Algorithm: Mating and Equilibrium}
