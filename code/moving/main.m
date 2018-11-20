@@ -1,5 +1,6 @@
 clear
 clc
+hold off;
 
 len=8;
 tsize=4;
@@ -54,17 +55,46 @@ hndl(3) = plot(vct(1), vct(2), 'or');
 a = [rmpop.vector];
 hndl(4) = scatter(a(1,:),a(2,:), 'og');
 
-random = rand();
-direction = (vct - fem); % direction vector times D distance between best and source
-range = 2 * random * direction; % represents second term in formula
-normals = null(direction(:).') % get all vectors normal to direction vector
-out = fem + range; % push female to direction
-extent = random * pi / 6; % extent to which the point can deviate from the direction
+% tester for comparing methods
+% for q = 1:1000
+    random = rand();
+    direction = (vct - fem); % direction vector times D distance between best and source
+    p1 = 2 * random * direction; % represents second term in formula
 
-for i = 1:size(normals, 2) % get all 'dimensions' or direction the point can deviate from
-    out = out + normals(:,i) * extent * (rand() * 2 - 1) % deviate point in direction perpendicular to original direction
-    %           ^ normal vct  ^ extnt of deviate ^ -1 to 1 times of deviation
-end
+    normals = null(direction(:).').*norm(direction); % get all vectors normal to direction vector
+    out = fem + p1; % push female to direction
+    angle = random * pi / 6; % extent to which the point can deviate from the direction
+
+    for z = 1:size(normals, 2) % get all 'dimensions' or direction the point can deviate from
+        mo = normals(:,z);
+        out = fem + mo * angle * (rand() * 2 - 1); % deviate point in direction perpendicular to original direction
+        %           ^ normal vct  ^ extnt of deviate ^ -1 to 1 times of deviation
+    end
+% 
+%     plot(out(1), out(2), '*g');
+% end
+%
+% try 2 dimension
+%
+% for q=1:1000
+%     random = rand();
+%     random2 = rand();
+% 
+%     distance = (vct - fem); % direction vector times D distance between best and source
+%     p1 = 2 * random * distance; % represents second term in formula
+% 
+%     angle = random * pi / 6 * (random2 * 2 - 1); % represents tan(theta) * U(-1, 1)
+%     p2 = [-distance(2); distance(1)] ; % represents third term in formula
+% 
+%     out = fem + p1 + p2 * angle;
+%     plot(out(1), out(2), '+r');
+%     
+% end
+% 
+% oss = vct + [-distance(2); distance(1)];
+% 
+% plot([vct(1) fem(1)], [vct(2) fem(2)])
+% plot([vct(1) oss(1)], [vct(2) oss(2)])
 
 hndl(5) = plot(out(1), out(2), '+r');
 axis([min(minsp, out(1)) max(maxsp, out(1)) min(minsp, out(2)) max(maxsp, out(2))])

@@ -108,7 +108,7 @@ for i=1:iter
                 impro = (bstfit - gfit)/gfit; %improvement
                 probrate = 0.1 + min(0.5, impro);
                 
-                rndm = rand();
+                rndm = rand(1)
                 if rndm < probrate
                     newpos = rand(2,1).*(maxsp-minsp)+minsp;
                     newfit = fiteval(newpos);
@@ -131,7 +131,7 @@ for i=1:iter
                 selectable = grps(j).content;
                 visitablenumber = fix(vper*gsize);
                 
-                selectable(k) = [];
+                selectable(k) = []
 
                 source = grps(j).content(k);
                 updated = 0; % check
@@ -143,44 +143,6 @@ for i=1:iter
                     target = selectable(select);
                     
                     if target.best ~= lstpos
-                        random = rand();
-                        direction = (target.best - lstpos); % direction vector times D distance between best and source
-                        extend = 2 * random * direction; % represents second term in formula
-
-                        normals = null(direction(:).').*norm(direction); % get all vectors normal to direction vector
-                        newpos = lstpos + extend; % push female to direction
-                        deviate = random * pi / 6; % extent to which the point can deviate from the direction
-
-                        for z = 1:size(normals, 2) % get all 'dimensions' or direction the point can deviate from
-                            newpos = newpos + normals(:,z) * deviate * (rand() * 2 - 1); % deviate point in direction perpendicular to original direction
-                            %           ^ normal vct  ^ extnt of deviate ^ -1 to 1 times of deviation
-                        end
-
-    %                     random = rand();
-    %                     random2 = rand();
-    % 
-    %                     distance = (target.best - lstpos); % direction vector times D distance between best and source
-    %                     p1 = 2 * random * distance; % represents second term in formula
-    % 
-    %                     angle = random * pi / 6 * (random2 * 2 - 1); % represents tan(theta) * U(-1, 1)
-    %                     p2 = [-distance(2); distance(1)] * angle; % represents third term in formula
-    % 
-    %                     newpos = lstpos + p1 + p2;
-
-                        lstfit = fiteval(lstpos);
-                        newfit = fiteval(newpos);
-
-                        if newfit < lstfit
-                            updated = 1; % check
-                            source.best = newpos;
-
-                            if newfit < gfit
-                                gfit = newfit;
-                                grps(j).gbest = newpos;
-                            end
-                        end
-
-                        source.position = newpos;
                     end
 
                     
@@ -225,7 +187,7 @@ for i=1:iter
     legend(hndl, 'Nomad Best', 'Nomad Pos', 'Pride Lion Best', 'Pride Lion Pos', 'Location', 'southoutside')
     hold off;
     
-    print(['roam-iter-' num2str(i)],'-dpng')
+%     print(['roam-iter-' num2str(i)],'-dpng')
     
     fprintf('Iteration %d: %d of %d lions improved. %d resets.\n', i, lionsupdated, len, rsnmupdated)
     pause(0.066)

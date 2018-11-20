@@ -41,7 +41,7 @@ The Particle Swarm Optimization \cite{eberhart_kennedy_1995} algorithm is modele
 of birds collectively foraging for food). In this algorithm, an initial set of particles is first initialized with each
 particle having a random initial velocity. These particles are then flung through hyperspace where each of their position
 represents a solution to the problem at hand. Each of these solutions are evaluated regarding their fitness and a particle's
-current most fit solution is stored as its 'pbest'. The current best solution attained by the entire set particles is also stored; this is called 'gbest'. For each time step of the algorithm, each particle is accelerated towards its 'pbest' and the 'gbest'. Eventually, these particles will converge around an optimal solution.
+current most fit solution is stored as its `pbest'. The current best solution attained by the entire set particles is also stored; this is called `gbest'. For each time step of the algorithm, each particle is accelerated towards its `pbest' and the `gbest'. Eventually, these particles will converge around an optimal solution.
 
 \section{Optimization: Artificial Immune Systems}
 Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.
@@ -155,7 +155,7 @@ The number of centers chosen for each pride is configurable by a percentage. The
 
 For ever hunting phase executed, a prey would be set by the average positions of the female lions chosen for hunting. All hunters would advance to the prey once and then hunting phase is done.
 
-The following example shows convergence of the lions to the solution when advancements of the lions is repeated. The fitness function used in this example is $f(x,y) = (x-1)^2 + (y-1)^2$ where the solutions are minimized for their cost, where in this function is toward the center (1,1) at cost zero. The prey is not reconfigured each iteration so that it can simulate real catch and escape situation.
+The following example shows optimization of the lions to the solution when advancements of the lions is repeated. The fitness function used in this example is $f(x,y) = (x-1)^2 + (y-1)^2$ where the solutions are minimized for their cost, where in this function is toward the center (1,1) at cost zero. The prey is not reconfigured each iteration so that it can simulate real catch and escape situation.
 
 <DEMO>
 
@@ -168,26 +168,56 @@ This part of the algorithm helps in searching local spaces for one solution as p
 As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
 Therefore the new position for a female lion is given as:
 \begin{align*}
-\text{Female Lion}' &= \text{Female Lion} + 2D \times rand(0,1){R1} + U(-1,1) \times \tan(\theta) \times D \times {R2} \\
+\text{Lion}' &= \text{Lion} + 2D \times rand(0,1){R1} + U(-1,1) \times \tan(\theta) \times D \times {R2} \\
 &\text{  where } R1 \cdot R2 = 0, ||R2|| = 1
 \end{align*}
-where Female Lion and Female Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
+where Lion and Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
+
 {R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
+
 In the following example (which uses the same fitness function and method as the previous section), multiple lions are created in the space; one of which lions is selected to move (source), tournament selection is done without replacement and each selected lion would be evaluated which of them have the best fitness (in this case: least cost).
 
+This mechanism, which would also be done by the resident males, is used in the roaming part of the algorithm.
 
 \section{Proposed Algorithm: Roaming}
 Roaming in territory is something lions in a pride usually do. This also helps in getting used to the territory for the lions. For nomads, this is done to find better places to get resources from. In optimization, this can be used to further optimize the local search space for each pride and is used by nomads for searching solutions.
 
 Along with roaming, if a resident male visits a new position better than its current position, update its current best position and best visited solution.
 
-For pride lions, roaming would mean to use each others' position to find better positions (solutions). Similar to the previous section, in this part of the algorithm, the lions would go towards each other using the same formula.
+For pride lions, roaming would mean to use each others' position to find better positions (solutions). Similar to the previous section, in this part of the algorithm, the lions would go towards each other using the same formula. The algorithm for resident male roaming is done by the following pseudo-code:
 
-For nomad lions, however, roaming would be utilizing random movement to find better positions (solutions). These lions can only go as far as a set range of movement per iteration that is randomly chosen with uniform distrbution. Nomad lions, being independent from others, may get stuck in local optima. Getting stuck in local optima, the nomad lion won't do any useful searching when it happens. Thus, a reset should be done whenever this happens.
 
+
+For nomad lions, however, roaming would be utilizing random movement to find better positions (solutions). In the algorithm, nomad lions have an advantage to not get stuck in local optima. A nomad lion would randomly roam around the search if space especially when its fitness among the nomads is worse. These nomad lions are only required to check their standing among peer nomads unlike resident lions whom tries to optimize with each others position, thus, giving the nomad lions an advantage to not get stuck. The new position of these nomads are generated using the following equation:
+
+\begin{align*}
+ \text{Lion'}_{ij} =
+  \begin{cases}
+   \text{Lion}_{ij}        & \text{if rand}(0,1)  > pr_i \\
+   \text{RAND}_j        & \text{otherwise}
+ \end{cases}
+\end{align*}
+
+where Lion$_{i}$ is the position of the lion, j is the dimension, rand is a uniformally distributed random number between 0 and 1 and RAND$_j$ is a random position in the search space. Now, $pr_i$ ($i$ for every nomad lion) is represented by:
+
+$$
+pr_i = 0.1 + \text{min}\left(0.5, \frac{ (\text{Nomad}_i - \text{Best}_{nomad}) }{ \text{Best}_{nomad} }\right)
+$$
+
+This shows that the nomad lion, instead of moving relative to other positions, would move in a sporadic manner proving its `randomness'.
+
+Similar to the previous examples, the following example simulates the roaming mechanism of the algorithm (using the same parameters) to show how this part of the algorithm helps in optimizing solutions. The mini-algorithm runs until the maximum set iterations of 300.
+
+The example shows how fast the optimization technique used in pride lions compared to the slow but sure optimization technique of nomads. Though after 300 iterations, the nomad lions still hasn't optimized enough to the global minima of $(1,1)$.
 
 \section{Proposed Algorithm: Mating and Equilibrium}
-Mating of the lions in the population refers to the crossing-over of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations: $$\text{Offspring}_j\text{1}=\beta \times \text{Female Lion}_j +\sum\frac{1-\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i,$$ $$\text{Offspring}_j\text{2}=(1-\beta) \times \text{Female Lion}_j +\sum\frac{\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i$$, where $j$ is dimension; $S_i$ is 1 if male $i$ is selected for mating, 0 otherwise; $NR$ is the number of resident males in a pride; $\beta$ is a randomly generated number with a normal distribution with mean value 0.5 and standard deviation 0.1.
+Mating of the lions in the population refers to the crossing-over of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations:
+
+$$\text{Offspring}_j\text{1}=\beta \times \text{Female Lion}_j +\sum\frac{1-\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i,$$
+
+$$\text{Offspring}_j\text{2}=(1-\beta) \times \text{Female Lion}_j +\sum\frac{\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i$$,
+
+where $j$ is dimension; $S_i$ is 1 if male $i$ is selected for mating, 0 otherwise; $NR$ is the number of resident males in a pride; $\beta$ is a randomly generated number with a normal distribution with mean value 0.5 and standard deviation 0.1.
 
 One of these offsprings is set as male, and the other as female. A mutation is applied on each gene of one of the produced offspring with probability $Mu$. Through mutation, a random number replaces the value of the gene.
 
