@@ -11,7 +11,6 @@ maxsp=2; % maximum value per dimension
 minsp=0; % minimum value per dimesnion
 dim = 2; % dimensions
 fit=@(x,y) (x-1).^2+(y-1).^2; % fitness function
-maximize = false; % maximize function or minimize
 
 a=rand(dim,len).*(maxsp-minsp)+minsp; % initial lion positions
 
@@ -90,7 +89,7 @@ for h=1:iter
     fprintf('Initial\n');
     axis([minsp maxsp minsp maxsp]);
     figure(1);
-    plotLions(dim,grps,[minsp maxsp],[minsp maxsp]);
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Initial');
     
     %Mating
     for i=1:length(grps)
@@ -140,7 +139,7 @@ for h=1:iter
     %plotting
     fprintf('Mating\n');
     figure(2);
-    plotLions(dim,grps,[minsp maxsp],[minsp maxsp]);
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Mating');
     
     %Defense
     for i=1:length(grps)
@@ -162,11 +161,7 @@ for h=1:iter
         end
         
         %sort males from weakest to strongest
-        if maximize
-            [~, ind] = sort([males.fitness]);
-        else
-            [~, ind] = sort([males.fitness],'descend');
-        end
+        [~, ind] = sort([males.fitness],'descend');
         sorted = males(ind);
         
         %drive out
@@ -186,7 +181,7 @@ for h=1:iter
                 nm = nmdgrp.content(i2); % nomad male
                 for i3=1:length(grps(i).content)
                     rm =  grps(i).content(i3); % resident male
-                    if rm.sex == 'm' && (maximize&&rm.fitness<=nm.fitness || ~maximize&&rm.fitness>=nm.fitness) % true if nomad male is stronger than resident
+                    if rm.sex == 'm' && rm.fitness>nm.fitness % true if nomad male is stronger than resident
                         % switch places of resident and nomad
                         grps(i).content(i3) = nm;
                         nmdgrp.content(i2) = rm; 
@@ -201,7 +196,7 @@ for h=1:iter
     %plotting
     fprintf('Defense\n');
     figure(3);
-    plotLions(dim,grps,[minsp maxsp],[minsp maxsp]);
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Defense');
     
     %Migration
     for i=1:length(grps)
@@ -239,11 +234,7 @@ for h=1:iter
     end
     
     %sort nomad females from weakest to strongest
-    if maximize
-        [~, ind] = sort([fnomads.fitness]);
-    else
-        [~, ind] = sort([fnomads.fitness],'descend');
-    end
+    [~, ind] = sort([fnomads.fitness],'descend');
     fsorted = fnomads(ind);
     
     %female nomad distribution
@@ -273,7 +264,7 @@ for h=1:iter
     %plotting
     fprintf('Migration\n');
     figure(4);
-    plotLions(dim,grps,[minsp maxsp],[minsp maxsp])
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Migration')
     
     %Equilibrium
     %separate males and females
@@ -291,13 +282,8 @@ for h=1:iter
     end
     
     %sort nomad lions from weakest to strongest
-    if maximize
-        [~, ind] = sort([nmales.fitness]);
-        [~, ind1] = sort([nfemales.fitness]);
-    else
-        [~, ind] = sort([nmales.fitness],'descend');
-        [~, ind1] = sort([nfemales.fitness],'descend');
-    end
+    [~, ind] = sort([nmales.fitness],'descend');
+    [~, ind1] = sort([nfemales.fitness],'descend');
     snmales = nmales(ind);
     snfemales = nfemales(ind1);
     
@@ -319,16 +305,19 @@ for h=1:iter
     %plotting
     fprintf('Equilibrium\n');
     figure(5);
-    plotLions(dim,grps,[minsp maxsp],[minsp maxsp]);
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Equilibrium');
     pause(1);
 end
 
-function plotLions(dim,grps,xbounds,ybounds)
+function plotLions(dim,grps,xbounds,ybounds,plottitle)
     if dim==2
         clf
         hold on;
+        title(plottitle);
         xlim(xbounds);
         ylim(ybounds);
+        xlabel('y') ;
+        ylabel('x'); 
         ctrm=0;
         ctrf=0;
         for i2=1:length(grps)
