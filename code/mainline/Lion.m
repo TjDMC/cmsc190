@@ -9,6 +9,12 @@ classdef Lion < handle
     end
     
     methods
+        function init(me,position,fit_fun)
+            me.position = position;
+            me.pbest = position;
+            me.pbestval = feval(fit_fun, position);
+        end
+        
         function offsprings = mate(me,males,muprob,minval,maxval)
             if me.sex ~= 'f'
                 offsprings = [];
