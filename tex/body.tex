@@ -326,7 +326,7 @@ Similar to the previous examples, the following example simulates the roaming me
 The example shows how fast the optimization technique used in pride lions compared to the slow but sure optimization technique of nomads. Though after 200 iterations, the nomad lions still hasn't optimized enough to the global minima of $(1,1)$.
 
 \section{Proposed Algorithm: Mating and Equilibrium}
-Mating of the lions in the population refers to the crossing-over of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations:
+Mating of the lions in the population refers to the mixing of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations:
 
 $$\text{Offspring}_j\text{1}=\beta \times \text{Female Lion}_j +\sum\frac{1-\beta}{\sum_{i=1}^{NR}S_i}\times\text{MaleLion}_j^i\times S_i,$$
 
@@ -337,21 +337,64 @@ where $j$ is dimension; $S_i$ is 1 if male $i$ is selected for mating, 0 otherwi
 One of these offsprings is set as male, and the other as female. A mutation is applied on each gene of one of the produced offspring with probability $Mu$. Through mutation, a random number replaces the value of the gene.
 
 The purpose of $\beta$ in the equation is to find a value somewhere in between the values of the female and male genes; and the purpose of mutation is to further diversify the solution generated.
+\\For example:
+\\Given the population:
 
-At the end of each iteration of LOA, the number of nomad lions will be controlled with respect to the permitted number of each gender determined by the sex rate. The ones with the least fitness value will be removed from the population. This is to maintain equilibrium in the lion's population.
+\begin{table}[h!]
+\centering
+\begin{tabular}{l c l c l c l c l}
+\hline
+  & 1          & 2        & 3          & 4        \\
+\hline
+Position    & (0.5, 0.5) & (0.5, 1) & (1.5, 0.5) & (1, 1.5) \\
+\hline
+\end{tabular}
+\caption{Mating Demo Female Population}
+\end{table}
 
-For example:
+\begin{table}[h!]
+\centering
+\begin{tabular}{l c l c l c l c l}
+\hline
+  & 1          & 2        & 3          & 4        \\
+\hline
+Position    & (0.75, 0.5) & (1, 0.5) & (0.5, 1.5) & (1, 1) \\
+\hline
+\end{tabular}
+\caption{Mating Demo Male Population}
+\end{table}
+
+Selecting Female 2 (0.5, 1.0) and Males 2 (0.75, 0.5) and 3 (0.5, 1.5) and $\beta$ as 0.4, the genes are computed as:
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/mating/matingdemooff1}
+\caption{Mating Demo Offspring Gene 1}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{img/mating/matingdemooff2}
+\caption{Mating Demo Offspring Gene 2}
+\end{center}
+\end{figure}
+
+The result offspring are Offspring 1 = (0.65, 1) and Offspring 2 = (0.6, 1). Plotting this example yields:
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/mating/matingdemooutput}
+\caption{Mating Demo Plot}
+\end{center}
+\end{figure}
 
 \section{Proposed Algorithm: Defense}
 When they mature, male cubs in a pride fight with the existing males. The weaker males are driven out of the pride and become nomads. This is done in the algorithm by sorting all the males in the pride according to their fitness. The number of males to be driven out is determined by the sex rate of the pride.
 
-For example:
-
 Similarly, nomad males can fight existing males in a pride, and if they prove to be stronger than the resident male, they replace the beaten male in the pride. For each nomad male in the population, it will attack a single or multiple prides determined randomly. Once a pride is selected, the fitness of the nomad male is compared to each resident male of the pride. If the nomad is determined to be stronger, it will replace the resident male, and the resident male becomes a nomad. This behaviour allows the retention of strong lions/solutions in the pride.
-
-For example:
 
 \section{Proposed Algorithm: Migration}
 Some females in a pride migrate to another pride or become nomads. Through migration, nomad females can also become residents of a pride. This enhances the diversity of the pride by the best position attained by the migrating females. For each pride, the maximum number of females is determined by the sex rate of the pride. The surplus females plus $\%I$ of the maximum number of females in a pride migrate and become nomads. The nomad females are then sorted according to their fitness and the stronger ones are distributed to random prides to fill the empty place of the migrated females. The number of females to be distributed is determined by the amount of empty female slots of all prides. This procedure allows information sharing among the different prides.
 
-For example:
+\section{Proposed Algorithm: Equilibrium}
+At the end of each iteration of LOA, the number of nomad lions will be controlled with respect to the permitted number of each gender determined by the sex rate. The ones with the least fitness value will be removed from the population. This is to maintain equilibrium in the lion's population.
