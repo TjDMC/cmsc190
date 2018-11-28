@@ -104,8 +104,6 @@ Along with generating the solutions, a percentage of $N$ will be selected as nom
 
 The positions of every lion (solution) is random of which is uniformally distributed across the entire search space. Until the percentage of nomad reaches the percentage threshold, lions would be labeled as nomads. The remaining lions would then be labeled as pride lions and would be divided using a specific group size. Each pride lion would be added to the group until the desired group sized would be reached, proceeding to the next group if filled. Until the gender percentage threshold is reached the lions in the pride will be labeled as female otherwise as a male. The same shall be done in labeling the gender of the nomads.
 
-<DEMO>
-
 \section{Proposed Algorithm: Hunting}
 In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
 Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems.
@@ -157,7 +155,50 @@ For ever hunting phase executed, a prey would be set by the average positions of
 
 The following example shows optimization of the lions to the solution when advancements of the lions is repeated. The fitness function used in this example is $f(x,y) = (x-1)^2 + (y-1)^2$ where the solutions are minimized for their cost, where in this function is toward the center (1,1) at cost zero. The prey is not reconfigured each iteration so that it can simulate real catch and escape situation.
 
-<DEMO>
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-init}
+    \caption{Iteration 0}
+    \label{fig:hnt-iter-0}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-1}
+    \caption{Iteration 1}
+    \label{fig:hnt-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-2}
+    \caption{Iteration 2}
+    \label{fig:hnt-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-3}
+    \caption{Iteration 3}
+    \label{fig:hnt-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-4}
+    \caption{Iteration 4}
+    \label{fig:hnt-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-5}
+    \caption{Iteration 5}
+    \label{fig:hnt-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-6}
+    \caption{Iteration 6}
+    \label{fig:hnt-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-7}
+    \caption{Iteration 7}
+    \label{fig:hnt-iter-7}
+  \end{subfigure}
+  \caption{Hunting Simulation}
+\end{figure}
 
 As shown in the previous figures, the prey acts as a marker to indicate the position where the all the hunting lions would move next. As the prey approaches the minimal solution in the correct direction, the hunting lions would also approach the ideal solution. In this example, the iterations stops when all the lions have shown no improvement in their advancement to the prey. In the figures, the lions have visibly reached each other at about 10 iterations but hasn't stopped its pursuit because of very small adjustments that isn't visible in the figures.
 
@@ -171,11 +212,33 @@ Therefore the new position for a female lion is given as:
 \text{Lion}' &= \text{Lion} + 2D \times rand(0,1){R1} + U(-1,1) \times \tan(\theta) \times D \times {R2} \\
 &\text{  where } R1 \cdot R2 = 0, ||R2|| = 1
 \end{align*}
-where Lion and Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory.
+where Lion and Lion' is the previous and next position of the female lion, respectively, and D is the distance between the female lion's position and the selected point chosen by tournament selection in the pride's territory. The following figure shows the range of possible next positions of the lion.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/moving/moving}
+\caption{Range of next positions relative to original}
+\end{center}
+\end{figure}
 
 {R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/moving/move-out-legend}
+\caption{Trajectory visualization by generating 300 outputs}
+\end{center}
+\end{figure}
+
 In the following example (which uses the same fitness function and method as the previous section), multiple lions are created in the space; one of which lions is selected to move (source), tournament selection is done without replacement and each selected lion would be evaluated which of them have the best fitness (in this case: least cost).
+
+In the algorithm, the tournament selection's size is not set but is computed according to the pride's number of successes in updating their best position in the last iteration. This is computed using the following equations.
+
+\begin{align*}
+    K_j(P) &= \Sigma_{i=1}^N  S(i,t) \\
+    T_j^{Size} &= \text{max}\left(2, ceil\left(\frac{K_j(P)}{2}\right)\right)
+\end{align*}
+where, $K_j$ is the number of successes in a pride and $T_j$ is the tournament size of that pride for the next iteration.
 
 This mechanism, which would also be done by the resident males, is used in the roaming part of the algorithm.
 
@@ -206,9 +269,61 @@ $$
 
 This shows that the nomad lion, instead of moving relative to other positions, would move in a sporadic manner proving its `randomness'.
 
-Similar to the previous examples, the following example simulates the roaming mechanism of the algorithm (using the same parameters) to show how this part of the algorithm helps in optimizing solutions. The mini-algorithm runs until the maximum set iterations of 300.
+Similar to the previous examples, the following example simulates the roaming mechanism of the algorithm (using the same parameters) to show how this part of the algorithm helps in optimizing solutions. The mini-algorithm runs until the maximum set iterations of 200. (Iterations on next page.)
 
-The example shows how fast the optimization technique used in pride lions compared to the slow but sure optimization technique of nomads. Though after 300 iterations, the nomad lions still hasn't optimized enough to the global minima of $(1,1)$.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/roam/roam-init}
+\caption{Initial positions and best of nomad and resident lions}
+\end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-25}
+    \caption{Iteration 25}
+    \label{fig:roam-iter-0}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-50}
+    \caption{Iteration 50}
+    \label{fig:roam-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-75}
+    \caption{Iteration 75}
+    \label{fig:roam-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-100}
+    \caption{Iteration 100}
+    \label{fig:roam-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-125}
+    \caption{Iteration 125}
+    \label{fig:roam-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-150}
+    \caption{Iteration 150}
+    \label{fig:roam-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-175}
+    \caption{Iteration 175}
+    \label{fig:roam-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/roam/roam-iter-200}
+    \caption{Iteration 200}
+    \label{fig:roam-iter-7}
+  \end{subfigure}
+  \caption{Roaming Simulation}
+\end{figure}
+
+The example shows how fast the optimization technique used in pride lions compared to the slow but sure optimization technique of nomads. Though after 200 iterations, the nomad lions still hasn't optimized enough to the global minima of $(1,1)$.
 
 \section{Proposed Algorithm: Mating and Equilibrium}
 Mating of the lions in the population refers to the crossing-over of their genes to allow exchanging of information. In this algorithm, for every pride, $\%Ma$ of the females mate with one or more males. For the nomads, $\%Ma$ of the females mate with only one male. These individuals are selected randomly. After mating, two offsprings are produced using the equations:

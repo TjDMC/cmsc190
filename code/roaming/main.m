@@ -222,10 +222,10 @@ for i=1:iter
     axis([minsp maxsp minsp maxsp])
     
 
-    legend(hndl, 'Nomad Best', 'Nomad Pos', 'Pride Lion Best', 'Pride Lion Pos', 'Location', 'southoutside')
+    legend(hndl, 'Nomad Best', 'Nomad Pos', 'Pride Lion Best', 'Pride Lion Pos')
     hold off;
     
-    print(['roam-iter-' num2str(i)],'-dpng')
+    % print(['roam-iter-' num2str(i)],'-dpng')
     
     fprintf('Iteration %d: %d of %d lions improved. %d resets.\n', i, lionsupdated, len, rsnmupdated)
     pause(0.066)
