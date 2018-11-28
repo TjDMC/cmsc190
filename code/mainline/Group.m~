@@ -101,11 +101,7 @@ classdef Group < handle
                     nomd_lft = nomd_cli.pbestval;
                     nomd_cli.position = min_val + rand(nomd_dim,1)*(max_val-min_val);
                     nomd_cli.evaluate(fit_fun);
-                    nomd_nft = nomd_cli.pbestval;
-                    if and(nomd_nft < nomd_lft, nomd_nft < nomd_bft)
-                        me.lbestval = nomd_nft;
-                        me.lbest = nomd_cli.position;
-                    end
+                    if nomd_
                 end
             end
         end
