@@ -13,7 +13,7 @@ percent_nomad = 0.2;
 percent_roam = 0.2;
 percent_sex = 0.8;
 
-adapt_fun = @(x) fit_fun(x);
+
 
 lion_groups = zeros(1, prides_length+1);
 
@@ -23,7 +23,7 @@ rand_lio = rand(dimension, population).*(space_max-space_min)+space_min;
 rand_pop = zeros(1, population);
 for i=1:population
     rand_cli = Lion;
-    rand_cli.init(rand_lio(:,i), adapt_fun);
+    rand_cli.init(rand_lio(:,i), fit_fun);
     rand_pop(i) = rand_cli;
 end
 
