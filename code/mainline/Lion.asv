@@ -5,9 +5,16 @@ classdef Lion < handle
         pbest
         pbestval
         sex='m'
+        role=''
     end
     
     methods
+        function init(me,position,fit_fun)
+            me.position = position;
+            me.pbest = position;
+            me.pbestval = feval(fit_fun, position);
+        end
+        
         function offsprings = mate(me,males,muprob,minval,maxval)
             if me.sex ~= 'f'
                 offsprings = [];
@@ -33,17 +40,17 @@ classdef Lion < handle
                         o2.position(i,1) = randvalue;
                     end
                 end
+                
                 if omutate ~= 1
                     o1.position(i,1) = beta.*me.position(i) + mbeta.*mgene;
                 end
+                
                 if omutate ~= 2
                     o2.position(i,1) = mbeta.*me.position(i) + beta.*mgene;
                 end
-                    
-                    
             end
             
-            %gender group
+            % select gender
             if rand(1) <= 0.5
                 o1.sex = 'm';
                 o2.sex = 'f';
@@ -98,6 +105,11 @@ classdef Lion < handle
                 me.pbestval = newbestval;
                 did_update = true;
             end
+        end
+        
+        function print(me, style)
+            if me.s
+            dispos(me.position, [])
         end
     end
 end

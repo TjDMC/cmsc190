@@ -109,5 +109,19 @@ classdef Group < handle
                 end
             end
         end
+        
+        function print(me)
+            if me.type == 'p'
+                style = '*';
+            else
+                style = '+';
+            end
+            for i=1:length(me.males)
+                me.males(i).print(style);
+            end
+            for i=1:length(me.females)
+                me.females(i).print(style);
+            end
+        end
     end
 end

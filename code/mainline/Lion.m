@@ -106,6 +106,15 @@ classdef Lion < handle
                 did_update = true;
             end
         end
+        
+        function print(me, style)
+            if me.sex == 'm'
+                color = 'b';
+            else
+                color = 'r';
+            end
+            dispos(me.position, [style color]);
+        end
     end
 end
 
