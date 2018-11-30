@@ -113,7 +113,7 @@ classdef Lion < handle
             else
                 color = 'r';
             end
-            dispos(me.position, [style color]);
+            dispos(me.pbest, [style color]);
         end
     end
 end
