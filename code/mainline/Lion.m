@@ -30,6 +30,7 @@ classdef Lion < handle
                 for j=1:length(males)
                     mgene = mgene + males(j).position(i);
                 end
+                mgene = mgene/length(males);
                 
                 mbeta = 1-beta;
                 omutate = 0; % no mutate
