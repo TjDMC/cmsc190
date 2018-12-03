@@ -235,21 +235,21 @@ classdef Group < handle
         function equilibriate(me,nomad_group,sex_rate)
             if me.type == 'p'
                 %internal defense
-				todrout = (length(me.males()))-fix((1-sex_rate)*me.maxsize);%number of males to drive out (internal defense)
-				
+				todrout = (length(me.males))-fix((1-sex_rate)*me.maxsize);%number of males to drive out (internal defense)
+                
 				%sort males from weakest to strongest
 				[~, ind] = sort([me.males.pbestval],'descend');
 				me.males = me.males(ind);
 				%drive out
 				for i=1:todrout
-					nomad_group.males = me.males(1);
+					nomad_group.males = [nomad_group.males me.males(1)];
 					me.males(1)=[];
 				end
             else
                 %kill the weak
 				mtokill = length(me.males)-me.maxsize*sex_rate; % number of males to kill
 				ftokill = length(me.females)-me.maxsize*(1-sex_rate);% number of females to kill
-				
+                
 				%sort nomad females from weakest to strongest
 				[~, ind] = sort([me.females.pbestval],'descend');
 				me.females = me.females(ind);
