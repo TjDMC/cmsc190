@@ -190,13 +190,12 @@ classdef Group < handle
 			mifem = fix(length(me.females)-maxfem + imfem);% number of migrating females (surplus + migrating)
 
 			imifem = randperm(length(me.females),mifem); %indices of migrating females
-			imifem = sort(imifem,'descend');
-
-			% remove females from pride and add to nomad group
-			for i=1:length(imifem)
-				nomad_grp.females = [nomad_grp.females me.females(i)];
-				me.females(i)=[];
-			end
+            
+            for i=1:length(imifem)
+                nomad_grp.females = [nomad_grp.females me.females(imifem(i))];
+            end
+            
+            me.females(imifem)=[];
 		end
 
 		function mate(me,mating_rate,mutation_prob,space_min,space_max,fit_fun)
@@ -280,12 +279,12 @@ classdef Group < handle
 				imfem = fix(im_rate*maxfem); %number of females to be put in this pride
 
 				ifem = randperm(length(me.females),imfem); %indices of females to be put into this pride
-				ifem = sort(ifem,'descend');
-
-				for j=1:length(ifem) %replace the migrated females in a pride
-					pgrp.females = [pgrp.females me.females(j)];
-					me.females(j)=[];
-				end
+                
+                for j=1:length(ifem) %replace the migrated females in a pride
+                    pgrp.females = [pgrp.females me.females(ifem(j))];
+                end
+                
+                me.females(ifem)=[];
 			end
 
 		end
