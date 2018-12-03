@@ -17,6 +17,11 @@ percent_nomad = 0.2;
 percent_roam = 0.2;
 percent_sex = 0.8;
 
+mating_rate = 0.3;
+mutation_prob = 0.02;
+
+immigration_rate = 0.4;
+
 adapt_fun = @(x) fit_fun(x);
 
 pride_groups = Group.empty(0, prides_length+1);
@@ -39,6 +44,7 @@ nomd_ind = randperm(population, nomd_siz);
 
 nomad_group = Group;
 nomad_group.type = 'n';
+nomad_group.maxsize = nomd_siz;
 
 nomd_tmg = Lion.empty(0,nomd_siz);
 for i=1:nomd_siz
@@ -82,7 +88,7 @@ for i=1:prid_end
     prid_gln = length(prid_grp);
     prid_fml = round(prid_gln*percent_sex);
     prid_fin = randperm(prid_gln, prid_fml);
-    
+
     prid_fgr = Lion.empty(0, prid_fml);
     for j=1:prid_fml
         prid_tfe = prid_grp(prid_fin(j));
@@ -94,6 +100,7 @@ for i=1:prid_end
     prid_thg.type = 'p';
     prid_thg.females = prid_fgr;
     prid_thg.males = prid_grp;
+	prid_thg.maxsize = length(prid_thg.all_lions());
     prid_thg.configure();
     pride_groups(i) = prid_thg;
 end
@@ -112,13 +119,24 @@ for i=1:300
         iter_gpr.recount();
         iter_gpr.do_pride_fem(percent_roam, adapt_fun);
         iter_gpr.do_pride_mal(percent_roam, adapt_fun);
-        iter_gpr.print();
+        iter_gpr.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
+        iter_gpr.equilibriate(nomad_group,percent_sex);
     end
     nomad_group.recount();
     nomad_group.do_nomad_all(space_min, space_max, adapt_fun);
+	nomad_group.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
+	nomad_group.invade(pride_groups);
+    for j=1:length(pride_groups)
+		iter_gpr = pride_groups(j);
+		iter_gpr.emigrate(percent_sex,immigration_rate,nomad_group);
+        iter_gpr.print();
+    end
+	nomad_group.immigrate(pride_groups,percent_sex,immigration_rate);
+	nomad_group.equilibriate(nomad_group,percent_sex);
     nomad_group.print();
     hold off;
     pause(0.006)
+    fprintf('%i %i %i %i %i %i\n',length(nomad_group.males)+length(nomad_group.females),length(pride_groups(1).males)+length(pride_groups(1).females),length(pride_groups(2).males)+length(pride_groups(2).females),length(pride_groups(3).males)+length(pride_groups(3).females),length(pride_groups(4).males)+length(pride_groups(4).females),length(pride_groups(5).males)+length(pride_groups(5).females));
 end
 
 % -----------------------
