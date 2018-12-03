@@ -38,9 +38,7 @@ classdef Group < handle
                 roam_ind = randperm(fem_len, roam_len);
                 
                 hunt_ers = me.females;
-                for i=1:length(roam_ind)
-                    hunt_ers( roam_ind(i) ) = [];
-                end
+                hunt_ers( roam_ind ) = [];
                 
                 [~, indices]=sort([hunt_ers.pbestval]);
                 hunt_ers(indices(1)).role = 'c';
@@ -80,7 +78,7 @@ classdef Group < handle
                     roam_tin = randperm(length(roam_all), roam_tsiz);
                     roam_chs = roam_all(roam_tin(1));
                     for j=2:length(roam_tin)
-                        roam_oth = roam_all(roam_tin(i));
+                        roam_oth = roam_all(roam_tin(j));
                         if roam_oth.pbestval < roam_chs.pbestval
                             roam_chs = roam_oth;
                         end
@@ -110,7 +108,7 @@ classdef Group < handle
                     roam_tin = randperm(length(roam_all), roam_len);
                     roam_chs = roam_all(roam_tin(1));
                     for j=2:roam_len
-                        roam_oth = roam_all(roam_tin(i));
+                        roam_oth = roam_all(roam_tin(j));
                         if roam_oth.pbestval < roam_chs.pbestval
                             roam_chs = roam_oth;
                         end

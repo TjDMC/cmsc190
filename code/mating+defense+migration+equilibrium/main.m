@@ -3,7 +3,7 @@ clc
 
 iter=300; % algorithm iterations
 
-len=50; % population size
+len=1000; % population size
 plen=4; % number of prides
 nper=0.2; % nomad percentage
 

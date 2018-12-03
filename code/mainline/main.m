@@ -9,7 +9,7 @@ space_min = -100;
 space_max = 100;
 
 iterations = 300;
-population = 50;
+population = 1000;
 dimension = 3;
 prides_length = 5;
 
