@@ -26,7 +26,11 @@ classdef Lion < handle
             o2 = Lion;
             
             for i=1:length(me.position) % for all dimension
-                mgene = mean(males.position(i,:),2);
+                mgene = 0;
+                for j=1:length(males)
+                    mgene = mgene + males(j).position(i);
+                end
+                
                 mbeta = 1-beta;
                 omutate = 0; % no mutate
                 
@@ -42,11 +46,11 @@ classdef Lion < handle
                 end
                 
                 if omutate ~= 1
-                    o1.position(i,1) = beta.*me.position(i) + mbeta.*mgene;
+                    o1.position(i,1) = beta.*me.position(i,1) + mbeta.*mgene;
                 end
                 
                 if omutate ~= 2
-                    o2.position(i,1) = mbeta.*me.position(i) + beta.*mgene;
+                    o2.position(i,1) = mbeta.*me.position(i,1) + beta.*mgene;
                 end
             end
             
