@@ -207,8 +207,8 @@ classdef Group < handle
             tgrp_typ = me.type;
             tgrp_mht = randi(tgrp_mln); % index/number of male/s in heat
             
-            chld_m = []; % prevent offsprings get r4ped
-            chld_f = [];
+            chld_m = Lion.empty(0, fheat); % prevent offsprings get r4ped
+            chld_f = Lion.empty(0, fheat);
             
             for i=1:fheat
                 tgrp_fem = me.females(ifheat(i));
@@ -220,13 +220,22 @@ classdef Group < handle
                     offsprings = tgrp_fem.mate(me.males(tgrp_mht), mutation_prob, space_min, space_max);
                 end
                 
-                %set offspring fitness
+                %set offspring fitness and compare
 				offsprings(1).init(offsprings(1).position,fit_fun);
-				offsprings(2).init(offsprings(2).position,fit_fun);
+                offsprings(2).init(offsprings(2).position,fit_fun);
+                
+                if offsprings(1).pbestval < me.lbestval
+                    me.lbest = offsprings(1).pbest;
+                    me.lbestval = offsprings(1).pbestval;
+                end
+                if offsprings(2).pbestval < me.lbestval
+                    me.lbest = offsprings(2).pbest;
+                    me.lbestval = offsprings(2).pbestval;
+                end
                 
                 % index 1 is standard for the male
-				chld_m = [chld_m offsprings(1)];
-				chld_f = [chld_f offsprings(2)];
+				chld_m(i) = offsprings(1);
+				chld_f(i) = offsprings(2);
             end
             
             me.males = [me.males chld_m];
@@ -261,7 +270,7 @@ classdef Group < handle
         end
         
         % NOMAD -> EMPTY Prides
-		function immigrate(me,pride_grps,sex_rate,im_rate)
+		function immigrate(me,pride_grps,sex_rate)
 			if me.type == 'p'
 				return;
             end
@@ -317,7 +326,7 @@ classdef Group < handle
                 me.females(i).print(style);
             end
             
-            fprintf('%i ', len_f+len_m);
+%             fprintf('%i ', len_f+len_m);
 
         end
     end

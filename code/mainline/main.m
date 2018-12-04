@@ -10,7 +10,7 @@ space_min = -5.12;
 space_max = 5.12;
 
 iterations = 50;
-population = 300;
+population = 50;
 dimension = 3;
 prides_length = 4;
 
@@ -106,6 +106,17 @@ for i=1:prid_end
     pride_groups(i) = prid_thg;
 end
 
+global_best_fitness = nomad_group.lbestval;
+global_best = nomad_group.lbest;
+
+for j=1:prides_length
+    iter_gpr = pride_groups(j);
+    if iter_gpr.lbestval < global_best_fitness
+        global_best_fitness = iter_gpr.lbestval;
+        global_best = iter_gpr.lbest;
+    end
+end
+
 % -----------------------
 % Start Generations
 % -----------------------
@@ -135,9 +146,21 @@ for i=1:iterations
 		iter_gpr.emigrate(percent_sex,immigration_rate,nomad_group);
     end
     
- 	nomad_group.immigrate(pride_groups,percent_sex,immigration_rate);
-    
+ 	nomad_group.immigrate(pride_groups,percent_sex);
 	nomad_group.equilibriate(nomad_group,percent_sex);
+    
+    % CHECK FITNESS
+    if nomad_group.lbestval < global_best_fitness
+        global_best_fitness = nomad_group.lbestval;
+        global_best = nomad_group.lbest;
+    end
+    for j=1:prides_length
+        iter_gpr = pride_groups(j);
+        if iter_gpr.lbestval < global_best_fitness
+            global_best_fitness = iter_gpr.lbestval;
+            global_best = iter_gpr.lbest;
+        end
+    end
     
     % PRINT ALL
     for j=1:prides_length
@@ -145,11 +168,16 @@ for i=1:iterations
         iter_gpr.print();
     end
     nomad_group.print();
-    fprintf('\n');
+    fprintf('- Best Fitness: %g\n', global_best_fitness);
     axis([space_min space_max space_min space_max space_min space_max])
     hold off;
     pause(0.0001)
 end
+
+matcl = num2cell(global_best);
+fprintf('Best Position: [');
+fprintf('%g; ', matcl{1:end});
+fprintf(']\n');
 
 % % PRINT ONLY LAST
 % for j=1:prides_length

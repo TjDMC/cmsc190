@@ -7,8 +7,9 @@ function mp = dispos(position, spec)
     elseif len == 3
         mp = plot3(position(1), position(2), position(3), spec);
     else
+        matcl = num2cell(position);
         fprintf('- Position (');
-        fprintf('%g, ', position{1:end});
+        fprintf('%g, ', matcl{1:end});
         fprintf(')\n');
         mp = 0;
     end    
