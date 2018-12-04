@@ -9,17 +9,17 @@ clf
 space_min = -5.12;
 space_max = 5.12;
 
-iterations = 50;
-population = 50;
-dimension = 3;
-prides_length = 4;
+iterations = 300;
+population = 100;
+dimension = 2;
+prides_length = 5;
 
 percent_nomad = 0.2;
-percent_roam = 0.2;
+percent_roam = 0.5;
 percent_sex = 0.8;
 
 mating_rate = 0.3;
-mutation_prob = 0.02;
+mutation_prob = 0.1;
 
 immigration_rate = 0.4;
 
@@ -195,12 +195,19 @@ fprintf(']\n');
 %     fitness = (pos(1)-50)^2 + (pos(2)-50)^2;
 % end
 
-% RASTRIGIN
+% % RASTRIGIN (0, 0) minima
+% function fitness = fit_fun(pos)
+%     dimensions = length(pos);
+%     fitness = 10*dimensions;
+%     for i=1:dimensions
+%         xi = pos(i);
+%         fitness = fitness + xi ^ 2 - 10 * cos(2*pi*xi);
+%     end
+% end
+
+% ROSENBROCK 2D (a, a^2) minima
 function fitness = fit_fun(pos)
-    dimensions = length(pos);
-    fitness = 10*dimensions;
-    for i=1:dimensions
-        xi = pos(i);
-        fitness = fitness + xi ^ 2 - 10 * cos(2*pi*xi);
-    end
+    a = 2;
+    b = 100;
+    fitness = (a-pos(1))^2+b*(pos(2)-pos(1)^2)^2;
 end
