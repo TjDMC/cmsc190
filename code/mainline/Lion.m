@@ -55,16 +55,18 @@ classdef Lion < handle
                 end
             end
             
-            % select gender
+            % select gender, arrange by sex
             if rand(1) <= 0.5
                 o1.sex = 'm';
                 o2.sex = 'f';
+                offsprings = [o1 o2];
             else
-                o1.sex = 'f';
                 o2.sex = 'm';
+                o1.sex = 'f';
+                offsprings = [o2 o1];
             end
             
-            offsprings = [o1 o2];
+            
         end
         
         function go_toward(me,other)

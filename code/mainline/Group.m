@@ -177,8 +177,9 @@ classdef Group < handle
 					end
 				end
 			end
-		end
-
+        end
+        
+        % PRIDE -> NOMAD
 		function emigrate(me,sex_rate,im_rate,nomad_grp)
 			if me.type == 'n'
 				return;
@@ -191,116 +192,132 @@ classdef Group < handle
 
 			imifem = randperm(length(me.females),mifem); %indices of migrating females
             
-            for i=1:length(imifem)
-                nomad_grp.females = [nomad_grp.females me.females(imifem(i))];
-            end
+            nomad_grp.females = [nomad_grp.females me.females(imifem)]; % get migrating...
             
-            me.females(imifem)=[];
+            me.females(imifem)=[]; % remove them here
 		end
 
 		function mate(me,mating_rate,mutation_prob,space_min,space_max,fit_fun)
-			fheat = mating_rate*length(me.females);% number of females in heat
-			ifheat = randperm(length(me.females),fix(fheat)); % indices of females in heat
-
-			for i=1:length(ifheat)
-				if me.type == 'p' % for pride
-					imheat = randperm(length(me.males),randi(length(me.males))); % indices of males in heat
-					mheat = Lion.empty(0,length(imheat)); %males in heat
-					for j=1:length(imheat)
-						mheat(j) = me.males(imheat(j));
-					end
-					offsprings = me.females(ifheat(i)).mate(mheat, mutation_prob, space_min, space_max); % mate
-				else
-					offsprings = me.females(ifheat(i)).mate(me.males(randi(length(me.males))), mutation_prob, space_min, space_max);
-				end
-
-				%set offspring fitness
+            tgrp_mln = length(me.males);
+            tgrp_fln = length(me.females);
+            
+			fheat = fix(mating_rate * tgrp_fln);% number of females in heat
+			ifheat = randperm(tgrp_fln, fheat); % indices of females in heat
+            
+            tgrp_typ = me.type;
+            tgrp_mht = randi(tgrp_mln); % index/number of male/s in heat
+            
+            chld_m = []; % prevent offsprings get r4ped
+            chld_f = [];
+            
+            for i=1:fheat
+                tgrp_fem = me.females(ifheat(i));
+                if tgrp_typ == 'p'
+                    imheat = randperm(tgrp_mln,tgrp_mht); % indices of males in heat
+                    mheat = me.males(imheat);
+                    offsprings = tgrp_fem.mate(mheat, mutation_prob, space_min, space_max); % mate
+                else
+                    offsprings = tgrp_fem.mate(me.males(tgrp_mht), mutation_prob, space_min, space_max);
+                end
+                
+                %set offspring fitness
 				offsprings(1).init(offsprings(1).position,fit_fun);
 				offsprings(2).init(offsprings(2).position,fit_fun);
-
-				if offsprings(1).sex == 'm'
-					me.males = [me.males offsprings(1)];
-					me.females = [me.females offsprings(2)];
-				else
-					me.males = [me.males offsprings(2)];
-					me.females = [me.females offsprings(1)];
-				end
-			end
+                
+                % index 1 is standard for the male
+				chld_m = [chld_m offsprings(1)];
+				chld_f = [chld_f offsprings(2)];
+            end
+            
+            me.males = [me.males chld_m];
+            me.females = [me.females chld_f];
         end
 
         function equilibriate(me,nomad_group,sex_rate)
             if me.type == 'p'
                 %internal defense
-				todrout = (length(me.males))-fix((1-sex_rate)*me.maxsize);%number of males to drive out (internal defense)
+				todrout = (length(me.males))-ceil((1-sex_rate)*me.maxsize);%number of males to drive out (internal defense)
 
 				%sort males from weakest to strongest
 				[~, ind] = sort([me.males.pbestval],'descend');
-				me.males = me.males(ind);
-				%drive out
-				for i=1:todrout
-					nomad_group.males = [nomad_group.males me.males(1)];
-					me.males(1)=[];
-				end
+                out_indices = ind(1:todrout); % get first n indices of weakest
+                nomad_group.males = [nomad_group.males me.males(out_indices)]; % add to nomad males with indices
+                me.males(out_indices) = []; % remove them here
             else
                 %kill the weak
-				mtokill = length(me.males)-me.maxsize*sex_rate; % number of males to kill
-				ftokill = length(me.females)-me.maxsize*(1-sex_rate);% number of females to kill
+				mtokill = floor(length(me.males)-me.maxsize*sex_rate); % number of males to kill
+				ftokill = floor(length(me.females)-me.maxsize*(1-sex_rate));% number of females to kill
 
 				%sort nomad females from weakest to strongest
 				[~, ind] = sort([me.females.pbestval],'descend');
-				me.females = me.females(ind);
+                weak_indices = ind(1:ftokill);
+				me.females(weak_indices) = [];
 
 				%sort nomad males from weakest to strongest
 				[~, ind] = sort([me.males.pbestval],'descend');
-				me.males = me.males(ind);
-
-				for i=1:mtokill
-					me.males(1)=[];
-				end
-				for i=1:ftokill
-					me.females(1)=[];
-				end
+                weak_indices = ind(1:mtokill);
+				me.males(weak_indices) = [];
             end
         end
-
+        
+        % NOMAD -> EMPTY Prides
 		function immigrate(me,pride_grps,sex_rate,im_rate)
 			if me.type == 'p'
 				return;
-			end
-
-			%sort nomad females from weakest to strongest
-			[~, ind] = sort([me.females.pbestval],'descend');
-			me.females = me.females(ind);
-
-			%female nomad distribution
-			for i=1:length(pride_grps)
+            end
+            
+            %sort females from strongest to get the strong ones first
+            [~, ind] = sort([me.females.pbestval]);
+            me.females = me.females(ind);
+            
+            prid_len = length(pride_grps);
+            
+            need_fem = zeros(1, prid_len);
+            
+            % how much do each pride need?
+            for i=1:prid_len
 				pgrp = pride_grps(i);
-				maxfem = sex_rate*pgrp.maxsize; %maximum females for this pride
-				imfem = fix(im_rate*maxfem); %number of females to be put in this pride
-
-				ifem = randperm(length(me.females),imfem); %indices of females to be put into this pride
+                need_fem(i) = max(0, fix(sex_rate * pgrp.maxsize + 0.0001) - length(pgrp.females)); % do you need some?
+            end
+            
+            
+            ifem = randperm(sum(need_fem)); % shuffle indices 1 to needed
+            j = 0;
+			% give each pride the strong ones
+			for i=1:prid_len
+                pgrp = pride_grps(i);
                 
-                for j=1:length(ifem) %replace the migrated females in a pride
-                    pgrp.females = [pgrp.females me.females(ifem(j))];
-                end
+                many = need_fem(i); % females this pride needs
+                k = j + many;
+                first_ind = ifem(j+1:k); % get next n indices
                 
-                me.females(ifem)=[];
-			end
-
+                pgrp.females = [pgrp.females me.females(first_ind)]; % give it to the pride
+                
+                j = k;
+            end
+            me.females(ifem)=[]; % clear those at my indices
 		end
 
         function print(me)
+%             return; %disable print
+            
             if me.type == 'p'
                 style = '*';
             else
                 style = '+';
             end
-            for i=1:length(me.males)
+            
+            len_m = length(me.males);
+            len_f = length(me.females);
+            
+            for i=1:len_m
                 me.males(i).print(style);
             end
-            for i=1:length(me.females)
+            for i=1:len_f
                 me.females(i).print(style);
             end
+            
+            fprintf('%i ', len_f+len_m);
 
         end
     end

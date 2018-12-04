@@ -1,17 +1,18 @@
 clear
 clc
+clf
 
 % -----------------------
 % Main Variables
 % -----------------------
 
-space_min = -100;
-space_max = 100;
+space_min = -5.12;
+space_max = 5.12;
 
-iterations = 300;
-population = 1000;
+iterations = 50;
+population = 300;
 dimension = 3;
-prides_length = 5;
+prides_length = 4;
 
 percent_nomad = 0.2;
 percent_roam = 0.2;
@@ -24,7 +25,8 @@ immigration_rate = 0.4;
 
 adapt_fun = @(x) fit_fun(x);
 
-pride_groups = Group.empty(0, prides_length+1);
+nomad_group = Group;
+pride_groups = Group.empty(0, prides_length);
 
 % -----------------------
 % Initialize Lions
@@ -42,7 +44,6 @@ end
 nomd_siz = round(percent_nomad * population);
 nomd_ind = randperm(population, nomd_siz);
 
-nomad_group = Group;
 nomad_group.type = 'n';
 nomad_group.maxsize = nomd_siz;
 
@@ -109,40 +110,69 @@ end
 % Start Generations
 % -----------------------
 
-for i=1:300
-    clf
+for i=1:iterations
+    cla
     hold on
-    axis([space_min space_max space_min space_max])
     fprintf('Iteration %d\n', i)
-    for j=1:length(pride_groups)
+    
+    for j=1:prides_length
         iter_gpr = pride_groups(j);
         iter_gpr.recount();
         iter_gpr.do_pride_fem(percent_roam, adapt_fun);
         iter_gpr.do_pride_mal(percent_roam, adapt_fun);
         iter_gpr.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
         iter_gpr.equilibriate(nomad_group,percent_sex);
+        pride_groups(j) = iter_gpr;
     end
+    
     nomad_group.recount();
     nomad_group.do_nomad_all(space_min, space_max, adapt_fun);
 	nomad_group.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
 	nomad_group.invade(pride_groups);
-    for j=1:length(pride_groups)
+    
+    for j=1:prides_length
 		iter_gpr = pride_groups(j);
 		iter_gpr.emigrate(percent_sex,immigration_rate,nomad_group);
+    end
+    
+ 	nomad_group.immigrate(pride_groups,percent_sex,immigration_rate);
+    
+	nomad_group.equilibriate(nomad_group,percent_sex);
+    
+    % PRINT ALL
+    for j=1:prides_length
+        iter_gpr = pride_groups(j);
         iter_gpr.print();
     end
-	nomad_group.immigrate(pride_groups,percent_sex,immigration_rate);
-	nomad_group.equilibriate(nomad_group,percent_sex);
     nomad_group.print();
+    fprintf('\n');
+    axis([space_min space_max space_min space_max space_min space_max])
     hold off;
-    pause(0.006)
-    fprintf('%i %i %i %i %i %i\n',length(nomad_group.males)+length(nomad_group.females),length(pride_groups(1).males)+length(pride_groups(1).females),length(pride_groups(2).males)+length(pride_groups(2).females),length(pride_groups(3).males)+length(pride_groups(3).females),length(pride_groups(4).males)+length(pride_groups(4).females),length(pride_groups(5).males)+length(pride_groups(5).females));
+    pause(0.0001)
 end
+
+% % PRINT ONLY LAST
+% for j=1:prides_length
+%     iter_gpr = pride_groups(j);
+%     iter_gpr.print();
+% end
+% nomad_group.print();
 
 % -----------------------
 % Fitness Function
 % -----------------------
 
+% % BASIC
+% function fitness = fit_fun(pos)
+%     fitness = (pos(1)-50)^2 + (pos(2)-50)^2;
+% end
+
+% RASTRIGIN
 function fitness = fit_fun(pos)
-    fitness = pos(1)^2 + pos(2)^2 + pos(3)^2;
+    dimensions = length(pos);
+    fitness = 10*dimensions;
+    for i=1:dimensions
+        xi = pos(i);
+        fitness = fitness + xi ^ 2 - 10 * cos(2*pi*xi);
+    end
 end
