@@ -11,7 +11,7 @@ space_max = 5.12;
 
 iterations = 300;
 population = 100;
-dimension = 2;
+dimension = 3;
 prides_length = 5;
 
 percent_nomad = 0.2;
@@ -121,7 +121,7 @@ end
 % Start Generations
 % -----------------------
 
-for i=1:iterations
+for i=1:44
     cla
     hold on
     fprintf('Iteration %d\n', i)
@@ -169,7 +169,14 @@ for i=1:iterations
     end
     nomad_group.print();
     fprintf('- Best Fitness: %g\n', global_best_fitness);
-    axis([space_min space_max space_min space_max space_min space_max])
+    axis([space_min space_max space_min space_max space_min space_max]);
+    if dimensions == 3
+        view([45 45 45]); % 3D angle
+    end
+    
+%     % SAVE
+%     print(['loa-iter-' num2str(i)], '-dpng');
+    
     hold off;
     pause(0.0001)
 end
@@ -190,10 +197,10 @@ fprintf(']\n');
 % Fitness Function
 % -----------------------
 
-% % BASIC
-% function fitness = fit_fun(pos)
-%     fitness = (pos(1)-50)^2 + (pos(2)-50)^2;
-% end
+% BASIC
+function fitness = fit_fun(pos)
+    fitness = (pos(1))^2 + (pos(2))^2 + (pos(3))^2;
+end
 
 % % RASTRIGIN (0, 0) minima
 % function fitness = fit_fun(pos)
@@ -206,8 +213,8 @@ fprintf(']\n');
 % end
 
 % ROSENBROCK 2D (a, a^2) minima
-function fitness = fit_fun(pos)
-    a = 2;
-    b = 100;
-    fitness = (a-pos(1))^2+b*(pos(2)-pos(1)^2)^2;
-end
+% function fitness = fit_fun(pos)
+%     a = 2;
+%     b = 100;
+%     fitness = (a-pos(1))^2+b*(pos(2)-pos(1)^2)^2;
+% end

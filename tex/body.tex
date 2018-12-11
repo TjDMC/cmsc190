@@ -132,6 +132,25 @@ As for the Center hunters, their new position is as follows:
    \end{cases}
 \]
 In all of these equations, $\text{rand}(a,b)$ generates a random number between $a$ and $b$, where $a$ and $b$ are upper and lower bounds, respectively.
+
+The following figures, figure 3 and figure 4, visualizes how the wing hunter's vector and center hunter's vector changes based on the prey's changing position, respectively. It also shows how the prey moves upon this change of position by the hunter that is currently attacking it in the current iteration. The figure gives an instance of a prey and hunter vector and shows the derivation of positions.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/pa/wing-hunt}
+\caption{Wing Hunt Vector Visualization}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/pa/center-hunt}
+\caption{Center Hunt Vector Visualization}
+\end{center}
+\end{figure}
+
+
+
 In the algorithm, this prey would be a dummy prey put at the start of the phase where PREY would be the midpoint between all the Hunter positions. Each of the hunters would be iterated to attack the dummy prey and the prey would escape to the direction opposite to the new position of the attacking Hunter from the Prey's current position.
 \begin{figure}[h]
 \begin{center}
@@ -417,7 +436,7 @@ At the end of each iteration of LOA, the number of nomad lions will be controlle
 \end{figure}
 
 \section{Mating, Defense, Migration, and Equilibrium Algorithm Demo}
-In this section, the mating, defense, migration, and equilibrium algorithm is demonstrated using an example. The function $$f(x,y)=(x-1)^2 + (y-1)^2$$ is being minimized and the following figure displays the initial positions of the lions. 
+In this section, the mating, defense, migration, and equilibrium algorithm is demonstrated using an example. The function $$f(x,y)=(x-1)^2 + (y-1)^2$$ is being minimized and the following figure displays the initial positions of the lions.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{img/mdme/init}
@@ -517,3 +536,334 @@ Subsequent iterations:
 \end{figure}
 
 At the end of the 50$^{th}$ iteration, the algorithm converges at x=1 and y=1, which is the minimum of the function.
+
+\section{The algorithm}
+
+Using the previous ideas, the algorithm is then created. Using the concepts in the previous section, the pseudocode of the algorithm is presented:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{img/pseudocode}
+\caption{The psedocode of LOA}
+\end{center}
+\end{figure}
+
+The algorithm starts with an initialization. It produces the random samples to be used as test solutions as positions to be improved upon. These samples are grouped in prides or by the nomads. They are also given a gender in these groups. The algorithm then proceeds to the iterative loop that begins with pride hunting, where select females would improve their own positions. The other females in the pride, lions that are not selected in the previous part, would try to find better positions by utilizing the best positions in their pride. The other resident lions, the males, would also do something similar. Better solutions are then made by mating the best lions in a pride. The children from this part is only added to the pride after the mating part has happened. The weakest males that are the least fit are driven out from prides and are put into the nomad group. After that the nomads are then checked and moved randomly in search space. The lions that are nomads are then mated one to one, also creating new solutions and improving on the other positions. The nomad males then try to attack prides by testing the resident male's fitness against their own. After this, the resident females, females in the pride, immigrate bringing them out of the pride and becoming a nomad. The nomad lions' population is then regulated by bringing the very best females back into prides filling the empty space that was once filled from the very initialization of the algorithm. To limit the population, the nomad lions with the least fitness are deleted based on the limit placed using the original population size of the nomads.
+
+\section{Sample Runs using different Benchmarks}
+The algorithm is now tested upon different benchmarking functions. All benchmarks ran using the following parameters of the algorithm.
+\\
+\\
+iterations = 300;\\
+
+population = 100;\\
+
+dimension = 2;\\
+
+prides length = 5;\\
+
+percent nomad = 0.2;\\
+percent roam = 0.5;\\
+percent sex = 0.8;\\
+
+mating rate = 0.3;\\
+mutation prob = 0.1;\\
+
+immigration rate = 0.4;\\
+
+The first benchmarking function is the function:
+
+$$
+  f(x) = x^2
+$$
+
+and figure 30 shows the plots of the positions on the x-axis after every other iterations and is stopped at iteration 25.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s1-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-4}
+    \caption{Iteration 4}
+    \label{fig:s1-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-8}
+    \caption{Iteration 8}
+    \label{fig:s1-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-11}
+    \caption{Iteration 11}
+    \label{fig:s1-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-15}
+    \caption{Iteration 15}
+    \label{fig:s1-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-18}
+    \caption{Iteration 18}
+    \label{fig:s1-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-22}
+    \caption{Iteration 22}
+    \label{fig:s1-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-25}
+    \caption{Iteration 25}
+    \label{fig:s1-iter-7}
+  \end{subfigure}
+  \caption{Function 1}
+\end{figure}
+
+The second benchmarking function is the function:
+
+$$
+  f(x, y) = x^2 + y^2
+$$
+
+and figure 31 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 44.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s2-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-7}
+    \caption{Iteration 7}
+    \label{fig:s2-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-13}
+    \caption{Iteration 13}
+    \label{fig:s2-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-19}
+    \caption{Iteration 19}
+    \label{fig:s2-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-25}
+    \caption{Iteration 25}
+    \label{fig:s2-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-31}
+    \caption{Iteration 31}
+    \label{fig:s2-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-37}
+    \caption{Iteration 37}
+    \label{fig:s2-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-44}
+    \caption{Iteration 44}
+    \label{fig:s2-iter-7}
+  \end{subfigure}
+  \caption{Function 2}
+\end{figure}
+
+
+The third benchmarking function is the function:
+
+$$
+  f(x, y) = x^2 + y^2 + z^2
+$$
+
+and figure 32 shows the plots of the positions on the 3D space after every other iterations and is stopped at iteration 22.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s3-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-3}
+    \caption{Iteration 3}
+    \label{fig:s3-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-5}
+    \caption{Iteration 5}
+    \label{fig:s3-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-7}
+    \caption{Iteration 7}
+    \label{fig:s3-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-9}
+    \caption{Iteration 9}
+    \label{fig:s3-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-11}
+    \caption{Iteration 11}
+    \label{fig:s3-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-13}
+    \caption{Iteration 13}
+    \label{fig:s3-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-15}
+    \caption{Iteration 15}
+    \label{fig:s3-iter-7}
+  \end{subfigure}
+  \caption{Function 3}
+\end{figure}
+
+The fourth benchmarking function is the Rastrigin benchmarking function for 2 dimensions and figure 33 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 28.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s4-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-5}
+    \caption{Iteration 5}
+    \label{fig:s4-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-9}
+    \caption{Iteration 9}
+    \label{fig:s4-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-13}
+    \caption{Iteration 13}
+    \label{fig:s4-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-17}
+    \caption{Iteration 17}
+    \label{fig:s4-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-21}
+    \caption{Iteration 21}
+    \label{fig:s4-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-25}
+    \caption{Iteration 25}
+    \label{fig:s4-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-28}
+    \caption{Iteration 28}
+    \label{fig:s4-iter-7}
+  \end{subfigure}
+  \caption{Function 4}
+\end{figure}
+
+
+The fifth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 2$ and $b=100$ and figure 34 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s5-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-44}
+    \caption{Iteration 44}
+    \label{fig:s5-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-87}
+    \caption{Iteration 87}
+    \label{fig:s5-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-130}
+    \caption{Iteration 130}
+    \label{fig:s5-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-173}
+    \caption{Iteration 173}
+    \label{fig:s5-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-216}
+    \caption{Iteration 216}
+    \label{fig:s5-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-259}
+    \caption{Iteration 259}
+    \label{fig:s5-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-300}
+    \caption{Iteration 300}
+    \label{fig:s5-iter-7}
+  \end{subfigure}
+  \caption{Function 5}
+\end{figure}
+
+
+The sixth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 9$ and $b=100$ and figure 35 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-1}
+    \caption{Iteration 1}
+    \label{fig:s6-iter-0}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-44}
+    \caption{Iteration 44}
+    \label{fig:s6-iter-1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-87}
+    \caption{Iteration 87}
+    \label{fig:s6-iter-2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-130}
+    \caption{Iteration 130}
+    \label{fig:s6-iter-3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-173}
+    \caption{Iteration 173}
+    \label{fig:s6-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-216}
+    \caption{Iteration 216}
+    \label{fig:s6-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-259}
+    \caption{Iteration 259}
+    \label{fig:s6-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-300}
+    \caption{Iteration 300}
+    \label{fig:s6-iter-7}
+  \end{subfigure}
+  \caption{Function 6}
+\end{figure}
