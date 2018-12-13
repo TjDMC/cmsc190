@@ -5,6 +5,8 @@ function [gbest,gbestval,fitcount] = LOA_func(fit_fun,dimension,population,itera
 % Main Variables
 % -----------------------
 
+print_lions = false;
+
 prides_length = 4;
 
 percent_nomad = 0.2;
@@ -122,12 +124,16 @@ end
 
 for i=1:iterations
     
-%     fprintf('Iteration %d\n', i)
+    if print_lions
+        fprintf('Iteration %d\n', i);
+        cla
+        hold on
+    end
     
     for j=1:prides_length
         iter_gpr = pride_groups(j);
         iter_gpr.recount();
-        iter_gpr.do_pride_fem(percent_roam, adapt_fun);
+        iter_gpr.do_pride_fem(percent_roam,space_min,space_max, adapt_fun);
         iter_gpr.do_pride_mal(percent_roam, adapt_fun);
         iter_gpr.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
         iter_gpr.equilibriate(nomad_group,percent_sex);
@@ -158,6 +164,22 @@ for i=1:iterations
             global_best_fitness = iter_gpr.lbestval;
             global_best = iter_gpr.lbest;
         end
+    end
+    
+    if print_lions
+        % PRINT ALL
+        for j=1:prides_length
+            iter_gpr = pride_groups(j);
+            iter_gpr.print();
+        end
+        nomad_group.print();
+        fprintf('- Best Fitness: %g\n', global_best_fitness);
+    %     axis([space_min space_max space_min space_max space_min space_max]);
+        if dimension == 3
+            view([45 45 45]); % 3D angle
+        end
+        hold off;
+        pause(0.0001)
     end
     
     if adapt_fun.fitness_count >= limit

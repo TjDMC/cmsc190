@@ -25,18 +25,11 @@ classdef Lion < handle
             o1 = Lion;
             o2 = Lion;
             
-            for i=1:length(me.position) % for all dimension
-                mgene = 0;
-                for j=1:length(males)
-                    mgene = mgene + males(j).position(i);
-                end
-                mgene = mgene/length(males);
-                
-                mbeta = 1-beta;
-                
-                o1.position(i,1) = beta.*me.position(i,1) + mbeta.*mgene;
-                o2.position(i,1) = mbeta.*me.position(i,1) + beta.*mgene;
-            end
+            msum = mean([males.position], 2);
+            mbeta = 1-beta;
+            
+            o1.position = beta.*me.position + mbeta .* msum;
+            o2.position = mbeta.*me.position + beta .* msum;
             
             % mutate
             if rand(1) <= 0.5 % only 1 can undergo mutation
@@ -44,6 +37,7 @@ classdef Lion < handle
             else
                 tomutate = o2;
             end
+            
             for i=1:length(tomutate.position)
                 if rand(1) <= muprob
                     tomutate.position(i,1) = (maxval-minval)*rand()+minval;
@@ -68,14 +62,10 @@ classdef Lion < handle
             if me.position == other.position
                 return % no change
             end
-            
             mypos = me.position;
-            
-            random = rand();
             direction = (other.pbest - mypos); % direction vector times D distance between best and source
-            
+            random = rand();
             mypos = mypos + 2 * random * direction; % push lion to direction, part 1
-
             normals = null(direction(:).').*norm(direction); % get all vectors normal to direction vector
             deviate = random * pi / 6; % extent to which the point can deviate from the direction
             for z = 1:size(normals, 2) % for all 'dimensions' or direction the point can deviate from, part 2
@@ -86,13 +76,6 @@ classdef Lion < handle
             me.position = mypos;
         end
         
-        function nmd_mutate(me, lfitval,minval,maxval)
-            improve = (me.pbestval - lfitval)/lfitval;
-            if rand() < (0.1+min(0.5,improve))
-                dlen = length(me.position);
-                me.position = minval+(maxval-minval).*rand(dlen, 1);
-            end
-        end
         
         function did_update = evaluate(me, fit_fun)
             did_update = false;
