@@ -879,6 +879,8 @@ The sixth benchmarking function is the Rosenbrock benchmarking function for 2 di
   \caption{Function 6}
 \end{figure}
 
+\clearpage
+
 \section{CEC 2014 Benchmarks}
 
 CEC is a committee known for creating competitions for optimization algorithms. Each year CEC provides a set of functions that are known for testing optimization algorithms for scientists to submit their work and compare the effectiveness of their algorithms. Each test suite includes functions that are shifted and rotated which are to be run in black box tests though their code is reviewable and written in C++.
@@ -895,7 +897,9 @@ The following parameters are set and used in the algorithm.
 \text{Immigrate Rate} &= 0.4\\
 \end{align*}
 
-An overview of what functions are included in the test is seen in the following table.
+\clearpage
+
+An overview of what functions are included in the test is seen in Table 3.
 
 \begin{table}[]
 \begin{tabular}{llll}
@@ -939,7 +943,9 @@ An overview of what functions are included in the test is seen in the following 
 \caption{Functions defined by CEC 2014 and used for testing}
 \end{table}
 
-The following are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used.
+\clearpage
+
+The following (Table 4) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used.
 
 
 \begin{table}[]
@@ -978,6 +984,8 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
 \end{tabular}
 \caption{Results for LOA under CEC 2014 Benchmark}
 \end{table}
+
+\clearpage
 
 The original authors had results that are near and similar to the table except for f1, f2, f17 and 21 which had about 100 times or more fitter population than the reimplementations. The original paper was written such that there are gaps in logic that was filled by assumptions when the algorithm was being reimplemented. The original programming language used in the original implementation was not specified along with platform specifics which may result in test discrepancies. There also specifics that are key to how the algorithm works that were not defined by the original authors and tighter reimplementation may be needed. In another perspective, the reimplementation keeps up with some if not most algorithms that were used to compare with by the original authors. It also has had lesser deviation on some functions more than the original but also had some functions where its deviation was beat by the original.
 
