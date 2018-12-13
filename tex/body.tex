@@ -883,21 +883,19 @@ The sixth benchmarking function is the Rosenbrock benchmarking function for 2 di
 
 CEC is a committee known for creating competitions for optimization algorithms. Each year CEC provides a set of functions that are known for testing optimization algorithms for scientists to submit their work and compare the effectiveness of their algorithms. Each test suite includes functions that are shifted and rotated which are to be run in black box tests though their code is reviewable and written in C++.
 
-The following results from the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark, which is run on a Ryzen 5 2600 with 8gb of RAM, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations.
-
 The following parameters are set and used in the algorithm.
 
-\begin{align}
-Number of Prides &= 4\\
-Percent of Nomad Lions &= 0.2\\
-Roaming Percent &= 0.2\\
-Mutate Probability &= 0.2\\
-Sex Rate &= 0.8\\
-Mating Probability &= 0.3\\
-Immigrate Rate &= 0.4\\
-\end{align}
+\begin{align*}
+\text{Number of Prides} &= 4\\
+\text{Percent of Nomad Lions} &= 0.2\\
+\text{Roaming Percent} &= 0.2\\
+\text{Mutate Probability} &= 0.2\\
+\text{Sex Rate} &= 0.8\\
+\text{Mating Probability} &= 0.3\\
+\text{Immigrate Rate} &= 0.4\\
+\end{align*}
 
-An overview of what functions are included in the test is seen in Figure 36.
+An overview of what functions are included in the test is seen in the following table.
 
 \begin{table}[]
 \begin{tabular}{llll}
@@ -938,7 +936,10 @@ An overview of what functions are included in the test is seen in Figure 36.
     & f29 & Composition function7 (f 17, f 18, f 19) & 2900 \\
     & f30 & Composition function8 (f 20, f 21, f 22) & 3000
 \end{tabular}
+\caption{Functions defined by CEC 2014 and used for testing}
 \end{table}
+
+The following are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used.
 
 
 \begin{table}[]
@@ -975,4 +976,11 @@ f28 & 3.255E+03 & 4.404E+03 & 1.954E+02 & 3.296E+03 \\
 f29 & 3.125E+03 & 4.300E+03 & 1.531E+02 & 3.131E+03 \\
 f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
 \end{tabular}
+\caption{Results for LOA under CEC 2014 Benchmark}
 \end{table}
+
+The original authors had results that are near and similar to the table except for f1, f2, f17 and 21 which had about 100 times or more fitter population than the reimplementations. The original paper was written such that there are gaps in logic that was filled by assumptions when the algorithm was being reimplemented. The original programming language used in the original implementation was not specified along with platform specifics which may result in test discrepancies. There also specifics that are key to how the algorithm works that were not defined by the original authors and tighter reimplementation may be needed. In another perspective, the reimplementation keeps up with some if not most algorithms that were used to compare with by the original authors. It also has had lesser deviation on some functions more than the original but also had some functions where its deviation was beat by the original.
+
+\section{Conclusion}
+
+As such, to conclude, the Lion Optimization Algorithm uses a Lion-Pride-Outcast behavior for a population to find solutions or what is thought of as a better territory or a safer place for the population to live in. The algorithm combines the effectiveness of swarm optimization in Prides and individual roaming that provides escaping optimas. It also harnesses Genetic Algorithm through mating in prides. The information exchange between Pride and Nomads is key for stuck prides to escape and for previous nomads to improve solutions.
