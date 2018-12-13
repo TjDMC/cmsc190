@@ -867,3 +867,101 @@ The sixth benchmarking function is the Rosenbrock benchmarking function for 2 di
   \end{subfigure}
   \caption{Function 6}
 \end{figure}
+
+\section{CEC 2014 Benchmarks}
+
+CEC is a committee known for creating competitions for optimization algorithms. Each year CEC provides a set of functions that are known for testing optimization algorithms for scientists to submit their work and compare the effectiveness of their algorithms. Each test suite includes functions that are shifted and rotated which are to be run in black box tests though their code is reviewable and written in C++.
+
+The following results from the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark, which is run on a Ryzen 5 2600 with 8gb of RAM, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations.
+
+The following parameters are set and used in the algorithm.
+
+\begin{align}
+Number of Prides &= 4\\
+Percent of Nomad Lions &= 0.2\\
+Roaming Percent &= 0.2\\
+Mutate Probability &= 0.2\\
+Sex Rate &= 0.8\\
+Mating Probability &= 0.3\\
+Immigrate Rate &= 0.4\\
+\end{align}
+
+An overview of what functions are included in the test is seen in Figure 36.
+
+\begin{table}[]
+\begin{tabular}{llll}
+  \textbf{Type}
+    & \textbf{ID} & \textbf{Function} & \textbf{f*} \\ \hline
+  Unimodal
+    & f1 & Rotated high conditioned elliptic function & 100 \\
+    & f2 & Rotated bent cigar function & 200 \\
+    & f3 & Rotated discus function & 300 \\
+  Multimodal
+    & f4 & Shifted and rotated Rosenbrock function & 400 \\
+    & f5 & Shifted and rotated Ackley's function & 500 \\
+    & f6 & Shifted and rotated Weierstrass function & 600 \\
+    & f7 & Shifted and rotated Griewank's function & 700 \\
+    & f8 & Shifted Rastrigin function & 800 \\
+    & f9 & Shifted and rotated Rastrigin's function & 900 \\
+    & f10 & Shifted Schwefel function & 1000 \\
+    & f11 & Shifted and rotated Schwefel's function & 1100 \\
+    & f12 & Shifted and rotated Katsuura function & 1200 \\
+    & f13 & Shifted and rotated HappyCat function & 1300 \\
+    & f14 & Shifted and rotated HGBat function & 1400 \\
+    & f15 & Shifted and rotated Expanded Griewank's plus Rosenbrock's function & 1500 \\
+    & f16 & Shifted and rotated Expanded Scaffer's F6 function & 1600 \\
+  Hybrid
+    & f17 & Hybrid function1 (f 9, f 8, f 1) & 1700 \\
+    & f18 & Hybrid function2 (f 2, f 12, f 8) & 1800 \\
+    & f19 & Hybrid function3 (f 7, f 6, f 4, f 14) & 1900 \\
+    & f20 & Hybrid function4 (f 12, f 3, f 13, f 8) & 2000 \\
+    & f21 & Hybrid function5 (f 14, f 12, f 4, f 9, f 1) & 2100 \\
+    & f22 & Hybrid function6 (f 10, f 11, f 13, f 9, f 5) & 2200 \\
+  Composition
+    & f23 & Composition function1 (f 4, f 1, f 2, f 3, f 1) & 2300 \\
+    & f24 & Composition function2 (f 10, f 9, f 14) & 2400 \\
+    & f25 & Composition function3 (f 11, f 9, f 1) & 2500 \\
+    & f26 & Composition function4 (f 11, f 13, f 1, f 6, f 7) & 2600 \\
+    & f27 & Composition function5 (f 14, f 9, f 11, f 6, f 1) & 2700 \\
+    & f28 & Composition function6 (f 15, f 13, f 11, f 16, f 1) & 2800 \\
+    & f29 & Composition function7 (f 17, f 18, f 19) & 2900 \\
+    & f30 & Composition function8 (f 20, f 21, f 22) & 3000
+\end{tabular}
+\end{table}
+
+
+\begin{table}[]
+\begin{tabular}{lllll}
+    & \textbf{min}       & \textbf{max}       & \textbf{std}       & \textbf{median}    \\ \hline
+f1  & 1.647E+07 & 6.730E+07 & 1.053E+07 & 3.844E+07 \\
+f2  & 2.645E+05 & 6.888E+06 & 1.386E+06 & 2.092E+06 \\
+f3  & 1.034E+04 & 3.092E+04 & 3.979E+03 & 1.670E+04 \\
+f4  & 4.738E+02 & 6.284E+02 & 3.272E+01 & 5.611E+02 \\
+f5  & 5.208E+02 & 5.210E+02 & 5.124E-02 & 5.210E+02 \\
+f6  & 6.195E+02 & 6.296E+02 & 2.167E+00 & 6.254E+02 \\
+f7  & 7.005E+02 & 7.011E+02 & 1.218E-01 & 7.009E+02 \\
+f8  & 8.547E+02 & 9.298E+02 & 1.350E+01 & 8.845E+02 \\
+f9  & 9.658E+02 & 1.028E+03 & 1.518E+01 & 9.971E+02 \\
+f10 & 2.586E+03 & 7.135E+03 & 1.273E+03 & 3.864E+03 \\
+f11 & 3.717E+03 & 8.245E+03 & 1.148E+03 & 7.470E+03 \\
+f12 & 1.202E+03 & 1.203E+03 & 3.312E-01 & 1.203E+03 \\
+f13 & 1.300E+03 & 1.301E+03 & 8.465E-02 & 1.300E+03 \\
+f14 & 1.400E+03 & 1.400E+03 & 3.087E-02 & 1.400E+03 \\
+f15 & 1.514E+03 & 1.549E+03 & 7.715E+00 & 1.525E+03 \\
+f16 & 1.611E+03 & 1.613E+03 & 3.086E-01 & 1.612E+03 \\
+f17 & 5.180E+05 & 3.363E+06 & 5.823E+05 & 1.612E+06 \\
+f18 & 1.991E+03 & 1.350E+04 & 2.131E+03 & 2.910E+03 \\
+f19 & 1.911E+03 & 1.923E+03 & 2.082E+00 & 1.919E+03 \\
+f20 & 4.630E+03 & 2.635E+04 & 4.406E+03 & 1.484E+04 \\
+f21 & 7.908E+04 & 7.593E+05 & 1.624E+05 & 2.698E+05 \\
+f22 & 2.473E+03 & 3.134E+03 & 1.545E+02 & 2.782E+03 \\
+f23 & 2.620E+03 & 2.633E+03 & 2.678E+00 & 2.624E+03 \\
+f24 & 2.618E+03 & 2.632E+03 & 3.211E+00 & 2.627E+03 \\
+f25 & 2.700E+03 & 2.709E+03 & 2.528E+00 & 2.707E+03 \\
+f26 & 2.700E+03 & 2.701E+03 & 1.122E-01 & 2.700E+03 \\
+f27 & 3.117E+03 & 3.739E+03 & 1.630E+02 & 3.536E+03 \\
+f28 & 3.255E+03 & 4.404E+03 & 1.954E+02 & 3.296E+03 \\
+f29 & 3.125E+03 & 4.300E+03 & 1.531E+02 & 3.131E+03 \\
+f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
+\end{tabular}
+\end{table}
