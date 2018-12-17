@@ -3,9 +3,9 @@ clc
 
 iter=300; % algorithm iterations
 
-len=1000; % population size
-plen=4; % number of prides
-nper=0.2; % nomad percentage
+len=20; % population size
+plen=1; % number of prides
+nper=0.5; % nomad percentage
 
 maxsp=2; % maximum value per dimension
 minsp=0; % minimum value per dimesnion
@@ -16,9 +16,9 @@ a=rand(dim,len).*(maxsp-minsp)+minsp; % initial lion positions
 
 pop=[]; % population
 
-srate = 0.8; %sex rate
-maprob = 0.3; % mating probability
-muprob = 0.2; % mutate probability
+srate = 0.5; %sex rate
+maprob = 0.2; % mating probability
+muprob = 0.1; % mutate probability
 
 irate = 0.4; %immigration rate
 
@@ -82,6 +82,8 @@ for i=1:length(grps)
         grps(i).fcount=grps(i).fcount+1;
     end
 end
+    figure(1);
+    plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Initial');
 
 %Mating + Defense + Migration + Equilibrium
 for h=1:iter
@@ -90,7 +92,6 @@ for h=1:iter
     axis([minsp maxsp minsp maxsp]);
     figure(1);
     plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Initial');
-    
     %Mating
     for i=1:length(grps)
         males = [];
@@ -108,7 +109,6 @@ for h=1:iter
         
         fheat = maprob*size(females,2);% number of females in heat
         ifheat = randperm(length(females),fix(fheat+0.001)); % indices of females in heat
-        
         for i2=1:size(ifheat,2)
             if grps(i).type == 'p' % for pride
                 imheat = randperm(length(males),randi(length(males))); % indices of males in heat
@@ -265,7 +265,6 @@ for h=1:iter
     fprintf('Migration\n');
     figure(4);
     plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Migration')
-    
     %Equilibrium
     %separate males and females
     nmales = [];
@@ -306,7 +305,9 @@ for h=1:iter
     fprintf('Equilibrium\n');
     figure(5);
     plotLions(dim,grps,[minsp maxsp],[minsp maxsp],'Equilibrium');
-    pause(1);
+    if h==1 || h == 2 || h == 3 || h == 5 || h == 10 || h == 25 || h == 50
+        pause(45);
+    end
 end
 
 function plotLions(dim,grps,xbounds,ybounds,plottitle)
@@ -317,7 +318,7 @@ function plotLions(dim,grps,xbounds,ybounds,plottitle)
         xlim(xbounds);
         ylim(ybounds);
         xlabel('y') ;
-        ylabel('x'); 
+        ylabel('x');
         ctrm=0;
         ctrf=0;
         for i2=1:length(grps)
@@ -341,9 +342,7 @@ function plotLions(dim,grps,xbounds,ybounds,plottitle)
                    end
                end
            end
-           fprintf(' %i ',length(grps(i2).content));
         end
         hold off;
-        fprintf('\n%i %i %i\n',ctrm,ctrf,ctrm+ctrf);
     end
 end

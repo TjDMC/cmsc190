@@ -1,0 +1,31 @@
+func_num=0;
+D=2;
+Xmin=-5;
+Xmax=5;
+pop_size=100;
+iter_max=300;
+runs=60;
+fhd = @fit_fun;
+
+timer=tic;
+[gbest,gbestval,FES]= LOA_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
+toc(timer)
+% ROSENBROCK (0, 0) minima
+function fitness = fit_fun(pos, n)
+    dimensions = length(pos);
+    fitness = 10*dimensions;
+    for i=1:dimensions
+        xi = pos(i);
+        fitness = fitness + xi ^ 2 - 10 * cos(2*pi*xi);
+    end
+    fitness = (
+end
+% RASTRIGIN (0, 0) minima
+% function fitness = fit_fun(pos, n)
+%     dimensions = length(pos);
+%     fitness = 10*dimensions;
+%     for i=1:dimensions
+%         xi = pos(i);
+%         fitness = fitness + xi ^ 2 - 10 * cos(2*pi*xi);
+%     end
+% end

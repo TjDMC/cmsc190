@@ -125,6 +125,9 @@ end
 %fprintf('\nGlobal best: %f %f\n',global_best_fitness,global_best(1));
 %fprintf('\nGlobal best: %f %f %f\n',global_best_fitness,global_best(1),global_best(2));
 %fprintf('\nGlobal best: %f %f %f %f\n',global_best_fitness,global_best(1),global_best(2),global_best(3));
+timer = tic;
+toplotx = zeros(1,iterations);
+toploty = zeros(1,iterations);
 for i=1:iterations
     
     if print_lions
@@ -160,7 +163,6 @@ for i=1:iterations
     if nomad_group.lbestval < global_best_fitness
         global_best_fitness = nomad_group.lbestval;
         global_best = nomad_group.lbest;
-        
     end
     for j=1:prides_length
         iter_gpr = pride_groups(j);
@@ -186,6 +188,9 @@ for i=1:iterations
         pause(0.0001)
     end
     
+    toplotx(i) = toc(timer);
+    toploty(i) = global_best_fitness;
+    
 %     %print fitnesses
 %     fprintf('Fitnesses at time %f\n',toc(timer));
 %     fprintf('Nomad best: %f %f \n',nomad_group.lbestval,nomad_group.lbest(1));
@@ -203,6 +208,10 @@ for i=1:iterations
     end
     
 end
+
+title('Rosenrock Function (a=9,b=100)');
+xlabel('Run Time(s)'
+plot(toplotx,toploty);
 
 gbest = global_best';
 gbestval = global_best_fitness;
