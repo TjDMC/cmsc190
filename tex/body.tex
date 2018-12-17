@@ -588,7 +588,7 @@ $$
   f(x) = x^2
 $$
 
-and figure 30 shows the plots of the positions on the x-axis after every other iterations and is stopped at iteration 25.
+and figure 26 shows the plots of the positions on the x-axis after every other iterations and is stopped at iteration 25.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -640,7 +640,7 @@ $$
   f(x, y) = x^2 + y^2
 $$
 
-and figure 31 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 44.
+and figure 27 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 44.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -690,10 +690,10 @@ and figure 31 shows the plots of the positions on the xy-plane after every other
 The third benchmarking function is the function:
 
 $$
-  f(x, y) = x^2 + y^2 + z^2
+  f(x, y, z) = x^2 + y^2 + z^2
 $$
 
-and figure 32 shows the plots of the positions on the 3D space after every other iterations and is stopped at iteration 22.
+and figure 28 shows the plots of the positions on the 3D space after every other iterations and is stopped at iteration 22.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -739,7 +739,7 @@ and figure 32 shows the plots of the positions on the 3D space after every other
   \caption{Function 3}
 \end{figure}
 
-The fourth benchmarking function is the Rastrigin benchmarking function for 2 dimensions and figure 33 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 28.
+The fourth benchmarking function is the Rastrigin benchmarking function for 2 dimensions and figure 29 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 28.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -786,7 +786,7 @@ The fourth benchmarking function is the Rastrigin benchmarking function for 2 di
 \end{figure}
 
 
-The fifth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 2$ and $b=100$ and figure 34 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
+The fifth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 2$ and $b=100$ and figure 30 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -833,7 +833,7 @@ The fifth benchmarking function is the Rosenbrock benchmarking function for 2 di
 \end{figure}
 
 
-The sixth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 9$ and $b=100$ and figure 35 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
+The sixth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions with $a = 9$ and $b=100$ and figure 31 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -877,6 +877,58 @@ The sixth benchmarking function is the Rosenbrock benchmarking function for 2 di
     \label{fig:s6-iter-7}
   \end{subfigure}
   \caption{Function 6}
+\end{figure}
+
+After 300 iterations, the global fitness achieved using each function is graphed against the algorithm's run time. This is displayed in figure 32. The best and worst fitness achieved, along with the standard deviation and median, of each function after 10 runs is also presented in table 3.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l c l c l c l c l}
+\hline
+ Function & Worst Fitness       & Best Fitness        & Standard Deviation          & Median        \\
+\hline
+1   & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+2   & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+3  & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+4  & 0.00 & 0.00 & 0.00 & 0.00 \\
+\hline
+5  & 8.78E-4 & 3.19E-11 & 6.75E-4 & 2.77E-6 \\
+\hline
+6  & 6.83E-4 & 4.72E-9 & 5.42E-4 & 1.09E-4 \\
+\hline
+\end{tabular}
+\caption{Fitness Results of Functions After 10 Runs}
+\end{table}
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/function1}
+    \caption{Function 1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/function2}
+    \caption{Function 2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/function3}
+    \caption{Function 3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/rastrigin}
+    \caption{Rastrigin Function}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/rosenbrock2-100}
+    \caption{Rosenbrock (a=2, b=100) Function}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/rosenbrock9-100}
+    \caption{Rosenbrock (a=9, b=100) Function}
+  \end{subfigure}
+  \caption{Run-Time vs Best Fitness Achieved of each function}
 \end{figure}
 
 \clearpage
