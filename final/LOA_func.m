@@ -1,6 +1,5 @@
 function [gbest,gbestval,fitcount] = LOA_func(fit_fun,dimension,population,iterations,space_min,space_max,varargin)
-
-
+func_num=cell2mat(varargin);
 % -----------------------
 % Main Variables
 % -----------------------
@@ -122,9 +121,9 @@ end
 % Start Generations
 % -----------------------
 
-%fprintf('\nGlobal best: %f %f\n',global_best_fitness,global_best(1));
-%fprintf('\nGlobal best: %f %f %f\n',global_best_fitness,global_best(1),global_best(2));
-%fprintf('\nGlobal best: %f %f %f %f\n',global_best_fitness,global_best(1),global_best(2),global_best(3));
+timer = tic;
+toplotx=zeros(1,iterations);
+toploty=zeros(1,iterations);
 for i=1:iterations
     
     if print_lions
@@ -186,23 +185,24 @@ for i=1:iterations
         pause(0.0001)
     end
     
-%     %print fitnesses
-%     fprintf('Fitnesses at time %f\n',toc(timer));
-%     fprintf('Nomad best: %f %f \n',nomad_group.lbestval,nomad_group.lbest(1));
-%     %fprintf('Nomad best: %f %f %f\n',nomad_group.lbestval,nomad_group.lbest(1),nomad_group.lbest(2));
-%     %fprintf('Nomad best: %f %f %f\n',nomad_group.lbestval,nomad_group.lbest(1),nomad_group.lbest(2),nomad_group.lbest(3));
-%     for j=1:prides_length
-%         iter_gpr = pride_groups(j);
-%         %fprintf('Pride %i best: %f %f \n',j,iter_gpr.lbestval,iter_gpr.lbest(1));
-%         %fprintf('Pride %i best: %f %f %f\n',j,iter_gpr.lbestval,iter_gpr.lbest(1),iter_gpr.lbest(2));
-%         %fprintf('Pride %i best: %f %f %f %f\n',j,iter_gpr.lbestval,iter_gpr.lbest(1),iter_gpr.lbest(2),iter_gpr.lbest(3));
-%     end
-%     fprintf('\n');
+    toplotx(i)=toc(timer);
+    toploty(i)=global_best_fitness;
+    
     if adapt_fun.fitness_count >= limit
         break;
     end
     
 end
+
+if i<3000
+    toplotx(i+1:3000) = [];
+    toploty(i+1:3000) = [];
+end
+figure(func_num);
+plot(toplotx,toploty);
+title(strcat('Function ',num2str(func_num)));
+xlabel('Run Time(s)');
+ylabel('Global Best Fitness');
 
 gbest = global_best';
 gbestval = global_best_fitness;

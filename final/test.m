@@ -11,14 +11,14 @@ Xmin=-100;
 Xmax=100;
 pop_size=50;
 iter_max=3000;
-runs=60;
+runs=1;
 fhd=str2func('cec14_func');
-for i=16:30 % functions
+for i=1:30 % functions
     func_num=i;
     fprintf('Function %d\nRunning %d...\n', i, runs);
     timer=tic;
     fprintf('\n');
-    parfor j=1:runs
+    for j=1:runs
         [gbest,gbestval,FES]= LOA_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
         xbest(j, :)=gbest;
         fbest(i,j)=gbestval;
@@ -38,7 +38,7 @@ for i=16:30 % functions
     fprintf(file_id, '%g\n', fbest(i, :));
     fclose(file_id);
 end
-fprintf('Done!');
+fprintf('Done!\n');
 
 % for i=1:30
 % eval(['load input_data/shift_data_' num2str(i) '.txt']);

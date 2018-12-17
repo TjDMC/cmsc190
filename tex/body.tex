@@ -997,7 +997,7 @@ An overview of what functions are included in the test is seen in Table 3.
 
 \clearpage
 
-The following (Table 4) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used.
+The following (Table 4) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33). 
 
 
 \begin{table}[]
@@ -1038,6 +1038,151 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
 \end{table}
 
 \clearpage
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f1}
+    \caption{Function 1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f2}
+    \caption{Function 2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f3}
+    \caption{Function 3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f4}
+    \caption{Function 4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f5}
+    \caption{Function 5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f6}
+    \caption{Function 6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f7}
+    \caption{Function 7}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f8}
+    \caption{Function 8}
+  \end{subfigure}
+  \caption{Run-Time vs Fitness of Functions 1-8}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f9}
+    \caption{Function 9}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f10}
+    \caption{Function 10}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f11}
+    \caption{Function 11}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f12}
+    \caption{Function 12}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f13}
+    \caption{Function 13}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f14}
+    \caption{Function 14}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f15}
+    \caption{Function 15}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f16}
+    \caption{Function 16}
+  \end{subfigure}
+  \caption{Run-Time vs Fitness of Functions 9-16}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f17}
+    \caption{Function 17}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f18}
+    \caption{Function 18}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f19}
+    \caption{Function 19}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f20}
+    \caption{Function 20}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f21}
+    \caption{Function 21}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f22}
+    \caption{Function 22}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f23}
+    \caption{Function 23}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f24}
+    \caption{Function 24}
+  \end{subfigure}
+  \caption{Run-Time vs Fitness of Functions 17-24}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f25}
+    \caption{Function 25}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f26}
+    \caption{Function 26}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f27}
+    \caption{Function 27}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f28}
+    \caption{Function 28}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f29}
+    \caption{Function 29}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/cecrt/f30}
+    \caption{Function 30}
+  \end{subfigure}
+  \caption{Run-Time vs Fitness of Functions 25-30}
+\end{figure}
+
+\clearpage
+
 
 The original authors had results that are near and similar to the table except for f1, f2, f17 and 21 which had about 100 times or more fitter population than the reimplementations. The original paper was written such that there are gaps in logic that was filled by assumptions when the algorithm was being reimplemented. The original programming language used in the original implementation was not specified along with platform specifics which may result in test discrepancies. There also specifics that are key to how the algorithm works that were not defined by the original authors and tighter reimplementation may be needed. In another perspective, the reimplementation keeps up with some if not most algorithms that were used to compare with by the original authors. It also has had lesser deviation on some functions more than the original but also had some functions where its deviation was beat by the original.
 
