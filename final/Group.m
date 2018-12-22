@@ -83,7 +83,7 @@ classdef Group < handle
                         hunt_cli.position = hunt_pry + hunt_rnd .* (hunt_pry - hunt_lps);
                     end
 
-                    hunt_cli.evaluate(fit_fun);
+                    hunt_cli.evaluate(fit_fun, min_val, max_val);
 
                     if hunt_cli.pbestval < hunt_lst
                         hunt_pim = (hunt_lst - hunt_cli.pbestval) / hunt_lst;
@@ -110,7 +110,7 @@ classdef Group < handle
                         roam_clf = roam_cli.pbestval;
                         
                         roam_cli.go_toward(roam_oth);
-                        roam_cli.evaluate(fit_fun);
+                        roam_cli.evaluate(fit_fun, min_val, max_val);
                         
                         if roam_cli.pbestval < roam_clf
                             roam_tim = true;
@@ -127,7 +127,7 @@ classdef Group < handle
                 end
         end
 
-        function do_pride_mal(me, roam_per, fit_fun)
+        function do_pride_mal(me, roam_per, fit_fun, min_val, max_val)
             male_len = length(me.males);
 
             roam_all = me.all_lions();
@@ -144,7 +144,7 @@ classdef Group < handle
                         roam_clf = roam_cli.pbestval;
                         
                         roam_cli.go_toward(roam_oth);
-                        roam_cli.evaluate(fit_fun);
+                        roam_cli.evaluate(fit_fun, min_val, max_val);
                         
                         if roam_cli.pbestval < roam_clf
                             roam_tim = true;
@@ -175,7 +175,7 @@ classdef Group < handle
 
                 if rand() <= nomd_prb
                     nomd_cli.position = min_val + rand(nomd_dim,1)*(max_val-min_val);
-                    nomd_cli.evaluate(fit_fun);
+                    nomd_cli.evaluate(fit_fun, min_val, max_val);
                     nomd_nft = nomd_cli.pbestval;
                     if nomd_nft < nomd_lft
                         me.improved = me.improved + 1;

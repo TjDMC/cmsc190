@@ -106,7 +106,7 @@ The positions of every lion (solution) is random of which is uniformally distrib
 
 \section{Proposed Algorithm: Hunting}
 In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
-Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems.
+Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems by letting solutions escape from local optima.
 The group with members of the highest finesses (highest revenue, lowest cost) is considered as the Centers while the other two groups are considered as Left and Right Wings.
 In the algorithm, the hunters are divided into three groups: Left, Right and Center. The group with highest cumulative finesses is considered to be the Center and the other groups would be Left and Right Wings.
 \begin{figure}[h]
@@ -149,16 +149,14 @@ The following figures, figure 3 and figure 4, visualizes how the wing hunter's v
 \end{center}
 \end{figure}
 
-
-
-In the algorithm, this prey would be a dummy prey put at the start of the phase where PREY would be the midpoint between all the Hunter positions. Each of the hunters would be iterated to attack the dummy prey and the prey would escape to the direction opposite to the new position of the attacking Hunter from the Prey's current position.
+In the algorithm, this prey would be a dummy prey put at the start of the phase where PREY would be a random point in the search space. Each of the hunters would be iterated to attack the dummy prey and the prey would escape to the direction opposite to the new position of the attacking Hunter from the Prey's current position.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/pa/hunting_attack}
 \caption{Attack and Escape Example}
 \end{center}
 \end{figure}
-This mechanism allows the hunters to create a circle shaped neighborhood around the prey, approach it from different directions and catch it. This also allows better solutions to be found (escape local optima) because some hunters use opposite positions.
+This mechanism allows the hunters to create a circle shaped neighborhood around the prey, approach it from different directions. This also allows better solutions to be found (escape local optima) and to avoid premature optimization.
 Therefore hunting in each pride can be stated in the following Pseudo-code:
 \begin{figure}[h]
 \begin{center}
@@ -168,60 +166,9 @@ Therefore hunting in each pride can be stated in the following Pseudo-code:
 
 At the beginning of the hunting phase, a group of female lions would be chosen from the pride. These lions would be ranked by their fitness and a number of these lions would be marked as centers while others would be marked as left and right wings.
 
-The number of centers chosen for each pride is configurable by a percentage. The remaining pride members would be defaulted to be the left and right wings.
+The number of centers chosen for each pride is a third of the hunting population. The remaining pride members would be defaulted to be the left and right wings. Left and right wing lions are identified in the algorithm as lions that are not center. This is because the left and right wings have the same behavior such that it won't matter to identify lefts from the rights.
 
-For ever hunting phase executed, a prey would be set by the average positions of the female lions chosen for hunting. All hunters would advance to the prey once and then hunting phase is done.
-
-The following example shows optimization of the lions to the solution when advancements of the lions is repeated. The fitness function used in this example is $f(x,y) = (x-1)^2 + (y-1)^2$ where the solutions are minimized for their cost, where in this function is toward the center (1,1) at cost zero. The prey is not reconfigured each iteration so that it can simulate real catch and escape situation.
-
-\begin{figure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-init}
-    \caption{Iteration 0}
-    \label{fig:hnt-iter-0}
-  \end{subfigure}
-  %
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-1}
-    \caption{Iteration 1}
-    \label{fig:hnt-iter-1}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-2}
-    \caption{Iteration 2}
-    \label{fig:hnt-iter-2}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-3}
-    \caption{Iteration 3}
-    \label{fig:hnt-iter-3}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-4}
-    \caption{Iteration 4}
-    \label{fig:hnt-iter-4}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-5}
-    \caption{Iteration 5}
-    \label{fig:hnt-iter-5}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-6}
-    \caption{Iteration 6}
-    \label{fig:hnt-iter-6}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/pa/hunting_ex/hunt-iter-7}
-    \caption{Iteration 7}
-    \label{fig:hnt-iter-7}
-  \end{subfigure}
-  \caption{Hunting Simulation}
-\end{figure}
-
-As shown in the previous figures, the prey acts as a marker to indicate the position where the all the hunting lions would move next. As the prey approaches the minimal solution in the correct direction, the hunting lions would also approach the ideal solution. In this example, the iterations stops when all the lions have shown no improvement in their advancement to the prey. In the figures, the lions have visibly reached each other at about 10 iterations but hasn't stopped its pursuit because of very small adjustments that isn't visible in the figures.
-
-This part of the algorithm helps in searching local spaces for one solution as proven in the example.
+From here, the position for every hunting lion is only changed and the best of each lion is still stored and determined separately.
 
 \section{Proposed Algorithm: Moving towards safe place}
 
@@ -997,7 +944,7 @@ An overview of what functions are included in the test is seen in Table 3.
 
 \clearpage
 
-The following (Table 4) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33). 
+The following (Table 4) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33).
 
 
 \begin{table}[]

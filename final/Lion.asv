@@ -85,9 +85,8 @@ classdef Lion < handle
                 return
             end
             
-            for i=1:length(me.position)
-                me.position(i) = min(space_max, max(space_min, me.position(i)));
-            end
+            me.position = max(me.position, space_min);
+            me.position = min(me.);
             
             newbestval = fit_fun.eval(me.position);
             
