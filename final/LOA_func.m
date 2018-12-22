@@ -122,6 +122,7 @@ end
 
 if print_lions
     if graph_function
+        warning('off', 'MATLAB:fplot:NotVectorized')
     
         if dimension == 1
             base_fig = fplot(@(x) fit_fun(x, 0), [space_min space_max], '-g');
@@ -144,7 +145,7 @@ if print_lions
     else
         if dimension == 2
             axis([space_min space_max space_min space_max -view_fit_range view_fit_range]);
-            view([45 45 90]); % 3D angle
+            view([-45 -45 90]); % 3D angle
             xlabel('x_1')
             ylabel('x_2')
             zlabel('f(X)')

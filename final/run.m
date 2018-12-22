@@ -1,7 +1,7 @@
 close all
 
 func_num=0;
-D=1;
+D=2;
 Xmin=pi;
 Xmax=2*pi;
 pop_size=50;
