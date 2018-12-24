@@ -6,8 +6,12 @@ function [gbest,gbestval,fitcount] = LOA_func(fit_fun,dimension,population,itera
 % -----------------------
 
 print_lions = true;
-view_fit_range=100;
+view_fit_range=[0 10000];
 graph_function = true;
+view_3d_angle = [-5 90_i 90];
+
+print_graphics = true;
+print_statistics = true;
 
 prides_length = 4;
 
@@ -139,13 +143,13 @@ if print_lions
     end
     
     if dimension == 1
-        axis([space_min space_max -view_fit_range view_fit_range]);
+        axis([space_min space_max view_fit_range]);
         xlabel('x_1')
         ylabel('f(X)')
     else
         if dimension == 2
-            axis([space_min space_max space_min space_max -view_fit_range view_fit_range]);
-            view([-45 -45 90]); % 3D angle
+            axis([space_min space_max space_min space_max view_fit_range]);
+            view(view_3d_angle); % 3D angle
             xlabel('x_1')
             ylabel('x_2')
             zlabel('f(X)')
@@ -153,6 +157,45 @@ if print_lions
     end    
 end
 
+if print_lions
+    
+    hold on;
+
+    % PRINT ALL
+    for j=1:prides_length
+        iter_gpr = pride_groups(j);
+        iter_gpr.print();
+    end
+    nomad_group.print();
+    fprintf('- Best Fitness: %g\n', global_best_fitness);
+
+    if graph_function
+        copyobj(base_fig,gca);
+    end
+
+    if print_graphics
+        print(['loa-iter-0.png'], '-dpng');
+    end
+
+    hold off;
+end
+
+if print_statistics
+    file_id = fopen(['loa-iter-stats.txt'], 'wt');
+    fprintf(file_id, 'Iterations: %g\n', iterations);
+    fprintf(file_id, 'Function Evaluations Limit: %g\n', limit);
+    fprintf(file_id, 'Population: %g\n\n', population);
+    fprintf(file_id, 'Prides Length: %g\n\n', prides_length);
+    fprintf(file_id, 'Percent Nomads: %g\n', percent_nomad);
+    fprintf(file_id, 'Percent Roaming: %g\n', percent_roam);
+    fprintf(file_id, 'Percent Sex: %g\n\n', percent_sex);
+    fprintf(file_id, 'Mating Rate: %g\n', mating_rate);
+    fprintf(file_id, 'Mutation Probability: %g\n', mutation_prob);
+    fprintf(file_id, 'Immigration Rate: %g\n\n', immigration_rate);
+    fprintf(file_id, 'Dimensions: %g\n', dimension);
+    fprintf(file_id, 'N-Dimension Space: %g:%g\n', space_min, space_max);
+    fprintf(file_id, '\nFitness Iterations:\n%g', global_best_fitness);
+end
 
 % -----------------------
 % Start Generations
@@ -200,6 +243,10 @@ for i=1:iterations
         end
     end
     
+    if print_statistics
+        fprintf(file_id, '\n%g', global_best_fitness);
+    end
+    
     if print_lions
         
         cla
@@ -217,6 +264,10 @@ for i=1:iterations
             copyobj(base_fig,gca);
         end
         
+        if print_graphics
+            print(['loa-iter-' num2str(i) '.png'], '-dpng');
+        end
+        
         hold off;
         pause(0.0001)
     end
@@ -225,6 +276,13 @@ for i=1:iterations
         break;
     end
     
+end
+
+if print_statistics
+    fprintf(file_id, '\nBest:\n');
+    fprintf(file_id, '%g\t', global_best);
+    fprintf(file_id, '\n');
+    fclose(file_id);
 end
 
 gbest = global_best';

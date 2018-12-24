@@ -30,7 +30,7 @@ for i=16:30 % functions
     fprintf(file_id, '\n - Ran %f sec, min %g\n\n', toc(timer), f_min);
     fprintf(file_id, '\nBest Xs\n');
     for ii = 1:size(xbest, 1)
-        fprintf(file_id, 'Iter %02d: ',ii);
+        fprintf(file_id, 'Run %02d: ',ii);
         fprintf(file_id, '%g\t', xbest(ii,:));
         fprintf(file_id, '\n');
     end
