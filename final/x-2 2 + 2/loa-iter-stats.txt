@@ -1,0 +1,71 @@
+Iterations: 50
+Function Evaluations Limit: 150000
+Population: 50
+
+Prides Length: 4
+
+Percent Nomads: 0.2
+Percent Roaming: 0.2
+Percent Sex: 0.8
+
+Mating Rate: 0.3
+Mutation Probability: 0.2
+Immigration Rate: 0.4
+
+Dimensions: 1
+N-Dimension Space: -5:5
+
+Fitness Iterations:
+2.00267
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2.00001
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+Best:
+1.99998	

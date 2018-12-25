@@ -6,9 +6,9 @@ function [gbest,gbestval,fitcount] = LOA_func(fit_fun,dimension,population,itera
 % -----------------------
 
 print_lions = true;
-view_fit_range=[0 10000];
+view_fit_range=[0 6];
 graph_function = true;
-view_3d_angle = [-5 90_i 90];
+view_3d_angle = [-45 -45 90];
 
 print_graphics = true;
 print_statistics = true;
@@ -127,7 +127,7 @@ end
 if print_lions
     if graph_function
         warning('off', 'MATLAB:fplot:NotVectorized')
-    
+
         if dimension == 1
             base_fig = fplot(@(x) fit_fun(x, 0), [space_min space_max], '-g');
             figure(figure)
@@ -141,7 +141,7 @@ if print_lions
             end
         end
     end
-    
+
     if dimension == 1
         axis([space_min space_max view_fit_range]);
         xlabel('x_1')
@@ -154,11 +154,11 @@ if print_lions
             ylabel('x_2')
             zlabel('f(X)')
         end
-    end    
+    end
 end
 
 if print_lions
-    
+
     hold on;
 
     % PRINT ALL
@@ -202,11 +202,11 @@ end
 % -----------------------
 
 for i=1:iterations
-    
+
     if print_lions
         fprintf('Iteration %d\n', i);
     end
-    
+
     for j=1:prides_length
         iter_gpr = pride_groups(j);
         iter_gpr.recount();
@@ -216,20 +216,20 @@ for i=1:iterations
         iter_gpr.equilibriate(nomad_group,percent_sex);
         pride_groups(j) = iter_gpr;
     end
-    
+
     nomad_group.recount();
     nomad_group.do_nomad_all(space_min, space_max, adapt_fun);
 	nomad_group.mate(mating_rate,mutation_prob,space_min,space_max,adapt_fun);
 	nomad_group.invade(pride_groups);
-    
+
     for j=1:prides_length
 		iter_gpr = pride_groups(j);
 		iter_gpr.emigrate(percent_sex,immigration_rate,nomad_group);
     end
-    
+
  	nomad_group.immigrate(pride_groups,percent_sex);
 	nomad_group.equilibriate(nomad_group,percent_sex);
-    
+
     % CHECK FITNESS
     if nomad_group.lbestval < global_best_fitness
         global_best_fitness = nomad_group.lbestval;
@@ -242,16 +242,16 @@ for i=1:iterations
             global_best = iter_gpr.lbest;
         end
     end
-    
+
     if print_statistics
         fprintf(file_id, '\n%g', global_best_fitness);
     end
-    
+
     if print_lions
-        
+
         cla
         hold on;
-        
+
         % PRINT ALL
         for j=1:prides_length
             iter_gpr = pride_groups(j);
@@ -259,29 +259,30 @@ for i=1:iterations
         end
         nomad_group.print();
         fprintf('- Best Fitness: %g\n', global_best_fitness);
-        
+
         if graph_function
             copyobj(base_fig,gca);
         end
-        
+
         if print_graphics
             print(['loa-iter-' num2str(i) '.png'], '-dpng');
         end
-        
+
         hold off;
         pause(0.0001)
     end
-    
+
     if adapt_fun.fitness_count >= limit
         break;
     end
-    
+
 end
 
 if print_statistics
     fprintf(file_id, '\nBest:\n');
     fprintf(file_id, '%g\t', global_best);
     fprintf(file_id, '\n');
+    fprintf(file_id, '\nFitness Evaluations:\n%g\n', adapt_fun.fitness_count);
     fclose(file_id);
 end
 
