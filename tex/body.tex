@@ -1,116 +1,128 @@
 \section{Overview}
-Solving complex optimization problems has been a hot topic the past decade and has garnered large followings most of which are practitioners and researchers. This attention has brought upon the development of new metaheuristic algorithms, many of which are inspired by various phenomena demonstrated by nature. \par
-The paper proposes a new population based algorithm, the Lion Optimization Algorithm (LOA) \cite{loa_2016}. The distinct lifestyle of lions and their characteristics of utilizing cooperation was made as the motivational basis for the development of this optimization algorithm. The algorithm is also tested against benchmark problems sourced from literature and whose primary solutions was compared with the results of the test. The results also confirm the performance of this algorithm alongside other algorithms used in the paper. \par
+
+\par Solving complex optimization problems has been a hot topic the past decade and has garnered large followings most of which are practitioners and researchers. This attention has brought upon the development of new metaheuristic algorithms, many of which are inspired by various phenomena demonstrated by nature.
+\par The paper proposes a new population based algorithm, the Lion Optimization Algorithm (LOA) \cite{loa_2016}. The distinct lifestyle of lions and their characteristics of utilizing cooperation was made as the motivational basis for the development of this optimization algorithm. The algorithm is also tested against benchmark problems sourced from literature and whose primary solutions was compared with the results of the test. The results also confirm the performance of this algorithm alongside other algorithms used in the paper.
 
 \section{Optimization}
-Basically, optimization is searching for the best solutions out of all possible solutions. A best solution can be defined regarding either the most of some measure of success (e.g. revenue) or the least of another measure (e.g. cost). We can be looking at a group of answers or one answer from a set. In solving optimization problems, one's goal is to minimize or maximize a result variable of a function by trying out different parameters for input. \par
+\par Basically, optimization is searching for the best solutions out of all possible solutions. A best solution can be defined regarding either the most of some measure of success (e.g. revenue) or the least of another measure (e.g. cost). We can be looking at a group of answers or one answer from a set. In solving optimization problems, one's goal is to minimize or maximize a result variable of a function by trying out different parameters for input. \par
 
 \section{Optimization Algorithms}
-Optimization algorithms can be divided into two major categories, as exact and approximate \cite{desale_2015}. Exact algorithms guarantee that the optimal solution to the problem will be found in a finite amount of time. There are, however, harder optimization problems that requires the searching of very large solution sets and thus making it impractical to use exact algorithms. An example of this is the travelling salesman problem, whereby a salesman is tasked to plan a path that visits a series of cities exactly once and return to his starting point with minimum distance travelled. In this problem, the number of possible paths that the salesman can take grows factorially as the number of cities increases. It is possible to solve this problem using brute-force method but it would take a lot of time. As such, the usage of approximate algorithms are necessitated. These algorithms do not guarantee that the optimal solution will be found, but it can find an approximate (sometimes exact) solution to the problem in a relatively short amount of time, sometimes using a less computationally intensive method. Approximate algorithms can be further divided into two major categories as heuristic and metaheuristic algorithms \cite{desale_2015}.\par
+\par Optimization algorithms can be divided into two major categories, as exact and approximate \cite{desale_2015}. Exact algorithms guarantee that the optimal solution to the problem will be found in a finite amount of time. There are, however, harder optimization problems that requires the searching of very large solution sets and thus making it impractical to use exact algorithms. An example of this is the travelling salesman problem, whereby a salesman is tasked to plan a path that visits a series of cities exactly once and return to his starting point with minimum distance travelled.
 
-Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution.\par
+\par In this problem, the number of possible paths that the salesman can take grows factorially as the number of cities increases. It is possible to solve this problem using brute-force method but it would take a lot of time. As such, the usage of approximate algorithms are necessitated. These algorithms do not guarantee that the optimal solution will be found, but it can find an approximate (sometimes exact) solution to the problem in a relatively short amount of time, sometimes using a less computationally intensive method. Approximate algorithms can be further divided into two major categories as heuristic and metaheuristic algorithms \cite{desale_2015}.
 
-Metaheuristic algorithms, on the other hand, requires minimal or no assumptions about the problem being solved. They can be tailored to optimize a specific problem which makes them applicable to a wide variety of problems. A metaheuristic algorithm optimizes a problem by iteratively improving a candidate solution until a desired quality is achieved. Metaheuristic algorithms often employ mechanisms to escape from being stuck in a local optimum and thus making them more likely to obtain the global optimum solution.\par
+\par Heuristic algorithms are problem-dependent techniques that approximate the solution to a problem using readily available information. Meaning, they try to take advantage of the particularities of the problem to find a solution. Applications of these algorithms include finding the best move in a chess game, solving a tic-tac-toe puzzle, and pathfinding. In these examples, the underlying concepts of the problem are first analyzed and then used to guide the algorithm in searching for a solution.
 
-An example of an algorithm that can often get stuck in a local optimum is the hill climbing algorithm. The hill-climbing algorithm starts with an arbitrary solution and makes iterative changes to it. If, after an iteration, the current solution state is found to be worse than its previous state, then it is reverted back. Otherwise, the solution is retained and is changed again. This process is repeated until no further improvements can be done to the solution. The problem with this method is that it is greedy, meaning that the solution achieved can be the best solution out of all its neighbouring solution, but not out of the entire solution space. This can be visualized by considering all possible states of the solution laid out on the surface of a landscape, wherein the height of any point on the landscape represents the optimality of the solution state at that point. Say we have two hills on that landscape, one of them higher than the other. The higher hill represents the global optimum of the solution space, while the lower hill represents the local optimum. If the initial solution state is near the smaller hill, it is more likely that the algorithm will "climb" the smaller hill. And since, it only accepts a state that is better than the previous one, it will not be able to go down the hill and climb the higher hill. Thus, it can get stuck in that local optimum.\par
+\par Metaheuristic algorithms, on the other hand, requires minimal or no assumptions about the problem being solved. They can be tailored to optimize a specific problem which makes them applicable to a wide variety of problems. A metaheuristic algorithm optimizes a problem by iteratively improving a candidate solution until a desired quality is achieved. Metaheuristic algorithms often employ mechanisms to escape from being stuck in a local optimum and thus making them more likely to obtain the global optimum solution.
+
+\par An example of an algorithm that can often get stuck in a local optimum is the hill climbing algorithm. The hill-climbing algorithm starts with an arbitrary solution and makes iterative changes to it. If, after an iteration, the current solution state is found to be worse than its previous state, then it is reverted back. Otherwise, the solution is retained and is changed again. This process is repeated until no further improvements can be done to the solution.
+\par The problem with this method is that it is greedy, meaning that the solution achieved can be the best solution out of all its neighbouring solution, but not out of the entire solution space. This can be visualized by considering all possible states of the solution laid out on the surface of a landscape, wherein the height of any point on the landscape represents the optimality of the solution state at that point.
+\par Say we have two hills on that landscape, one of them higher than the other. The higher hill represents the global optimum of the solution space, while the lower hill represents the local optimum. If the initial solution state is near the smaller hill, it is more likely that the algorithm will "climb" the smaller hill. And since, it only accepts a state that is better than the previous one, it will not be able to go down the hill and climb the higher hill. Thus, it can get stuck in that local optimum.\par
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/intro/hill_climbing}
 \caption{Hill-climbing algorithm local optimum}
 \end{center}
 \end{figure}
-Modern algorithms have mechanisms that tackle this problem. An example of an algorithm that employ such mechanisms is simulated annealing. The simulated annealing is very similar to hill-climbing except that it occassionally accepts solutions that are worse than the current. Over time, the probability of accepting such solutions decreases. This allows for the avoidance of getting stuck in a local optimum.\par
+\par Modern algorithms have mechanisms that tackle this problem. An example of an algorithm that employ such mechanisms is simulated annealing. The simulated annealing is very similar to hill-climbing except that it occassionally accepts solutions that are worse than the current. Over time, the probability of accepting such solutions decreases. This allows for the avoidance of getting stuck in a local optimum.
 
-The simulated annealing algorithm is modeled after the cooling process of a molten substance, and is one of many algorithms based on natural processes. Others include the genetic algorithm, ant colony optimization, and particle swarm optimization. For centuries humans have relied on nature to find the most appropriate solutions to problems. That's why in the past decades, computer scientists has turned to nature to develop novel algorithms.\par
+\par The simulated annealing algorithm is modeled after the cooling process of a molten substance, and is one of many algorithms based on natural processes. Others include the genetic algorithm, ant colony optimization, and particle swarm optimization. For centuries humans have relied on nature to find the most appropriate solutions to problems. That's why in the past decades, computer scientists has turned to nature to develop novel algorithms.
 
 \section{No Free Lunch Theorems}
-Since there are already so many optimization algorithms, what's the point of making a new one? The No Free Lunch Theorems were introduced in 1997 by Wolpert and Macready to address the need for newer optimization algorithms. The first of their theorems states that for any pair of algorithms $a_1$ and $a_2$, iterated $m$ times, $$ \sum_{f} P(d_{m}^{y}|f,m,a_1)=\sum_{f} P(d_{m}^{y}|f,m,a_2),$$ where $d_m^y$ denotes the set of size $m$ of the cost values $y\in Y$ associated to the input values $x\in X,f:X\to Y$ is the function being optimized and $P(d_m^y|f,m,a)$ is the conditional probability of obtaining a given sequence of cost values from algorithm $a$ run $m$ times on function $f$. Essentially, this says that when all functions $f$ are equally likely to be used, the probability of observing an arbitrary sequence of cost values over the course of optimization is independent of the algorithm.
-This theorem indicates that if an algorithm performs better than another algorithm on some class of problems, then it must perform worse on the remaining problems. Consequently, this implies that there is no general-purpose optimization algorithm that is universally superior than the rest. Hence, the development of newer optimization algorithms is still needed.\par
+\par Since there are already so many optimization algorithms, what's the point of making a new one? The No Free Lunch Theorems were introduced in 1997 by Wolpert and Macready to address the need for newer optimization algorithms. The first of their theorems states that for any pair of algorithms $a_1$ and $a_2$, iterated $m$ times, $$ \sum_{f} P(d_{m}^{y}|f,m,a_1)=\sum_{f} P(d_{m}^{y}|f,m,a_2),$$ where $d_m^y$ denotes the set of size $m$ of the cost values $y\in Y$ associated to the input values $x\in X,f:X\to Y$ is the function being optimized and $P(d_m^y|f,m,a)$ is the conditional probability of obtaining a given sequence of cost values from algorithm $a$ run $m$ times on function $f$. Essentially, this says that when all functions $f$ are equally likely to be used, the probability of observing an arbitrary sequence of cost values over the course of optimization is independent of the algorithm.
+
+\par This theorem indicates that if an algorithm performs better than another algorithm on some class of problems, then it must perform worse on the remaining problems. Consequently, this implies that there is no general-purpose optimization algorithm that is universally superior than the rest. Hence, the development of newer optimization algorithms is still needed.
 
 \section{Optimization: Genetic Algorithm}
-The genetic algorithm \cite{holland_2010} is modeled after Darwin’s theory of evolution. An initial population is initialized in which each individual represents a solution to the problem. Through a series of selection, crossover, and mutation, successive populations are generated until an individual with a desired fitness is obtained. Fitness is defined as how well an individual can solve the given problem.\par
+\par The genetic algorithm \cite{holland_2010} is modeled after Darwin’s theory of evolution. An initial population is initialized in which each individual represents a solution to the problem. Through a series of selection, crossover, and mutation, successive populations are generated until an individual with a desired fitness is obtained. Fitness is defined as how well an individual can solve the given problem.
 
-Selection pertains to the process in which individuals with the best fitness are selected and allowed to pass their genes (or properties. E.g. bits) to the next generation. The individuals with the highest fitness have a higher chance of being selected.\par
+\par Selection pertains to the process in which individuals with the best fitness are selected and allowed to pass their genes (or properties. E.g. bits) to the next generation. The individuals with the highest fitness have a higher chance of being selected.
 
-Crossover is when genes of the selected individuals are interchanged with each other. The results are called offspring and are added to the next generation.\par
+\par Crossover is when genes of the selected individuals are interchanged with each other. The results are called offspring and are added to the next generation.
 
-Mutation refers to when genes of the offspring are subject to mutate or change (e.g. Binary value from 1 to 0). This further diversifies the sample space and consequently prevents the algorithm from converging early.\par
+\par Mutation refers to when genes of the offspring are subject to mutate or change (e.g. Binary value from 1 to 0). This further diversifies the sample space and consequently prevents the algorithm from converging early.
 
 \section{Optimization: Particle Swarm Optimization}
-The Particle Swarm Optimization \cite{eberhart_kennedy_1995} algorithm is modeled after the movement of a swarm as a whole (e.g. A flock
-of birds collectively foraging for food). In this algorithm, an initial set of particles is first initialized with each
-particle having a random initial velocity. These particles are then flung through hyperspace where each of their position
-represents a solution to the problem at hand. Each of these solutions are evaluated regarding their fitness and a particle's
-current most fit solution is stored as its `pbest'. The current best solution attained by the entire set particles is also stored; this is called `gbest'. For each time step of the algorithm, each particle is accelerated towards its `pbest' and the `gbest'. Eventually, these particles will converge around an optimal solution.\par
+\par The Particle Swarm Optimization \cite{eberhart_kennedy_1995} algorithm is modeled after the movement of a swarm as a whole (e.g. A flock
+of birds collectively foraging for food).
+
+\par In this algorithm, an initial set of particles is first initialized with each particle having a random initial velocity. These particles are then flung through hyperspace where each of their position
+represents a solution to the problem at hand.
+
+Each of these solutions are evaluated regarding their fitness and a particle's
+current most fit solution is stored as its `pbest'. The current best solution attained by the entire set particles is also stored; this is called `gbest'. For each time step of the algorithm, each particle is accelerated towards its `pbest' and the `gbest'. Eventually, these particles will converge around an optimal solution.
 
 \section{Optimization: Artificial Immune Systems}
-Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.\par
+\par Artificial immune systems are a classification of rule based machine learning systems inspired by the vertebrate immune systems. This systems model the learning and memory for use in problem solving. These systems adapt to what they learn in the environment to become better at solving problems. Compared to GA these methods use less mutation per generation whenever the fitness becomes better.
 
 \section{Optimization: Ant Colony Optimization}
-Ants can find food faster by utilizing shorter paths found by the other ants in its colony. An ant would leave more pheromones when it has reached the food faster so other ants would be more inclined to use the path. This also applies to optimization by using memory and prioritizing directions with more incentives.\par
+\par Ants can find food faster by utilizing shorter paths found by the other ants in its colony. An ant would leave more pheromones when it has reached the food faster so other ants would be more inclined to use the path. This also applies to optimization by using memory and prioritizing directions with more incentives.
 
 \section{Optimization: Marriage in Honey Bee Optimization}
-The model simulates the evolution of honey-bees starting with a solitary colony (single queen without a family) to the emergence of an eusocial colony (one or more queens with a family).\par
+\par The model simulates the evolution of honey-bees starting with a solitary colony (single queen without a family) to the emergence of an eusocial colony (one or more queens with a family).
 
 \section{Optimization: Lion Pride Optimizer}
-Previous works such as the Lion Pride Optimizer was inspired by this brutal competition of male lions whom also plays an important role for the persistence of the pride. In the work, the optimization chooses two of the best points in a ``pride'' and each ``female'' with a mating coefficient will create 4 offsprings only to choose one at last based on the best male in the pride. The optimization also uses safeguards to prevent stagnation in the pride by either replacing all members in the pride or resetting the search space.\par
+\par Previous works such as the Lion Pride Optimizer was inspired by this brutal competition of male lions whom also plays an important role for the persistence of the pride. In the work, the optimization chooses two of the best points in a ``pride'' and each ``female'' with a mating coefficient will create 4 offsprings only to choose one at last based on the best male in the pride. The optimization also uses safeguards to prevent stagnation in the pride by either replacing all members in the pride or resetting the search space.
 
 \section{Optimization: Lion's Algorithm}
-The lion's algorithm by Rajakumar \cite{rajakumar_2012} is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years. During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed.\par
+\par The lion's algorithm by Rajakumar \cite{rajakumar_2012} is another inspiration for the LOA. This algorithm is modeled after the territorial behavior of a lion pride, where the pride represents the solution space and a lion represents a solution. The pride is first initialized with one male and one female lion. Through mating, four cubs are generated as a result of single point crossover with dual possibilities. Four more cubs are generated from the mutation of these cubs, totalling eight cubs. These cubs are then grouped according to gender, and the weakest cubs are killed. A cub needs 2-4 years to reach maturity and so the territorial lions must defend the territory for the same number of years.
+\par During this time, nomadic lions may invade the pride. For each year, a nomadic lion is generated to test the strength of the pride. If the nomadic lion is found to be stronger than the territorial lions, the nomadic lion takes over the pride and kills the territorial lions' cubs. If the cubs survive and they mature, the best male and female lions take over the entire pride while the rest are killed.
 
 \section{Applications}
-Researchers have made good use of optimization problems such as scheduling problems, data clustering, image and video processing, tuning of neural networks, and pattern recognition.\par
+\par Researchers have made good use of optimization problems such as scheduling problems, data clustering, image and video processing, tuning of neural networks, and pattern recognition.
 
 \section{Application: Scheduling Problems}
-Scheduling problems are problems where different difficulty on jobs would take different amount of time that will be processed by different nodes. The problem is to minimize the time that all the nodes would simultaneously get to be finished. Optimization helps find the best job to node assignment to minimize the mean time.\par
+\par Scheduling problems are problems where different difficulty on jobs would take different amount of time that will be processed by different nodes. The problem is to minimize the time that all the nodes would simultaneously get to be finished. Optimization helps find the best job to node assignment to minimize the mean time.
 
 \section{Application: Data Clustering}
-Data clustering or cluster analysis is the way to group a set of objects such that objects with the most similarity a group together in clusters. The objects may have one or more properties to identify and the groups may have smaller subgroups that one can also classify. Optimization helps identify the best clustering of an object based on its parameters.\par
+\par Data clustering or cluster analysis is the way to group a set of objects such that objects with the most similarity a group together in clusters. The objects may have one or more properties to identify and the groups may have smaller subgroups that one can also classify. Optimization helps identify the best clustering of an object based on its parameters.
 
 \section{Application: Image and Video Processing}
-Image and video processing is the process of adding metadata to an image or video based to what its visual content actually is. An image or video in a computer is represented as pixels or boxes of colors that is displayed on the screen of the viewer. These pixels individually cannot determine the actual content, which is significant to the viewer, of the image and video.\par Optimization algorithms help computers identify what pixels in an image or video actually represents to the viewer. Such algorithms help with edge detection, segmentation, representation and description of the parts of an image or video.\par
+\par Image and video processing is the process of adding metadata to an image or video based to what its visual content actually is. An image or video in a computer is represented as pixels or boxes of colors that is displayed on the screen of the viewer. These pixels individually cannot determine the actual content, which is significant to the viewer, of the image and video.
+
+\par Optimization algorithms help computers identify what pixels in an image or video actually represents to the viewer. Such algorithms help with edge detection, segmentation, representation and description of the parts of an image or video.
 
 \section{Application: Tuning of neural networks}
-Neural networks can be tuned by its parameters. These parameters talked about are parameters that are constant throughout the run of the network. This parameters may be tuned to get the best performance out of neural network which may also drive the network to learn faster, slower or not at all. Optimization helps to find the best parameters that will drive the system's performance.\par
+\par Neural networks can be tuned by its parameters. These parameters talked about are parameters that are constant throughout the run of the network. This parameters may be tuned to get the best performance out of neural network which may also drive the network to learn faster, slower or not at all. Optimization helps to find the best parameters that will drive the system's performance.
 
 \section{Application: Pattern Recognition}
-Patterns can be also found in data. These patterns can help add to the metadata of that data. Pattern recognition finds those patterns that can be found off the data. Optimization helps identify patterns that best identify a given data.\par
+\par Patterns can be also found in data. These patterns can help add to the metadata of that data. Pattern recognition finds those patterns that can be found off the data. Optimization helps identify patterns that best identify a given data.
 
 \section{Inspiration for the algorithm}
-Lions have displayed cooperation and antagonism especially in hunting. Lions are also socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
+\par Lions have displayed cooperation and antagonism especially in hunting. Lions are also socially inclined meaning that they also organize information that other lions have collected and use them for their benefit.
 Male lions have radically different social behavior and appearance than the female lions and v.v.
-The lions can also be classified if they're residents or nomads. Resident lions create groups called prides, establish their territories and flourish there while nomads take what they need in an area then finds another area to pillage not establishing territories.\par
-A pride typically would include five females have cubs of both sexes and one or more adult male lions.
+\par The lions can also be classified if they're residents or nomads. Resident lions create groups called prides, establish their territories and flourish there while nomads take what they need in an area then finds another area to pillage not establishing territories.
+\par A pride typically would include five females have cubs of both sexes and one or more adult male lions.
 As young males would grow they would separate from their birth pride and establish their own prides.
-Nomads, who doesn't establish territories, would move about sporadically (whenever they want) and either in pairs or singularly.
+\par Nomads, who doesn't establish territories, would move about sporadically (whenever they want) and either in pairs or singularly.
 Lions usually hunt together in prides. Female lions would work together to surround and swiftly catch the prey. There could also be a hunter female lion who would go out of territory to hunt on their own while the other members of the pride would wait for the lioness to return. But still, coordinated group hunting would bring greater success in prey hunts.\par
-Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
+\par Lions do go mate anytime around the year and females can have more than one reproductive cycle each year. A lioness can also mate with more than one lion when in heat.
 Additionally, to mark their territory the pride would place urine all over the place to drive away others who would intrude.
 
 \section{Idea for the algorithm}
-The initially proposed algorithm started an initial population formed by a set of solutions randomly generated labelled as Lions.A percentage $\%N$ of the initial population of solutions are selected as `Nomad Lions' while the rest are the `Resident Lions'. While the nomad lions are individually grouped, the resident lions are then further divided into partitions called `Prides' where a percentage $\%S$ is percentage of the females in the group but in nomad lions, this percentage is reversed, where $\%S$ will be used to identify the males in the nomad lions.\par
-Each lion will have a variable pertaining to the best obtained solution for every passing iteration that will be called best visited position and will be updated regularly for every iteration. In each pride, a few random females will be selected to go hunting. These females will encircle the prey and catch it. The males in the pride will roam the territory. The females may mate with one or more resident males then a young male is created. These males may establish their own prides and territory later or may become a nomad.\par
-The nomad lions roams around the search space to find better (places) solutions. A nomad lion may invade and replace a resident male in a pride, driving out that resident male (replacement). Also, a female lion may also migrate to another pride or become a nomad herself. Weak lions, who have not found better prey (solutions) where there is no competition, will die or be killed (stagnation). The process will go on until the stopping condition is satisfied.
+\par The initially proposed algorithm started an initial population formed by a set of solutions randomly generated labelled as Lions.A percentage $\%N$ of the initial population of solutions are selected as `Nomad Lions' while the rest are the `Resident Lions'. While the nomad lions are individually grouped, the resident lions are then further divided into partitions called `Prides' where a percentage $\%S$ is percentage of the females in the group but in nomad lions, this percentage is reversed, where $\%S$ will be used to identify the males in the nomad lions.
+\par Each lion will have a variable pertaining to the best obtained solution for every passing iteration that will be called best visited position and will be updated regularly for every iteration. In each pride, a few random females will be selected to go hunting. These females will encircle the prey and catch it. The males in the pride will roam the territory. The females may mate with one or more resident males then a young male is created. These males may establish their own prides and territory later or may become a nomad.
+\par The nomad lions roams around the search space to find better (places) solutions. A nomad lion may invade and replace a resident male in a pride, driving out that resident male (replacement). Also, a female lion may also migrate to another pride or become a nomad herself. Weak lions, who have not found better prey (solutions) where there is no competition, will die or be killed (stagnation). The process will go on until the stopping condition is satisfied.
 
 \section{Opposition Based Learning}
-Opposition based learning is a novel idea of using opposite entities to arrive to better solutions or to arrive at the best solution faster. OBL is used to arrive to the best solution faster than the naive method. In Genetic Algorithm, OBL is also used to get better solutions by allowing multiple best solutions determined using the cost or revenue function to try predict better solutions influenced by the selected solutions' genes.\par
+\par Opposition based learning is a novel idea of using opposite entities to arrive to better solutions or to arrive at the best solution faster. OBL is used to arrive to the best solution faster than the naive method. In Genetic Algorithm, OBL is also used to get better solutions by allowing multiple best solutions determined using the cost or revenue function to try predict better solutions influenced by the selected solutions' genes.\par
 
-A basic example of OBL is finding a solution $X$ in a one dimensional solution set. For the solution $\hat{X}$, we have an estimate $\hat{X}$ that approaches $X$ from the left. As we optimize to the solution $X$, the difference between the solution $X$ and the estimate $\hat{X}$ will get less and less as $\hat{X}$ gets near to the solution $X$. Suppose we get to $X$ at a certain time, which is the time from the start of the optimization to whenever the estimate $\hat{X}$ will be equal to the solution $ X $. If we use OBL and add another estimate $\hat{X}_2$ that would approach $X$ from the right then the time it takes for the optimization to arrive at solution $X$ would be the maximum between the time it takes for $\hat{X}$ or $\hat{X}_2$ to reach solution $X$.
+\par A basic example of OBL is finding a solution $X$ in a one dimensional solution set. For the solution $\hat{X}$, we have an estimate $\hat{X}$ that approaches $X$ from the left. As we optimize to the solution $X$, the difference between the solution $X$ and the estimate $\hat{X}$ will get less and less as $\hat{X}$ gets near to the solution $X$. Suppose we get to $X$ at a certain time, which is the time from the start of the optimization to whenever the estimate $\hat{X}$ will be equal to the solution $ X $. If we use OBL and add another estimate $\hat{X}_2$ that would approach $X$ from the right then the time it takes for the optimization to arrive at solution $X$ would be the maximum between the time it takes for $\hat{X}$ or $\hat{X}_2$ to reach solution $X$.
 
 \section{Proposed Algorithm: Initialization}
-The first step of the algorithm is to randomly generate solutions called Lions with a population of N. In a Nvar dimensional search space optimization problem a Lion is represented as
+\par The first step of the algorithm is to randomly generate solutions called Lions with a population of N. In a Nvar dimensional search space optimization problem a Lion is represented as
 $$Lion = [x_1, x_2,..., x_{Nvar}]$$
-As most optimization algorithms, there will be a given cost function, where the fitness value of a solution can be gauged.
+\par As most optimization algorithms, there will be a given cost function, where the fitness value of a solution can be gauged.
 $$\text{fitness} = f(\text{Lion}) = f(x_1, x_2,..., x_{Nvar})$$
-Along with generating the solutions, a percentage of $N$ will be selected as nomad lions and the rest would be divided into a number $P$ of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage $S$ of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where $1-S$ will be the percentage of females in the nomads. The percentage $\%S$ is typically chosen between 75 to 90 percent.
+\par Along with generating the solutions, a percentage of $N$ will be selected as nomad lions and the rest would be divided into a number $P$ of prides. The solutions in the pride will have a specific gender which will identify their role in finding solutions. A percentage $S$ of the prides in the population are labeled as females (others are males) while in nomads will have the ratio reversed where $1-S$ will be the percentage of females in the nomads. The percentage $\%S$ is typically chosen between 75 to 90 percent.
 
-The positions of every lion (solution) is random of which is uniformally distributed across the entire search space. Until the percentage of nomad reaches the percentage threshold, lions would be labeled as nomads. The remaining lions would then be labeled as pride lions and would be divided using a specific group size. Each pride lion would be added to the group until the desired group sized would be reached, proceeding to the next group if filled. Until the gender percentage threshold is reached the lions in the pride will be labeled as female otherwise as a male. The same shall be done in labeling the gender of the nomads.
+\par The positions of every lion (solution) is random of which is uniformally distributed across the entire search space. Until the percentage of nomad reaches the percentage threshold, lions would be labeled as nomads. The remaining lions would then be labeled as pride lions and would be divided using a specific group size. Each pride lion would be added to the group until the desired group sized would be reached, proceeding to the next group if filled. Until the gender percentage threshold is reached the lions in the pride will be labeled as female otherwise as a male. The same shall be done in labeling the gender of the nomads.
 
 \section{Proposed Algorithm: Hunting}
-In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
+\par In a pride, females would look for a prey to provide food for the pride. The females would fill specific roles to execute certain strategies to encircle the prey and catch it. In general, lions would approximately follow a pattern in hunting. Stander divided lions into seven different stalking roles which would be grouped into by the Left Wings, Centers and Right Wings.
 Left Wings and Right Wings both attack the prey from opposite directions in which the idea of Opposition Based Learning is utilized which also is proven to effectively solve optimization problems by letting solutions escape from local optima.
-The group with members of the highest finesses (highest revenue, lowest cost) is considered as the Centers while the other two groups are considered as Left and Right Wings.
-In the algorithm, the hunters are divided into three groups: Left, Right and Center. The group with highest cumulative finesses is considered to be the Center and the other groups would be Left and Right Wings.
+\par The group with members of the highest finesses (highest revenue, lowest cost) is considered as the Centers while the other two groups are considered as Left and Right Wings.
+\par In the algorithm, the hunters are divided into three groups: Left, Right and Center. The group with highest cumulative finesses is considered to be the Center and the other groups would be Left and Right Wings.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/pa/hunting_scheme}
@@ -127,7 +139,7 @@ For the left and right wings, they approach the prey as follows:
    \end{cases}
 \]
 where Hunter is the current position of the hunter and Hunter' is the new position of the hunter.
-As for the Center hunters, their new position is as follows:
+\par As for the Center hunters, their new position is as follows:
 \[ \text{Hunter}' =  \begin{cases}
       \text{rand}(\text{Hunter}, \text{PREY}) & \text{Hunter} < \text{PREY} \\
       \text{rand}(\text{PREY}, \text{Hunter}) & \text{Hunter} > \text{PREY}
@@ -135,7 +147,7 @@ As for the Center hunters, their new position is as follows:
 \]
 In all of these equations, $\text{rand}(a,b)$ generates a random number between $a$ and $b$, where $a$ and $b$ are upper and lower bounds, respectively.
 
-The following figures, figure 3 and figure 4, visualizes how the wing hunter's vector and center hunter's vector changes based on the prey's changing position, respectively. It also shows how the prey moves upon this change of position by the hunter that is currently attacking it in the current iteration. The figure gives an instance of a prey and hunter vector and shows the derivation of positions.
+\par The following figures, figure 3 and figure 4, visualizes how the wing hunter's vector and center hunter's vector changes based on the prey's changing position, respectively. It also shows how the prey moves upon this change of position by the hunter that is currently attacking it in the current iteration. The figure gives an instance of a prey and hunter vector and shows the derivation of positions.
 
 \begin{figure}[h]
 \begin{center}
@@ -151,30 +163,31 @@ The following figures, figure 3 and figure 4, visualizes how the wing hunter's v
 \end{center}
 \end{figure}
 
-In the algorithm, this prey would be a dummy prey put at the start of the phase where PREY would be a random point in the search space. Each of the hunters would be iterated to attack the dummy prey and the prey would escape to the direction opposite to the new position of the attacking Hunter from the Prey's current position.
+\par In the algorithm, this prey would be a dummy prey put at the start of the phase where PREY would be a random point in the search space. Each of the hunters would be iterated to attack the dummy prey and the prey would escape to the direction opposite to the new position of the attacking Hunter from the Prey's current position.
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/pa/hunting_attack}
 \caption{Attack and Escape Example}
 \end{center}
 \end{figure}
-This mechanism allows the hunters to create a circle shaped neighborhood around the prey, approach it from different directions. This also allows better solutions to be found (escape local optima) and to avoid premature optimization.
+\par This mechanism allows the hunters to create a circle shaped neighborhood around the prey, approach it from different directions. This also allows better solutions to be found (escape local optima) and to avoid premature optimization.
 Therefore hunting in each pride can be stated in the following Pseudo-code:
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{img/pa/hunting_pseudo}
+\caption{Hunting Algorithm}
 \end{center}
 \end{figure}
 
-At the beginning of the hunting phase, a group of female lions would be chosen from the pride. These lions would be ranked by their fitness and a number of these lions would be marked as centers while others would be marked as left and right wings.
+\par At the beginning of the hunting phase, a group of female lions would be chosen from the pride. These lions would be ranked by their fitness and a number of these lions would be marked as centers while others would be marked as left and right wings.
 
-The number of centers chosen for each pride is a third of the hunting population. The remaining pride members would be defaulted to be the left and right wings. Left and right wing lions are identified in the algorithm as lions that are not center. This is because the left and right wings have the same behavior such that it won't matter to identify lefts from the rights.
+\par The number of centers chosen for each pride is a third of the hunting population. The remaining pride members would be defaulted to be the left and right wings. Left and right wing lions are identified in the algorithm as lions that are not center. This is because the left and right wings have the same behavior such that it won't matter to identify lefts from the rights.
 
-From here, the position for every hunting lion is only changed and the best of each lion is still stored and determined separately.
+\par From here, the position for every hunting lion is only changed and the best of each lion is still stored and determined separately.
 
 \section{Proposed Algorithm: Moving towards safe place}
 
-As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
+\par As mentioned earlier, some of the females go hunting, not all. So, remaining females go toward one of the areas of the territory. In the algorithm, the territories of each pride would consist of personal best solutions so far, which would assist the algorithm to save the best solutions obtained so far over the course of iteration.
 Therefore the new position for a female lion is given as:
 \begin{align*}
 \text{Lion}' &= \text{Lion} + 2D \times rand(0,1){R1} + U(-1,1) \times \tan(\theta) \times D \times {R2} \\
@@ -189,7 +202,7 @@ where Lion and Lion' is the previous and next position of the female lion, respe
 \end{center}
 \end{figure}
 
-{R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
+\par {R1} is a vector which its start point is the previous location of the female lion and its direction is toward the selected position. {R2} is perpendicular to {R1}. $\theta$ is an angle that is selected by uniform distribution among $-\pi/6$ and $\pi/6$ and $U$ is a function selecting a random number with uniform distribution.
 
 \begin{figure}[h]
 \begin{center}
@@ -198,28 +211,35 @@ where Lion and Lion' is the previous and next position of the female lion, respe
 \end{center}
 \end{figure}
 
-In the following example (which uses the same fitness function and method as the previous section), multiple lions are created in the space; one of which lions is selected to move (source), tournament selection is done without replacement and each selected lion would be evaluated which of them have the best fitness (in this case: least cost).
+\par This mechanism, which would also be used by the resident males for roaming within territory, is also part of the next section.
 
-In the algorithm, the tournament selection's size is not set but is computed according to the pride's number of successes in updating their best position in the last iteration. This is computed using the following equations.
+\par In the following example (which uses the same fitness function and method as the previous section), multiple lions are created in the space; one of which lions is selected to move (source), tournament selection is done without replacement and each selected lion would be evaluated which of them have the best fitness (in this case: least cost).
+
+\par In the algorithm, the tournament selection's size is not set but is computed according to the pride's number of successes in updating their best position in the last iteration. This is computed using the following equations.
 
 \begin{align*}
     K_j(P) &= \Sigma_{i=1}^N  S(i,t) \\
     T_j^{Size} &= \text{max}\left(2, ceil\left(\frac{K_j(P)}{2}\right)\right)
 \end{align*}
+
+
 where, $K_j$ is the number of successes in a pride and $T_j$ is the tournament size of that pride for the next iteration.
 
-This mechanism, which would also be done by the resident males, is used in the roaming part of the algorithm.
-
 \section{Proposed Algorithm: Roaming}
-Roaming in territory is something lions in a pride usually do. This also helps in getting used to the territory for the lions. For nomads, this is done to find better places to get resources from. In optimization, this can be used to further optimize the local search space for each pride and is used by nomads for searching solutions.
+\par Roaming in territory is something lions in a pride usually do. This also helps in getting used to the territory for the lions. For nomads, this is done to find better places to get resources from. In optimization, this can be used to further optimize the local search space for each pride and is used by nomads for searching solutions.
 
-Along with roaming, if a resident male visits a new position better than its current position, update its current best position and best visited solution.
+\par Along with roaming, if a resident male visits a new position better than its current position, update its current best position and best visited solution.
 
-For pride lions, roaming would mean to use each others' position to find better positions (solutions). Similar to the previous section, in this part of the algorithm, the lions would go towards each other using the same formula. The algorithm for resident male roaming is done by the following pseudo-code:
+\par For pride lions, roaming would mean to use each others' position to find better positions (solutions). Similar to the previous section, in this part of the algorithm, the lions would go towards each other using the same formula. The algorithm for resident male roaming is done by the following pseudo-code:
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/roam/resident}
+\caption{Resident Male Roaming Algorithm}
+\end{center}
+\end{figure}
 
-
-For nomad lions, however, roaming would be utilizing random movement to find better positions (solutions). In the algorithm, nomad lions have an advantage to not get stuck in local optima. A nomad lion would randomly roam around the search if space especially when its fitness among the nomads is worse. These nomad lions are only required to check their standing among peer nomads unlike resident lions whom tries to optimize with each others position, thus, giving the nomad lions an advantage to not get stuck. The new position of these nomads are generated using the following equation:
+\par For nomad lions, however, roaming would be utilizing random movement to find better positions (solutions). In the algorithm, nomad lions have an advantage to not get stuck in local optima. A nomad lion would randomly roam around the search if space especially when its fitness among the nomads is worse. These nomad lions are only required to check their standing among peer nomads unlike resident lions whom tries to optimize with each others position, thus, giving the nomad lions an advantage to not get stuck. The new position of these nomads are generated using the following equation:
 
 \begin{align*}
  \text{Lion'}_{ij} =
@@ -235,7 +255,14 @@ $$
 pr_i = 0.1 + \text{min}\left(0.5, \frac{ (\text{Nomad}_i - \text{Best}_{nomad}) }{ \text{Best}_{nomad} }\right)
 $$
 
-This shows that the nomad lion, instead of moving relative to other positions, would move in a sporadic manner proving its `randomness'.
+This shows that the nomad lion, instead of moving relative to other positions, would move in a sporadic manner proving its `randomness'. The 0.1 offset would still allow some nomads to reset positions when all nomad lions have been stuck in an optima.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{img/roam/nomad}
+\caption{Nomad Male Roaming Algorithm}
+\end{center}
+\end{figure}
 
 Similar to the previous examples, the following example simulates the roaming mechanism of the algorithm (using the same parameters) to show how this part of the algorithm helps in optimizing solutions. The mini-algorithm runs until the maximum set iterations of 200. (Iterations on next page.)
 
@@ -508,93 +535,93 @@ Using the previous ideas, the algorithm is then created. Using the concepts in t
 \end{center}
 \end{figure}
 
-The algorithm starts with an initialization. It produces the random samples to be used as test solutions as positions to be improved upon. These samples are grouped in prides or by the nomads. They are also given a gender in these groups. The algorithm then proceeds to the iterative loop that begins with pride hunting, where select females would improve their own positions. The other females in the pride, lions that are not selected in the previous part, would try to find better positions by utilizing the best positions in their pride. The other resident lions, the males, would also do something similar. Better solutions are then made by mating the best lions in a pride. The children from this part is only added to the pride after the mating part has happened. The weakest males that are the least fit are driven out from prides and are put into the nomad group. After that the nomads are then checked and moved randomly in search space. The lions that are nomads are then mated one to one, also creating new solutions and improving on the other positions. The nomad males then try to attack prides by testing the resident male's fitness against their own. After this, the resident females, females in the pride, immigrate bringing them out of the pride and becoming a nomad. The nomad lions' population is then regulated by bringing the very best females back into prides filling the empty space that was once filled from the very initialization of the algorithm. To limit the population, the nomad lions with the least fitness are deleted based on the limit placed using the original population size of the nomads.
+The algorithm starts with an initialization. It produces the random samples to be used as test solutions as positions to be improved upon. These samples are grouped in prides or by the nomads. They are also given a gender in these groups.
 
-\section{Sample Runs using different Benchmarks}
-The algorithm is now tested upon different benchmarking functions. All benchmarks ran using the following parameters of the algorithm.
-\\
-\\
-iterations = 300;\\
+\par The algorithm then proceeds to the iterative loop that begins with pride hunting, where select females would improve their own positions. The other females in the pride, lions that are not selected in the previous part, would try to find better positions by utilizing the best positions in their pride. The other resident lions, the males, would also do something similar.
 
-population = 100;\\
+\par Better solutions are then made by mating the best lions in a pride. The children from this part is only added to the pride after the mating part has happened. The weakest males that are the least fit are driven out from prides and are put into the nomad group. After that the nomads are then checked and moved randomly in search space. The lions that are nomads are then mated one to one, also creating new solutions and improving on the other positions.
 
-dimension = 2;\\
+\par The nomad males then try to attack prides by testing the resident male's fitness against their own. After this, the resident females, females in the pride, immigrate bringing them out of the pride and becoming a nomad. The nomad lions' population is then regulated by bringing the very best females back into prides filling the empty space that was once filled from the very initialization of the algorithm.
 
-prides length = 5;\\
+\par To limit the population, the nomad lions with the least fitness are deleted based on the limit placed using the original population size of the nomads.
 
-percent nomad = 0.2;\\
-percent roam = 0.5;\\
-percent sex = 0.8;\\
-
-mating rate = 0.3;\\
-mutation prob = 0.1;\\
-
-immigration rate = 0.4;\\
-
-The first benchmarking function $g1$ is the function:
+\section{Sample Runs using different Benchmark Functions}
+\par The algorithm is now tested upon different benchmarking functions. All benchmarks ran using the following parameters of the algorithm. There are 7 used functions to test the effectiveness of the algorithm, 4 of which are used again run in another solution space. All benchmarking function will also have the function plot for 1 dimensional or the function surface for 2 dimensional functions included in the plot.
+\begin{align*}
+\text{Iterations} &= 50\\
+\text{Population} &= 50\\
+\text{Number of Prides} &= 4\\
+\text{Percent of Nomad Lions} &= 0.2\\
+\text{Roaming Percent} &= 0.2\\
+\text{Mutate Probability} &= 0.2\\
+\text{Sex Rate} &= 0.8\\
+\text{Mating Probability} &= 0.3\\
+\text{Immigrate Rate} &= 0.4\\
+\end{align*}
+\par The first benchmarking function $g1$ is the function:
 
 $$
   f(x) = x^2
 $$
 
-and figure 26 shows the plots of the positions on the x-axis after every other iterations and is stopped at iteration 25.
+and figure 28 shows the plots of the positions on the x-axis with the y-space as function evaluations.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-1}
-    \caption{Iteration 1}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-0}
+    \caption{Iteration 0}
     \label{fig:s1-iter-0}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-4}
-    \caption{Iteration 4}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-7}
+    \caption{Iteration 7}
     \label{fig:s1-iter-1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-8}
-    \caption{Iteration 8}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-14}
+    \caption{Iteration 14}
     \label{fig:s1-iter-2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-11}
-    \caption{Iteration 11}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-21}
+    \caption{Iteration 21}
     \label{fig:s1-iter-3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-15}
-    \caption{Iteration 15}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-28}
+    \caption{Iteration 28}
     \label{fig:s1-iter-4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-18}
-    \caption{Iteration 18}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-35}
+    \caption{Iteration 35}
     \label{fig:s1-iter-5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-22}
-    \caption{Iteration 22}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-42}
+    \caption{Iteration 42}
     \label{fig:s1-iter-6}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-25}
-    \caption{Iteration 25}
+    \includegraphics[width=\textwidth]{img/smpl/circ/loa-iter-50}
+    \caption{Iteration 50}
     \label{fig:s1-iter-7}
   \end{subfigure}
   \caption{Benchmarking Function 1: $g1$}
 \end{figure}
 
-The second benchmarking function $g2$ is the function:
+\par The second benchmarking function $g2$ is the function:
 
 $$
   f(x_1, x_2) = x_1^2 + x_2^2
 $$
 
-and figure 27 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 44.
+and figure 29 shows the plots of the positions in 3d space with the z-space as function evaluations.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-1}
-    \caption{Iteration 1}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-0}
+    \caption{Iteration 0}
     \label{fig:s2-iter-0}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
@@ -603,244 +630,534 @@ and figure 27 shows the plots of the positions on the xy-plane after every other
     \label{fig:s2-iter-1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-13}
-    \caption{Iteration 13}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-14}
+    \caption{Iteration 14}
     \label{fig:s2-iter-2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-19}
-    \caption{Iteration 19}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-21}
+    \caption{Iteration 21}
     \label{fig:s2-iter-3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-25}
-    \caption{Iteration 25}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-28}
+    \caption{Iteration 28}
     \label{fig:s2-iter-4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-31}
-    \caption{Iteration 31}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-35}
+    \caption{Iteration 35}
     \label{fig:s2-iter-5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-37}
-    \caption{Iteration 37}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-42}
+    \caption{Iteration 42}
     \label{fig:s2-iter-6}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-44}
-    \caption{Iteration 44}
+    \includegraphics[width=\textwidth]{img/smpl/sphr/loa-iter-50}
+    \caption{Iteration 50}
     \label{fig:s2-iter-7}
   \end{subfigure}
   \caption{Benchmarking Function 2: $g2$}
 \end{figure}
 
 
-The fourth benchmarking function $g4$ is the Rastrigin benchmarking function for 1 dimension defined by
+\par The third benchmarking function $g3$ is the Rastrigin benchmarking function for 1 dimension defined by
 
 $$
   f(x) = 10 + x^2 - 10 \cos(2\pi x)
 $$
 
-and figure 28 shows the plots of the positions on the 3D space after every other iterations and is stopped at iteration 22.
+and figure 30 shows the plots of the positions on the 2d space with the y-space as function evaluations and graphs after every other iteration.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-1}
-    \caption{Iteration 1}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-0}
+    \caption{Iteration 0}
     \label{fig:s3-iter-0}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-3}
-    \caption{Iteration 3}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-7}
+    \caption{Iteration 7}
     \label{fig:s3-iter-1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-5}
-    \caption{Iteration 5}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-14}
+    \caption{Iteration 14}
     \label{fig:s3-iter-2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-7}
-    \caption{Iteration 7}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-21}
+    \caption{Iteration 21}
     \label{fig:s3-iter-3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-9}
-    \caption{Iteration 9}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-28}
+    \caption{Iteration 28}
     \label{fig:s3-iter-4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-11}
-    \caption{Iteration 11}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-35}
+    \caption{Iteration 35}
     \label{fig:s3-iter-5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-13}
-    \caption{Iteration 13}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-42}
+    \caption{Iteration 42}
     \label{fig:s3-iter-6}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/fn4d/loa-iter-15}
-    \caption{Iteration 15}
+    \includegraphics[width=\textwidth]{img/smpl/rast1d/loa-iter-50}
+    \caption{Iteration 50}
     \label{fig:s3-iter-7}
   \end{subfigure}
   \caption{Benchmarking Function 3: $g3$}
 \end{figure}
 
-The fourth benchmarking function $g4$ is the Rastrigin benchmarking function for 2 dimension defined by
+\par The fourth benchmarking function $g4$ is the Rastrigin benchmarking function for 2 dimension defined by
 
 $$
   f(x_1, x_2) = 20 + x_1^2 - 10 \cos(2\pi x_1) + x_2^2 - 10 \cos(2\pi x_2)
 $$
 
-in the space interval $[\pi:2\pi]$ and figure 29 shows the plots of the positions on the xy-plane after every other iterations and is stopped at iteration 28.
+in the space interval $[\pi:2\pi]$ and figure 31 shows the plots of the positions after every other iteration on the xy-plane with z-space as function evaluations.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-1}
-    \caption{Iteration 1}
-    \label{fig:s4-iter-0}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-0}
+    \caption{Iteration 0}
+    \label{fig:s3-iter-0}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-5}
-    \caption{Iteration 5}
-    \label{fig:s4-iter-1}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-7}
+    \caption{Iteration 7}
+    \label{fig:s3-iter-1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-9}
-    \caption{Iteration 9}
-    \label{fig:s4-iter-2}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-13}
-    \caption{Iteration 13}
-    \label{fig:s4-iter-3}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-17}
-    \caption{Iteration 17}
-    \label{fig:s4-iter-4}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-14}
+    \caption{Iteration 14}
+    \label{fig:s3-iter-2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-21}
     \caption{Iteration 21}
-    \label{fig:s4-iter-5}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-25}
-    \caption{Iteration 25}
-    \label{fig:s4-iter-6}
+    \label{fig:s3-iter-3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-28}
     \caption{Iteration 28}
-    \label{fig:s4-iter-7}
+    \label{fig:s3-iter-4}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-35}
+    \caption{Iteration 35}
+    \label{fig:s3-iter-5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-42}
+    \caption{Iteration 42}
+    \label{fig:s3-iter-6}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/smpl/rast2d/loa-iter-50}
+    \caption{Iteration 50}
+    \label{fig:s3-iter-7}
   \end{subfigure}
   \caption{Benchmarking Function 4: $g4$}
 \end{figure}
 
 
-The fifth benchmarking function $g5$ is the Rosenbrock benchmarking function for 2 dimensions with $a = 2$ and $b=100$ and figure 30 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.
+\par The fifth benchmarking function $g5$ is the Rosenbrock benchmarking function for 2 dimensions with $a = 1$ and $b=100$ and figure 32 shows the plots of the positions on the xy-plane after every other iteration with the z-space as their function evaluations.
 
 \begin{figure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-1}
-    \caption{Iteration 1}
-    \label{fig:s5-iter-0}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-0}
+    \caption{Iteration 0}
+    \label{fig:s3-iter-0}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-44}
-    \caption{Iteration 44}
-    \label{fig:s5-iter-1}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-7}
+    \caption{Iteration 7}
+    \label{fig:s3-iter-1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-87}
-    \caption{Iteration 87}
-    \label{fig:s5-iter-2}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-14}
+    \caption{Iteration 14}
+    \label{fig:s3-iter-2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-130}
-    \caption{Iteration 130}
-    \label{fig:s5-iter-3}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-21}
+    \caption{Iteration 21}
+    \label{fig:s3-iter-3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-173}
-    \caption{Iteration 173}
-    \label{fig:s5-iter-4}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-28}
+    \caption{Iteration 28}
+    \label{fig:s3-iter-4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-216}
-    \caption{Iteration 216}
-    \label{fig:s5-iter-5}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-35}
+    \caption{Iteration 35}
+    \label{fig:s3-iter-5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-259}
-    \caption{Iteration 259}
-    \label{fig:s5-iter-6}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-42}
+    \caption{Iteration 42}
+    \label{fig:s3-iter-6}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-2-100/loa-iter-300}
-    \caption{Iteration 300}
-    \label{fig:s5-iter-7}
+    \includegraphics[width=\textwidth]{img/smpl/rosn2d-1-100/loa-iter-50}
+    \caption{Iteration 50}
+    \label{fig:s3-iter-7}
   \end{subfigure}
   \caption{Benchmarking Function 5: $g5$}
 \end{figure}
 
 
-The sixth benchmarking function $g6$ is the Rosenbrock benchmarking function for 2 dimensions defined by
+\par The sixth benchmarking function $g6$ is the Griewank benchmarking function for 1 dimension defined by
 
 $$
-  f(x_1, x_2) = (a-x_1)^2 + b (x_2 - x_1^2)^2
+  f(x) = 1 + \frac{1}{4000}x^2 - \cos(x)
 $$
 
-with $a = 1$ and $b=100$ and figure 31 shows the plots of the positions on the xy-plane after every other iterations and is capped at 300.\par
+and figure 34 shows the plots of the positions on the x-axis after every other iteration with the y-space as function evaluations.
 
 \begin{figure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-1}
-    \caption{Iteration 1}
-    \label{fig:s6-iter-0}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-44}
-    \caption{Iteration 44}
-    \label{fig:s6-iter-1}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-87}
-    \caption{Iteration 87}
-    \label{fig:s6-iter-2}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-130}
-    \caption{Iteration 130}
-    \label{fig:s6-iter-3}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-173}
-    \caption{Iteration 173}
-    \label{fig:s6-iter-4}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-216}
-    \caption{Iteration 216}
-    \label{fig:s6-iter-5}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-259}
-    \caption{Iteration 259}
-    \label{fig:s6-iter-6}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/smpl/rosn2d-9-100/loa-iter-300}
-    \caption{Iteration 300}
-    \label{fig:s6-iter-7}
-  \end{subfigure}
-  \caption{Benchmarking Function 6: $g6$}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1d/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Benchmarking Function 6: $g6$}
 \end{figure}
 
-After 300 iterations, the global fitness achieved using each function is graphed against the algorithm's run time. This is displayed in figure 32. The best and worst fitness achieved, along with the standard deviation and median, of each function after 10 runs is also presented in table 3. \par
+\par The seventh benchmarking function $g7$ is the Griewank benchmarking function for 2 dimension defined by
+
+$$
+  f(x_1, x_2) = 1 + \frac{1}{4000}x_1^2 + \frac{1}{4000}x_2^2 - \cos(x_1) * \cos(\frac{1}{2}x_2\sqrt{2})
+$$
+
+and figure 35 shows the plots of the positions on the xy-plane after every other iteration with the z-space as function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk2d/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Benchmarking Function 7: $g7$}
+\end{figure}
+
+\par The next function $g8$ reintroduces $g1$ and offsets the global minima to x=1 and best fitness as 1. This function can be described by
+$$
+f(x) = (x-2)^2 + 2
+$$
+and figure 36 shows the plot of the points in the x-axis with the y-space as function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/circshft/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Benchmarking Function 8: $g8$}
+\end{figure}
+
+\clearpage
+
+\par The next 4 tests introduces the most of the previously described function in another interval.
+
+\par The next test $t1$ reuses Rastrigin 1D function in the interval of $[\pi:2\pi]$ and figure 37 shows the plot of the points in x-axis and uses y-space for function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast1dshft/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Interval test 1: $t1$}
+\end{figure}
+
+\par The next test $t2$ reuses Griewank 1D function in the interval of $[40:100]$ and figure 38 shows the plot of the points in x-axis and uses y-space for function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/grwnk1dshft/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Interval test 2: $t2$}
+\end{figure}
+
+\par The next test $t3$ reuses Rastrigin 2D function in the interval of $[\pi:2\pi]$ and figure 39 shows the plot of the points in xy-plane and uses z-space for function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Interval test 3: $t3$}
+\end{figure}
+
+\par The next test $t4$ reuses Griewank 2D function in the interval of $[\pi:5\pi]$ and figure 40 shows the plot of the points in xy-plane and uses z-space for function evaluations.
+
+\begin{figure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-0}
+   \caption{Iteration 0}
+   \label{fig:s3-iter-0}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-7}
+   \caption{Iteration 7}
+   \label{fig:s3-iter-1}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-14}
+   \caption{Iteration 14}
+   \label{fig:s3-iter-2}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-21}
+   \caption{Iteration 21}
+   \label{fig:s3-iter-3}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-28}
+   \caption{Iteration 28}
+   \label{fig:s3-iter-4}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-35}
+   \caption{Iteration 35}
+   \label{fig:s3-iter-5}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-42}
+   \caption{Iteration 42}
+   \label{fig:s3-iter-6}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.4\textwidth}
+   \includegraphics[width=\textwidth]{img/smpl/rast2dshft/loa-iter-50}
+   \caption{Iteration 50}
+   \label{fig:s3-iter-7}
+ \end{subfigure}
+ \caption{Interval test 4: $t4$}
+\end{figure}
+
+\par The global fitness achieved using each function is graphed against every iteration of the algorithm. This is displayed in figure 41. The best and worst fitness achieved, along with the standard deviation and median, of each function after 10 runs is also presented in table 3. \par
 
 \begin{table}[h!]
 \centering
@@ -901,6 +1218,7 @@ CEC is a committee known for creating competitions for optimization algorithms. 
 The following parameters are set and used in the algorithm.
 
 \begin{align*}
+\text{Population} &= 50\\
 \text{Number of Prides} &= 4\\
 \text{Percent of Nomad Lions} &= 0.2\\
 \text{Roaming Percent} &= 0.2\\
