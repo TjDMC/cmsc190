@@ -546,7 +546,7 @@ The algorithm starts with an initialization. It produces the random samples to b
 \par To limit the population, the nomad lions with the least fitness are deleted based on the limit placed using the original population size of the nomads.
 
 \section{Sample Runs using different Benchmark Functions}
-\par The algorithm is now tested upon different benchmarking functions. There are 7 used functions to test the effectiveness of the algorithm, 4 of which are used again run in another solution space. All benchmarking function will also have the function plot for 1 dimensional or the function surface for 2 dimensional functions included in the plot. The following functions are overlapped to the corresponding plot or surface beneath the lions' scatter plot (some lions may have their plot point covered behind the 3D surface). All benchmarks ran using the following parameters of the algorithm.
+\par The algorithm is now tested upon different benchmarking functions. There are 8 used functions to test the effectiveness of the algorithm, 4 of which are used again run in another solution space. All benchmarking function will also have the function plot for 1 dimensional or the function surface for 2 dimensional functions included in the plot. The following functions are overlapped to the corresponding plot or surface beneath the lions' scatter plot (some lions may have their plot point covered behind the 3D surface). All benchmarks ran using the following parameters of the algorithm.
 \begin{align*}
 \text{Iterations} &= 50\\
 \text{Population} &= 50\\
@@ -558,10 +558,10 @@ The algorithm starts with an initialization. It produces the random samples to b
 \text{Mating Probability} &= 0.3\\
 \text{Immigrate Rate} &= 0.4\\
 \end{align*}
-\par The first benchmarking function $g1$ is the function:
+\par The first benchmarking function is:
 
 $$
-  f(x) = x^2
+  g1=f(x) = x^2
 $$
 
 and figure 28 shows the plots of the positions on the x-axis with the y-space as function evaluations.
@@ -611,10 +611,10 @@ and figure 28 shows the plots of the positions on the x-axis with the y-space as
   \caption{Benchmarking Function 1: $g1$}
 \end{figure}
 
-\par The second benchmarking function $g2$ is the function:
+\par The second benchmarking function is:
 
 $$
-  f(x_1, x_2) = x_1^2 + x_2^2
+  g2=f(x_1, x_2) = x_1^2 + x_2^2
 $$
 
 and figure 29 shows the plots of the positions in 3d space with the z-space as function evaluations.
@@ -665,10 +665,10 @@ and figure 29 shows the plots of the positions in 3d space with the z-space as f
 \end{figure}
 
 
-\par The third benchmarking function $g3$ is the Rastrigin benchmarking function for 1 dimension defined by
+\par The third benchmarking function is the Rastrigin benchmarking function for 1 dimension defined by
 
 $$
-  f(x) = 10 + x^2 - 10 \cos(2\pi x)
+  g3=f(x) = 10 + x^2 - 10 \cos(2\pi x)
 $$
 
 and figure 30 shows the plots of the positions on the 2d space with the y-space as function evaluations and graphs after every other iteration.
@@ -718,13 +718,13 @@ and figure 30 shows the plots of the positions on the 2d space with the y-space 
   \caption{Benchmarking Function 3: $g3$}
 \end{figure}
 
-\par The fourth benchmarking function $g4$ is the Rastrigin benchmarking function for 2 dimension defined by
+\par The fourth benchmarking function is the Rastrigin benchmarking function for 2 dimensions defined by
 
 $$
-  f(x_1, x_2) = 20 + x_1^2 - 10 \cos(2\pi x_1) + x_2^2 - 10 \cos(2\pi x_2)
+ g4= f(x_1, x_2) = 20 + x_1^2 - 10 \cos(2\pi x_1) + x_2^2 - 10 \cos(2\pi x_2)
 $$
 
-in the space interval $[\pi:2\pi]$ and figure 31 shows the plots of the positions after every other iteration on the xy-plane with z-space as function evaluations.
+and figure 31 shows the plots of the positions after every other iteration on the xy-plane with z-space as function evaluations.
 
 \begin{figure}
   \centering
@@ -772,7 +772,11 @@ in the space interval $[\pi:2\pi]$ and figure 31 shows the plots of the position
 \end{figure}
 
 
-\par The fifth benchmarking function $g5$ is the Rosenbrock benchmarking function for 2 dimensions with $a = 1$ and $b=100$ and figure 32 shows the plots of the positions on the xy-plane after every other iteration with the z-space as their function evaluations.
+\par The fifth benchmarking function is the Rosenbrock benchmarking function for 2 dimensions defined by
+$$
+  g5=f(x_1, x_2) = (a-x_1)^2+b(x_2-x_1^2)^2
+$$
+with $a = 1$ and $b=100$ and figure 32 shows the plots of the positions on the xy-plane after every other iteration with the z-space as their function evaluations.
 
 \begin{figure}
   \centering
@@ -820,13 +824,13 @@ in the space interval $[\pi:2\pi]$ and figure 31 shows the plots of the position
 \end{figure}
 
 
-\par The sixth benchmarking function $g6$ is the Griewank benchmarking function for 1 dimension defined by
+\par The sixth benchmarking function is the Griewank benchmarking function for 1 dimension defined by
 
 $$
-  f(x) = 1 + \frac{1}{4000}x^2 - \cos(x)
+  g6=f(x) = 1 + \frac{1}{4000}x^2 - \cos(x)
 $$
 
-and figure 34 shows the plots of the positions on the x-axis after every other iteration with the y-space as function evaluations.
+and figure 33 shows the plots of the positions on the x-axis after every other iteration with the y-space as function evaluations.
 
 \begin{figure}
   \centering
@@ -873,13 +877,13 @@ and figure 34 shows the plots of the positions on the x-axis after every other i
  \caption{Benchmarking Function 6: $g6$}
 \end{figure}
 
-\par The seventh benchmarking function $g7$ is the Griewank benchmarking function for 2 dimension defined by
+\par The seventh benchmarking function is the Griewank benchmarking function for 2 dimension defined by
 
 $$
-  f(x_1, x_2) = 1 + \frac{1}{4000}x_1^2 + \frac{1}{4000}x_2^2 - \cos(x_1) * \cos(\frac{1}{2}x_2\sqrt{2})
+  g7=f(x_1, x_2) = 1 + \frac{1}{4000}x_1^2 + \frac{1}{4000}x_2^2 - \cos(x_1) * \cos(\frac{1}{2}x_2\sqrt{2})
 $$
 
-and figure 35 shows the plots of the positions on the xy-plane after every other iteration with the z-space as function evaluations.
+and figure 34 shows the plots of the positions on the xy-plane after every other iteration with the z-space as function evaluations.
 
 \begin{figure}
   \centering
@@ -926,11 +930,11 @@ and figure 35 shows the plots of the positions on the xy-plane after every other
  \caption{Benchmarking Function 7: $g7$}
 \end{figure}
 
-\par The next function $g8$ reintroduces $g1$ and offsets the global minima to x=1 and best fitness as 1. This function can be described by
+\par The next function reintroduces $g1$ and offsets the global minima to x=2 and best fitness as 2. This function can be described by
 $$
-f(x) = (x-2)^2 + 2
+g8=f(x) = (x-2)^2 + 2
 $$
-and figure 36 shows the plot of the points in the x-axis with the y-space as function evaluations.
+and figure 35 shows the plot of the points in the x-axis with the y-space as function evaluations.
 
 \begin{figure}
   \centering
@@ -981,7 +985,7 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
 
 \par The next 4 tests introduces the most of the previously described function in another interval.
 
-\par The next test $t1$ reuses Rastrigin 1D function in the interval of $[\pi:2\pi]$ and figure 37 shows the plot of the points in x-axis and uses y-space for function evaluations.
+\par The next test $t1$ reuses Rastrigin 1D function ($g3$) in the interval of $[\pi:2\pi]$ and figure 36 shows the plot of the points in x-axis and uses y-space for function evaluations.
 
 \begin{figure}
   \centering
@@ -1028,7 +1032,7 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
  \caption{Interval test 1: $t1$}
 \end{figure}
 
-\par The next test $t2$ reuses Griewank 1D function in the interval of $[40:100]$ and figure 38 shows the plot of the points in x-axis and uses y-space for function evaluations.
+\par The next test $t2$ reuses Griewank 1D function ($g6$) in the interval of $[40:100]$ and figure 37 shows the plot of the points in x-axis and uses y-space for function evaluations.
 
 \begin{figure}
   \centering
@@ -1075,7 +1079,7 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
  \caption{Interval test 2: $t2$}
 \end{figure}
 
-\par The next test $t3$ reuses Rastrigin 2D function in the interval of $[\pi:2\pi]$ and figure 39 shows the plot of the points in xy-plane and uses z-space for function evaluations.
+\par The next test $t3$ reuses Rastrigin 2D function ($g4$) in the interval of $[\pi:2\pi]$ and figure 38 shows the plot of the points in xy-plane and uses z-space for function evaluations.
 
 \begin{figure}
   \centering
@@ -1122,7 +1126,7 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
  \caption{Interval test 3: $t3$}
 \end{figure}
 
-\par The next test $t4$ reuses Griewank 2D function in the interval of $[\pi:5\pi]$ and figure 40 shows the plot of the points in xy-plane and uses z-space for function evaluations.
+\par The next test $t4$ reuses Griewank 2D function ($g7$) in the interval of $[\pi:5\pi]$ and figure 39 shows the plot of the points in xy-plane and uses z-space for function evaluations.
 
 \begin{figure}
   \centering
@@ -1169,7 +1173,10 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
  \caption{Interval test 4: $t4$}
 \end{figure}
 
-\par The global fitness achieved using each function is graphed against every iteration of the algorithm. This is displayed in figure 41. The best and worst fitness achieved, along with the standard deviation and median, of each function after 10 runs is also presented in table 3. \par
+\par The global fitness achieved using each function is graphed against every iteration of the algorithm. This is displayed in Figures 40 and 41.
+\par
+\par The best and worst fitness achieved, along with the standard deviation and median, of each function after 10 runs of 50 iterations is presented in Table 3. In these runs, the interval used for functions $g1$-$g8$ was [-5,5].
+\par
 
 \begin{table}[h!]
 \centering
@@ -1177,17 +1184,29 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
 \hline
  Function & Worst Fitness       & Best Fitness        & Standard Deviation          & Median        \\
 \hline
-1   & 0.00 & 0.00 & 0.00 & 0.00 \\
+g1   & 3.77e-10& 1.27e-14& 9.49e-11& 1.307e-11\\
 \hline
-2   & 0.00 & 0.00 & 0.00 & 0.00 \\
+g2  &1.92e-05 & 2.09e-08& 2.92e-06& 4.67e-06 \\
 \hline
-3  & 0.00 & 0.00 & 0.00 & 0.00 \\
+g3  &1.21e-06& 1.40e-12& 3.28e-07& 1.58e-07 \\
 \hline
-4  & 0.00 & 0.00 & 0.00 & 0.00 \\
+g4  &5.27e-01& 5.76e-04& 1.29e-01& 9.77e-03 \\
 \hline
-5  & 8.78E-4 & 3.19E-11 & 6.75E-4 & 2.77E-6 \\
+g5  &1.72e-02& 7.10e-05& 4.25e-03& 2.68e-03 \\
 \hline
-6  & 6.83E-4 & 4.72E-9 & 5.42E-4 & 1.09E-4 \\
+g6  &4.58e-11& 3.93e-14& 1.11e-11& 1.58e-13 \\
+\hline
+g7  &1.12e-04& 7.25e-08& 2.67e-05& 6.31e-05 \\
+\hline
+g8  &2.00 & 2.00 & 0.00 & 2.00 \\
+\hline
+t1  &1.36e+01& 1.36e+01& 0& 1.36e+01 \\
+\hline
+t2  &4.83e-01& 4.83e-01& 0& 4.83e-01 \\
+\hline
+t3  &2.71e+01& 2.71e+01& 0& 2.71e+01 \\
+\hline
+t4  &8.22e-03& 7.39e-03& 3.02e-04& 7.45e-03 \\
 \hline
 \end{tabular}
 \caption{Fitness Results of Functions After 10 Runs}
@@ -1196,30 +1215,58 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/function1}
-    \caption{Function 1}
+    \includegraphics[width=\textwidth]{img/summary/g1}
+    \caption{g1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/function2}
-    \caption{Function 2}
+    \includegraphics[width=\textwidth]{img/summary/g2}
+    \caption{g2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/function3}
-    \caption{Function 3}
+    \includegraphics[width=\textwidth]{img/summary/g3}
+    \caption{g3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/rastrigin}
-    \caption{Rastrigin Function}
+    \includegraphics[width=\textwidth]{img/summary/g4}
+    \caption{g4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/rosenbrock2-100}
-    \caption{Rosenbrock (a=2, b=100) Function}
+    \includegraphics[width=\textwidth]{img/summary/g5}
+    \caption{g5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{img/summary/rosenbrock9-100}
-    \caption{Rosenbrock (a=9, b=100) Function}
+    \includegraphics[width=\textwidth]{img/summary/g6}
+    \caption{g6}
   \end{subfigure}
-  \caption{Run-Time vs Best Fitness Achieved of each function}
+  \caption{Run-Time vs Best Fitness Achieved of $g1$-$g6$}
+\end{figure}
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/g7}
+    \caption{g7}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/g8}
+    \caption{g8}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/t1}
+    \caption{t1}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/t2}
+    \caption{t2}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/t3}
+    \caption{t3}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/summary/t4}
+    \caption{t4}
+  \end{subfigure}
+  \caption{Run-Time vs Best Fitness Achieved of $g7$, $g8$, and $t1$-$t4$ }
 \end{figure}
 
 \clearpage
@@ -1259,7 +1306,7 @@ where $F$ is the new function, $f$ is the original, $s_f$ is the scale of the ne
   \caption{Shift and Scale Parabola Example}
 \end{figure}
 
-\par Notice in Figure 41 the differences of the original to the shifted or scaled versions of the parabola function. The shift employed in this function is a $x$ shift of +20 and a fitness shift of +20 while the scaled version employs a $1/100^{th}$ $x$ input scale.
+\par Notice in Figure 42 the differences of the original to the shifted or scaled versions of the parabola function. The shift employed in this function is a $x$ shift of +20 and a fitness shift of +20 while the scaled version employs a $1/100^{th}$ $x$ input scale.
 
 % Example two rastrigin 2.1 shift 2.2 scale
 \begin{figure}
@@ -1279,7 +1326,7 @@ where $F$ is the new function, $f$ is the original, $s_f$ is the scale of the ne
   \caption{Shift and Scale Rastrigin Example}
 \end{figure}
 
-\par Notice in Figure 42 the difference between the original Rastrigin function to the shifted function, which uses a $x$ shift of +5.12 and a fitness shift of +5.12 (despite being slightly unnoticeable). Also the scaled Rastrigin can be compared to the original by the input interval it uses being [-100,100] from the original's [-5.12,5.12] in which the original is scaled to fit the [-100,100] but still producing the same fitness values on scale.
+\par Notice in Figure 43 the difference between the original Rastrigin function to the shifted function, which uses a $x$ shift of +5.12 and a fitness shift of +5.12 (despite being slightly unnoticeable). Also the scaled Rastrigin can be compared to the original by the input interval it uses being [-100,100] from the original's [-5.12,5.12] in which the original is scaled to fit the [-100,100] but still producing the same fitness values on scale.
 
 \clearpage
 
@@ -1348,7 +1395,7 @@ where $F$ is the new function, $f$ is the original, $s_f$ is the scale of the ne
 
 \clearpage
 
-\par The following (Table 5) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33).
+\par The following (Table 5) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figures 44-47).
 
 
 \begin{table}[]
@@ -1394,35 +1441,35 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f1}
-    \caption{Function 1}
+    \caption{f1}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f2}
-    \caption{Function 2}
+    \caption{f2}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f3}
-    \caption{Function 3}
+    \caption{f3}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f4}
-    \caption{Function 4}
+    \caption{f4}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f5}
-    \caption{Function 5}
+    \caption{f5}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f6}
-    \caption{Function 6}
+    \caption{f6}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f7}
-    \caption{Function 7}
+    \caption{f7}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f8}
-    \caption{Function 8}
+    \caption{f8}
   \end{subfigure}
   \caption{Run-Time vs Fitness of Functions 1-8}
 \end{figure}
@@ -1433,35 +1480,35 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f9}
-    \caption{Function 9}
+    \caption{f9}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f10}
-    \caption{Function 10}
+    \caption{f10}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f11}
-    \caption{Function 11}
+    \caption{f11}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f12}
-    \caption{Function 12}
+    \caption{f12}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f13}
-    \caption{Function 13}
+    \caption{f13}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f14}
-    \caption{Function 14}
+    \caption{f14}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f15}
-    \caption{Function 15}
+    \caption{f15}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f16}
-    \caption{Function 16}
+    \caption{f16}
   \end{subfigure}
   \caption{Run-Time vs Fitness of Functions 9-16}
 \end{figure}
@@ -1472,35 +1519,35 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f17}
-    \caption{Function 17}
+    \caption{f17}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f18}
-    \caption{Function 18}
+    \caption{f18}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f19}
-    \caption{Function 19}
+    \caption{f19}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f20}
-    \caption{Function 20}
+    \caption{f20}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f21}
-    \caption{Function 21}
+    \caption{f21}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f22}
-    \caption{Function 22}
+    \caption{f 22}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f23}
-    \caption{Function 23}
+    \caption{f23}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f24}
-    \caption{Function 24}
+    \caption{f24}
   \end{subfigure}
   \caption{Run-Time vs Fitness of Functions 17-24}
 \end{figure}
@@ -1511,27 +1558,27 @@ f30 & 3.813E+03 & 7.945E+04 & 1.646E+04 & 4.796E+03
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f25}
-    \caption{Function 25}
+    \caption{f25}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f26}
-    \caption{Function 26}
+    \caption{f26}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f27}
-    \caption{Function 27}
+    \caption{f27}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f28}
-    \caption{Function 28}
+    \caption{f28}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f29}
-    \caption{Function 29}
+    \caption{f29}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \includegraphics[width=\textwidth]{img/cecrt/f30}
-    \caption{Function 30}
+    \caption{f30}
   \end{subfigure}
   \caption{Run-Time vs Fitness of Functions 25-30}
 \end{figure}
