@@ -124,30 +124,37 @@ for j=1:prides_length
     end
 end
 
-if print_lions
-    if graph_function
-        warning('off', 'MATLAB:fplot:NotVectorized')
-
-        if dimension == 1
-            base_fig = fplot(@(x) fit_fun(x, 0), [space_min space_max], '-g');
-            figure(figure)
-        else
-            if dimension == 2
-                base_fig = fsurf(@(x,y) fit_fun([x y], 0),[space_min space_max space_min space_max]);
-                set(base_fig,'AdaptiveMeshDensity',0,'MeshDensity',60);
-                figure(figure)
-            else
-                graph_function = false;
-            end
-        end
-    end
+if graph_function
+    warning('off', 'MATLAB:fplot:NotVectorized')
 
     if dimension == 1
+        base_fig = fplot(@(x) fit_fun(x, 0), [space_min space_max], '-g');
+    else
+        if dimension == 2
+            base_fig = fsurf(@(x,y) fit_fun([x y], 0),[space_min space_max space_min space_max]);
+            set(base_fig,'AdaptiveMeshDensity',0,'MeshDensity',60);
+        else
+            graph_function = false;
+        end
+    end
+    
+    if ~print_lions && graph_function
+        if print_graphics
+            print(['loa-graph.png'], '-dpng');
+        end
+    end
+end
+
+if print_lions
+
+    if dimension == 1
+        figure(figure)
         axis([space_min space_max view_fit_range]);
         xlabel('x_1')
         ylabel('f(X)')
     else
         if dimension == 2
+            figure(figure)
             axis([space_min space_max space_min space_max view_fit_range]);
             view(view_3d_angle); % 3D angle
             xlabel('x_1')

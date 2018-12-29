@@ -546,7 +546,7 @@ The algorithm starts with an initialization. It produces the random samples to b
 \par To limit the population, the nomad lions with the least fitness are deleted based on the limit placed using the original population size of the nomads.
 
 \section{Sample Runs using different Benchmark Functions}
-\par The algorithm is now tested upon different benchmarking functions. All benchmarks ran using the following parameters of the algorithm. There are 7 used functions to test the effectiveness of the algorithm, 4 of which are used again run in another solution space. All benchmarking function will also have the function plot for 1 dimensional or the function surface for 2 dimensional functions included in the plot.
+\par The algorithm is now tested upon different benchmarking functions. There are 7 used functions to test the effectiveness of the algorithm, 4 of which are used again run in another solution space. All benchmarking function will also have the function plot for 1 dimensional or the function surface for 2 dimensional functions included in the plot. The following functions are overlapped to the corresponding plot or surface beneath the lions' scatter plot (some lions may have their plot point covered behind the 3D surface). All benchmarks ran using the following parameters of the algorithm.
 \begin{align*}
 \text{Iterations} &= 50\\
 \text{Population} &= 50\\
@@ -1224,11 +1224,70 @@ and figure 36 shows the plot of the points in the x-axis with the y-space as fun
 
 \clearpage
 
+\section{Function Shifting, Scaling and Offsetting}
+
+\par The fitness functions can be sometimes modified such that optimally finding solutions correctly according to the shift, scale or offset would prove the integrity of any algorithm. Some tests also use this technique to modify the interval available to a function by `scaling' a set of possible inputs inside the fitness function's domain.
+
+\par A good example of the use of these techniques is a shifted rastrigin function. A typical rastrigin function has an n-dimensional domain of [-5.12, 5.12] for any dimension.
+
+\par So, when using a standard input interval, it would require to rescale or sometimes shift the inputs. It would look something like this:
+
+$$
+  F(x) = f\left(\frac{s_f * x_0}{s_0} + o_x\right) + o_f
+$$
+
+where $F$ is the new function, $f$ is the original, $s_f$ is the scale of the new input interval, $s_0$ is the scale of the original interval, $o_x$ is the shift on the interval of new $x$ and $o_f$ is the offset of function fitness.
+
+\par Here are some examples of before and after using some of these techniques.
+
+
+% Example one parabola 1.1 shift 1.2 scale
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/parabola/loa-graph-orig}
+    \caption{Original Parabola}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/parabola/loa-graph-shift}
+    \caption{Shifted Parabola}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/parabola/loa-graph-scale}
+    \caption{Scaled Parabola}
+  \end{subfigure}
+  \caption{Shift and Scale Parabola Example}
+\end{figure}
+
+\par Notice in Figure 41 the differences of the original to the shifted or scaled versions of the parabola function. The shift employed in this function is a $x$ shift of +20 and a fitness shift of +20 while the scaled version employs a $1/100^{th}$ $x$ input scale.
+
+% Example two rastrigin 2.1 shift 2.2 scale
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/rastrigin/loa-graph-orig}
+    \caption{Original Rastrigin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/rastrigin/loa-graph-shift}
+    \caption{Shifted Rastrigin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{img/translates/rastrigin/loa-graph-scale}
+    \caption{Scaled Rastrigin}
+  \end{subfigure}
+  \caption{Shift and Scale Rastrigin Example}
+\end{figure}
+
+\par Notice in Figure 42 the difference between the original Rastrigin function to the shifted function, which uses a $x$ shift of +5.12 and a fitness shift of +5.12 (despite being slightly unnoticeable). Also the scaled Rastrigin can be compared to the original by the input interval it uses being [-100,100] from the original's [-5.12,5.12] in which the original is scaled to fit the [-100,100] but still producing the same fitness values on scale.
+
+\clearpage
+
 \section{CEC 2014 Benchmarks}
 
-CEC is a committee known for creating competitions for optimization algorithms. Each year CEC provides a set of functions that are known for testing optimization algorithms for scientists to submit their work and compare the effectiveness of their algorithms. Each test suite includes functions that are shifted and rotated which are to be run in black box tests though their code is reviewable and written in C++.
+\par CEC is a committee known for creating competitions for optimization algorithms. Each year CEC provides a set of functions that are known for testing optimization algorithms for scientists to submit their work and compare the effectiveness of their algorithms. Each test suite includes functions that are shifted and rotated which are to be run in black box tests though their code is reviewable and written in C++.
 
-The following parameters are set and used in the algorithm.
+\par The following parameters are set and used in the algorithm.
 
 \begin{align*}
 \text{Population} &= 50\\
@@ -1241,9 +1300,9 @@ The following parameters are set and used in the algorithm.
 \text{Immigrate Rate} &= 0.4\\
 \end{align*}
 
-\clearpage
+\par An overview of what functions are included in the test is seen in Table 4. f* in this table implies a shift of the function to have the said ideal fitness in the ideal global optima meaning that the function f1 in the table would have an ideal global optima having a fitness of about 100.
 
-An overview of what functions are included in the test is seen in Table 4.
+\clearpage
 
 \begin{table}[]
 \begin{tabular}{llll}
@@ -1289,7 +1348,7 @@ An overview of what functions are included in the test is seen in Table 4.
 
 \clearpage
 
-The following (Table 5) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33).
+\par The following (Table 5) are results from running the reimplemented algorithm on the CEC 2014 Special Session and Competition on Real-Parameter Single Objective (Expensive) Optimization Benchmark\cite{liang_2013}, on a AMD Ryzen 5 2600 machine, parallelized on a 6 threaded workload to run 60 times of the algorithm on one function totalling to 30 functions. The limit placed to stop the algorithm is when it reaches 150,000 function evaluations. Each function ran for about 600 seconds on the machine. The best fitness for each run is recorded and computed for the Standard Deviation. The algorithm was written in MATLAB and the parallel computing toolbox was also used. The run times of the algorithm using each function were also graphed against the fitness values achieved at those times (Figure 33).
 
 
 \begin{table}[]
