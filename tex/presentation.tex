@@ -189,20 +189,35 @@ Nomad lions, unlike residents, roam sporadically.\\Nomad positions are randomly 
 \end{frame}
 
 \begin{frame}{Proposed Algorithm: Mating}
-%--dito
+Mating is an essential process that ensures the lions' survival as well as allowing information exchange among lions. \\Females of a pride mate with one or several residential males. \\Nomad females only mate with one. \\The mating operator is a linear combination of parents for producing two new offspring: 1 male and 1 female. \\These cubs are also subject to chance mutation.
 \end{frame}
 
 \begin{frame}{Proposed Algorithm: Defense}
-%--dito
+When male cubs mature, they become aggressive fight other males in the pride.\\Beaten males abandon their pride and become a nomad.\\On the other hand, if a nomad lion is strong enough to take over a pride by fighting its males, he replaces the beaten residential male. 
 \end{frame}
 
-\begin{frame}{Proposed Algorithm: Migration}
-%--dito
+\begin{frame}{Proposed Algorithm: Defense}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=0.65\textwidth]{img/defense/defense}
+  \caption{(a) Defense against new mature residential males and (b) defense against nomad males}
+  \end{center}
+  \end{figure}
 \end{frame}
 
-\begin{frame}{Proposed Algorithm: Equilibrium}
-%--dito
+\begin{frame}{Proposed Algorithm: Migration and Equilibrium}
+Female lions exhibit migratory behavior when it travels from one pride to another, or becomes a nomad. \\ This allows information exchange among prides and nomads.\\ To maintain equilibrium in the lions' population, nomadic lions with the least fitness are killed at the end of each iteration.
 \end{frame}
+
+\begin{frame}{Proposed Algorithm: Migration and Equilibrium}
+  \begin{figure}[h]
+  \begin{center}
+  \includegraphics[width=0.65\textwidth]{img/equilibrium/equilibrium}
+  \caption{Migration and Equilibrium}
+  \end{center}
+  \end{figure}
+\end{frame}
+
 
 \section{Benchmarks}
 
@@ -685,10 +700,6 @@ f29 & \cellcolor[HTML]{67FD9A}3.125E+03 & \cellcolor[HTML]{67FD9A}4.300E+03 & \c
 f30 & \cellcolor[HTML]{67FD9A}3.813E+03 & \cellcolor[HTML]{67FD9A}7.945E+04 & \cellcolor[HTML]{67FD9A}1.646E+04 & \cellcolor[HTML]{67FD9A}4.796E+03
 \end{tabular}}
 \end{table}
-\end{frame}
-
-\begin{frame}{CEC 2014 Benchmarks: Run-Time vs Fitness}
-%--dito
 \end{frame}
 
 \section{Conclusion}
